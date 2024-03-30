@@ -9,7 +9,7 @@
       "quotes": ["error", "single"],
       "jsx-quotes": ["error", "prefer-double"],
       "indent": ["warn", 4],
-      "comma-dangle": ["warn", "always-multiline"],
+      "comma-dangle": ["warn", "never"],
       "semi": ["error", "never"]
     }
 }

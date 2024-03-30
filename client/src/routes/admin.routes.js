@@ -1,5 +1,5 @@
 import React from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 
 import Account from '../pages/Account.page'
 import MakeProduct from '../pages/Admin/MakeProduct.page'
