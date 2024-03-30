@@ -1,0 +1,10 @@
+{
+    "serverUrl": "http://localhost:5000",
+    "baseUrl": "http://localhost:3000",
+    "port": 5000,
+    "sslPort": 443,
+
+    "jwtSecret": "NHrmJipPAavz6Juw",
+    "mongoUri": "mongodb+srv://root:inM1dn5XW31BEXJG@cluster0.kos23un.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+}
+
