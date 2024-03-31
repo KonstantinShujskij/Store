@@ -10,7 +10,13 @@ export default function useProductsApi() {
         catch(error) { return [] } 
     } 
 
+    const collections = async () => {
+        try { return await publicRequest('api/products/collections') }
+        catch(error) { return [] } 
+    } 
+
     return { 
-        categories
+        categories,
+        collections
     }
 }

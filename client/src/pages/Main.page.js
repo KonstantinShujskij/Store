@@ -7,9 +7,13 @@ function Main() {
     const productsApi = useProductsApi()
 
     const [categories, setCategories] = useState([])
+    const [collections, setCollections] = useState([])
 
     useEffect(() => {
-        const load = async () => setCategories(await productsApi.categories())
+        const load = async () => {
+            setCategories(await productsApi.categories())
+            setCollections(await productsApi.collections()) 
+        }
 
         load()
     }, [])
@@ -26,6 +30,14 @@ function Main() {
                 {categories.map((item) => (
                     <li key={item?.id}>
                         <Link to={`/catalog/${item?.id}`}>{item?.title}</Link>
+                    </li>
+                ))}
+            </ul>
+
+            <ul>
+                {collections.map((item) => (
+                    <li key={item?._id}>
+                        <Link to={`/catalog/${item?._id}`}>{item?.title}</Link>
                     </li>
                 ))}
             </ul>
