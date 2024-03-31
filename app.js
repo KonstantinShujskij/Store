@@ -13,6 +13,8 @@ app.use(express.json({ extended: true }))
 
 app.use('/store', express.static(path.join(__dirname, 'store')))
 
+app.use('/api/products', require('./routes/products.routes'))
+
 
 const PORT = config.get('port')
 const SLL_PORT = config.get('sslPort')
