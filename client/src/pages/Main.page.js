@@ -26,10 +26,13 @@ function Main() {
             <br />
             <Link to="/info">Info</Link>
 
+            <br />
+            <Link to="/make-product">Make Product</Link>
+
             <ul>
                 {categories.map((item) => (
                     <li key={item?.id}>
-                        <Link to={`/catalog/${item?.id}`}>{item?.title}</Link>
+                        <Link to={`/catalog/${item?._id}`}>{item?.title}</Link>
                     </li>
                 ))}
             </ul>

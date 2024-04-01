@@ -5,7 +5,7 @@ import Alert from './components/Alert/Alert'
 
 
 function App() {
-    const routes = useRoutes()
+    const routes = useRoutes(true, true)
 
     return (
         <div className="App">
