@@ -21,3 +21,13 @@ body {
 .f-coll {
   flex-direction: column;
 }
+
+.mr-auto { margin-right: auto; }
+.ml-auto { margin-left: auto; }
+
+.color {
+  width: 24px;
+  height: 24px;
+  overflow: hidden;
+  border-radius: 50%;
+}
