@@ -15,8 +15,8 @@ export default function useProductsApi() {
         catch(error) { return [] } 
     } 
 
-    const products = async () => {
-        try { return await publicRequest('api/products/products') }
+    const products = async (filter) => {
+        try { return await publicRequest('api/products/products', {filter}) }
         catch(error) { return [] } 
     } 
 

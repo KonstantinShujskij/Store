@@ -3,8 +3,8 @@ const {Schema, model, Types} = require('mongoose')
 const schema = new Schema({
     title: {type: String},
     desc: {type: String},
-    category: {type: String, default: ''},
-    collection: {type: String, default: ''},
+    category: {type: Types.ObjectId, ref: 'Category'},
+    collection: {type: Types.ObjectId, ref: 'Collection', default: undefined},
     price: {type: Number, default: 0},
     parametrs: [
         {

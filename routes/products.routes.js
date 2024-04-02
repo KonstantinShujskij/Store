@@ -39,7 +39,9 @@ router.post('/collections', trappiner(async (req, res) => {
 })) 
 
 router.post('/products', trappiner(async (req, res) => {     
-    const list = await Product.list()
+    const { filter } = req.body
+
+    const list = await Product.list(filter)
 
     res.status(200).json(list)
 })) 
