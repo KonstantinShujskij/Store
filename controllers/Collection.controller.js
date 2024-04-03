@@ -10,6 +10,13 @@ async function create(title) {
     return collection
 }
 
+async function get(_id) {
+    const collection = await Collection.findOne({_id})
+    if(!collection) { throw errors.notFind }
+
+    return collection
+}
+
 async function list() {
     const collections = await Collection.find()
 
@@ -18,5 +25,6 @@ async function list() {
 
 module.exports = { 
     create,
+    get,
     list
 }

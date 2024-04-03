@@ -6,6 +6,7 @@ import Properties from '../../components/Properties'
 import Colors from '../../components/Colors/Colors'
 import useColors from '../../hooks/colors.hook'
 import useLoad from '../../hooks/load.hook'
+import useProperties from '../../hooks/properties.hook'
 
 
 function MakeProduct() {
@@ -22,7 +23,7 @@ function MakeProduct() {
     const [category, setCategory] = useState(null)
     const [collection, setCollection] = useState(null) 
 
-    const [values, setValues] = useState([]) 
+    const properties = useProperties()
     const colors = useColors()
 
     useLoad(async () => {
@@ -35,8 +36,10 @@ function MakeProduct() {
     const createHandler = async () => {
         if(isWaiting) { return Alert.pushError('Please wait') }
 
+        const prop = properties.getValue()
+
         setIsWaiting(true)
-        const product = await productsApi.create(title.value, desc.value, price.value, category, collection)
+        const product = await productsApi.create(title.value, desc.value, price.value, category, collection, prop)
         setIsWaiting(false)
 
         if(product) { return Alert.pushMess('Product has been created') }
@@ -54,7 +57,7 @@ function MakeProduct() {
                 {collections.map((item) => <option value={item._id} key={item._id}>{item.title}</option>)}
             </select>
 
-            <Properties data={values} setData={setValues} />
+            <Properties {...properties.bind} />
             <Colors {...colors.bind} />
 
             <button onClick={() => createHandler()}>Create</button>

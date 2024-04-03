@@ -10,6 +10,13 @@ async function create(title) {
     return category
 }
 
+async function get(_id) {
+    const category = await Category.findOne({_id})
+    if(!category) { throw errors.notFind }
+
+    return category
+}
+
 async function list() {
     const categories = await Category.find()
 
@@ -18,5 +25,6 @@ async function list() {
 
 module.exports = { 
     create,
+    get,
     list
 }

@@ -20,8 +20,8 @@ export default function useProductsApi() {
         catch(error) { return [] } 
     } 
 
-    const create = async (title, desc, price, category, collection) => {
-        try { return await publicRequest('api/products/create', {title, desc, price, category, collection}) }
+    const create = async (title, desc, price, category, collection, prop) => {
+        try { return await publicRequest('api/products/create', {title, desc, price, category, collection, prop}) }
         catch(error) { return null } 
     } 
 

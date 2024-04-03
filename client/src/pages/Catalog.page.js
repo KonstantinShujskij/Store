@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import useProductsApi from '../api/products.api'
 import { useParams } from 'react-router-dom'
+import Product from '../components/Product/Product'
 
 
 function Catalog() {
@@ -20,12 +21,7 @@ function Catalog() {
     
     return (
         <div>
-            <div>Catalog {id}</div>
-            <ul>
-                {products.map((product) => (
-                    <li key={product._id}>{product.title} \ {product.category} \ {product.price}$</li>
-                ))}
-            </ul>
+            {products.map((product) => <Product product={product} key={product._id} />)}
         </div>
     )
 }

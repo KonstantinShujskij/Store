@@ -1,4 +1,5 @@
 const {Router} = require('express')
+const {check} = require('express-validator')
 
 const trappiner = require('../utils/trappiner.utils')
 
@@ -46,13 +47,23 @@ router.post('/products', trappiner(async (req, res) => {
     res.status(200).json(list)
 })) 
 
-router.post('/create', trappiner(async (req, res) => {   
-    const { title, desc, price, category, collection } = req.body
-  
-    const product = await Product.create(title, desc, price, category, collection)
+router.post('/create', 
+    [
+        check('prop', 'incorectValue').isArray(),
+        check('prop.*.title', 'incorectValue').isString(),
+        check('prop.*.min', 'incorectValue').isFloat({ min: 0, max: 10000 }),
+        check('prop.*.max', 'incorectValue').isFloat({ min: 0, max: 10000 })
+    ],
+    trappiner(async (req, res) => {   
+        const { title, desc, price, category, collection, prop } = req.body
 
-    res.status(201).json(product)
-})) 
+        const parametrs = prop.map((item) => ({ title: item.title, min: item.min, max: item.max }))
+    
+        const product = await Product.create(title, desc, price, category, collection, parametrs)
+
+        res.status(201).json(product)
+    })
+) 
 
 
 module.exports = router
