@@ -47,6 +47,14 @@ router.post('/products', trappiner(async (req, res) => {
     res.status(200).json(list)
 })) 
 
+router.post('/get', trappiner(async (req, res) => {     
+    const { id } = req.body
+
+    const product = await Product.get(id)
+
+    res.status(200).json(product)
+})) 
+
 router.post('/create', 
     [
         check('prop', 'incorectValue').optional().isArray(),
@@ -62,7 +70,7 @@ router.post('/create',
         const { title, desc, price, category, collection, prop, colors } = req.body
 
         const parametrs = prop.map((item) => ({ title: item.title, min: item.min, max: item.max }))
-        const colorSchema = colors.map((item) => ({ values: item.values, styles: item.stules }))
+        const colorSchema = colors.map((item) => ({ main: item.value, styles: item.styles }))
 
         const product = await Product.create(title, desc, price, category, collection, parametrs, colorSchema)
 

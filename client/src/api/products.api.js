@@ -25,11 +25,17 @@ export default function useProductsApi() {
         catch(error) { return null } 
     } 
 
+    const get = async (id) => {
+        try { return await publicRequest('api/products/get', {id}) }
+        catch(error) { return null } 
+    } 
+
     return { 
         categories,
         collections,
         products,
 
-        create
+        create,
+        get
     }
 }

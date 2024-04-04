@@ -28,6 +28,13 @@ async function create(title, desc, price, categoryId, collectionId, parametrs, c
     return product
 }
 
+async function get(_id) {
+    const product = await Product.findOne({_id})
+    if(!product) { throw errors.notFind }
+
+    return product
+}
+
 async function list(filter) {
     const options = {...Filter.client(filter)}
     const products = await Product.find(options)
@@ -37,5 +44,6 @@ async function list(filter) {
 
 module.exports = { 
     create,
+    get,
     list
 }
