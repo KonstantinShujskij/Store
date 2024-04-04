@@ -37,9 +37,10 @@ function MakeProduct() {
         if(isWaiting) { return Alert.pushError('Please wait') }
 
         const prop = properties.getValue()
+        const colorsValue = colors.getValue()
 
         setIsWaiting(true)
-        const product = await productsApi.create(title.value, desc.value, price.value, category, collection, prop)
+        const product = await productsApi.create(title.value, desc.value, price.value, category, collection, prop, colorsValue)
         setIsWaiting(false)
 
         if(product) { return Alert.pushMess('Product has been created') }

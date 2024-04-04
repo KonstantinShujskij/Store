@@ -9,6 +9,8 @@ function Product({product}) {
             <h3><Link to={`/product/${product._id}`}>{product?.title}</Link></h3>
             <p>{product?.desc}</p>
             <h4>{product?.price} $</h4>
+            <p>{product?.categoryTitle}</p>
+            <p>{product?.collectionTitle}</p>
         </div>
     )
 }
