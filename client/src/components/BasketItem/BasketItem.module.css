@@ -1,0 +1,11 @@
+.item {
+    border: 2px solid #ababab;
+    padding: 12px;
+    margin-bottom: 12px;
+}
+
+.color {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+}

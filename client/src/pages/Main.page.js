@@ -29,6 +29,9 @@ function Main() {
             <br />
             <Link to="/make-product">Make Product</Link>
 
+            <br />
+            <Link to="/basket">Basket</Link>
+
             <ul>
                 {categories.map((item) => (
                     <li key={item?.id}>
