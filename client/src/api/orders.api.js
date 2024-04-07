@@ -9,7 +9,13 @@ export default function useOrdersApi() {
         catch(error) { return null } 
     } 
 
+    const get = async (id) => {
+        try { return await publicRequest('api/orders/get', {id}) }
+        catch(error) { return null } 
+    } 
+
     return { 
-        create
+        create,
+        get
     }
 }

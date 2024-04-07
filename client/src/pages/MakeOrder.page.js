@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 import * as basket from '../redux/selectors/basket.selectors'
 import BasketItem from '../components/BasketItem/BasketItem'
@@ -9,8 +10,13 @@ import useContacts from '../hooks/contact.hook'
 import Contacts from '../components/Contacts/Contacts'
 import useOrdersApi from '../api/orders.api'
 
+import useBasket from '../hooks/basket.hook'
+
+
 function MakeOrder() {
     const ordersApi = useOrdersApi()
+    const Basket = useBasket()
+    const navigate = useNavigate()
 
     const list = useSelector(basket.list)
     const price = useSelector(basket.price)
@@ -21,7 +27,10 @@ function MakeOrder() {
     const makeHandler = async () => {
         const order = await ordersApi.create(delivery.getValue(), contacts.getValue(), list)
     
-        console.log(order)
+        if(order) {
+            Basket.clear()
+            navigate(`/order/${order}`)
+        }
     }
 
     return (
