@@ -1,7 +1,10 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
+
 import * as basket from '../redux/selectors/basket.selectors'
 import BasketItem from '../components/BasketItem/BasketItem'
+
 
 function Basket() {
     const list = useSelector(basket.list)
@@ -25,7 +28,7 @@ function Basket() {
             <hr />
             <br />
         
-            <button>Make Order</button>
+            <Link to="/make-order">Make Order</Link>
         </div>
     )
 }

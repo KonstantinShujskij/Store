@@ -28,6 +28,30 @@ async function create(title, desc, price, categoryId, collectionId, parametrs, c
     return product
 }
 
+async function validate(productData) {
+    const product = await get(productData._id)
+    
+    if(product.title !== productData.title) { throw errors.incorectValue }
+    if(product.price !== productData.price) { throw errors.incorectValue }
+
+    let falseColors = true
+    product.colorSchema.forEach((item) => {
+        if(item.main === productData.mainColor) { 
+            if(item.styles.includes(productData.styleColor)) { falseColors = false } 
+        }
+    })
+    if(falseColors) { throw errors.incorectValue } 
+
+    product.parametrs.forEach((item) => {
+        const value = parseFloat(productData.parametrs[item.title])
+
+        if(value === undefined) { throw errors.incorectValue }
+        if(value < item.min || value > item.max) { throw errors.incorectValue }
+    })
+
+    return product.price
+}
+
 async function get(_id) {
     const product = await Product.findOne({_id})
     if(!product) { throw errors.notFind }
@@ -44,6 +68,7 @@ async function list(filter) {
 
 module.exports = { 
     create,
+    validate,
     get,
     list
 }

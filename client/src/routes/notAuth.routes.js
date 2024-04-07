@@ -26,9 +26,9 @@ const notAuthRoutes = (
         <Route path="/catalog/:id" element={<Catalog />} exact />
         <Route path="/product/:id" element={<Product />} exact />
         <Route path="/basket" element={<Basket />} exact />
+        <Route path="/make-order" element={<MakeOrder />} exact />
         <Route path="/order/:id" element={<Order />} exact />
-        <Route path="/make-order/:id" element={<MakeOrder />} exact />
-
+        
         <Route path="*" element={<Main />} exact  />
     </>
 )
