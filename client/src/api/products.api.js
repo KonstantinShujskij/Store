@@ -30,12 +30,21 @@ export default function useProductsApi() {
         catch(error) { return null } 
     } 
 
+    // admins
+
+    const remove = async (id) => {
+        try { return await protectedRequest('api/products/remove', {id}) }
+        catch(error) { return null } 
+    }
+
     return { 
         categories,
         collections,
         products,
 
         create,
-        get
+        get,
+
+        remove
     }
 }

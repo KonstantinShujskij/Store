@@ -16,7 +16,7 @@ function Catalog() {
         }
 
         load()
-    }, [])
+    }, [id])
     
     
     return (

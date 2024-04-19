@@ -59,6 +59,13 @@ async function get(_id) {
     return product
 }
 
+async function remove(_id) {
+    const product = await get(_id)
+    await Product.deleteOne(product._id)
+
+    return true
+}
+
 async function list(filter) {
     const options = {...Filter.client(filter)}
     const products = await Product.find(options)
@@ -70,5 +77,6 @@ module.exports = {
     create,
     validate,
     get,
+    remove,
     list
 }

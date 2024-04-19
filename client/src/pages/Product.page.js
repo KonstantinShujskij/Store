@@ -1,12 +1,18 @@
 import React, { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import useProductsApi from '../api/products.api'
 import useLoad from '../hooks/load.hook'
 import useBasket from '../hooks/basket.hook'
 
+import * as authSelectors from '../redux/selectors/auth.selectors'
+import { useSelector } from 'react-redux'
+
 
 function Product() {
     const { id } = useParams()
+    const navigate = useNavigate()
+
+    const isAdmin = useSelector(authSelectors.isAdmin)
 
     const productsApi = useProductsApi()
     const Basket = useBasket()
@@ -23,13 +29,13 @@ function Product() {
         setProduct(loadProduct)
 
         const param = {}
-        loadProduct.parametrs.forEach((item) => { param[item.title] = item.min })
+        loadProduct?.parametrs.forEach((item) => { param[item.title] = item.min })
         setParametrs(param)
 
-        const color = loadProduct.colorSchema[0] 
+        const color = loadProduct?.colorSchema[0] 
 
         setStyleColors(color?.styles)
-        setMainColor(color.main)
+        setMainColor(color?.main)
         setStyleColor(color?.styles[0])
     })
 
@@ -59,6 +65,11 @@ function Product() {
         })
     }
 
+    const removeHandler = async () => {
+        await productsApi.remove(id)
+        navigate('/')
+    }
+
     return (
         <div>
             <h2>{product?.title}</h2>
@@ -72,7 +83,7 @@ function Product() {
             <br />
 
             <div>
-                {product?.parametrs.map((item) => (
+                {product?.parametrs?.map((item) => (
                     <div key={item._id}>
                         <span>{item.title} </span>
                         <input value={parametrs[item.title]} onChange={(e) => setProp(item.title, e.target.value)} />
@@ -86,19 +97,24 @@ function Product() {
 
             <div>
                 <select onChange={(event) => mainColorHandler(event.target.value)}>
-                    {product?.colorSchema.map((item) => (
+                    {product?.colorSchema?.map((item) => (
                         <option key={item._id} value={item._id}>{item?.main}</option>
                     ))}
                 </select>
                 <select onChange={(event) => setStyleColor(event.target.value)}>
-                    {styleColors.map((color) => (
+                    {styleColors?.map((color) => (
                         <option key={color} value={color}>{color}</option>
                     ))}
                 </select>
             </div>
 
             <br />
-            <button onClick={pushHandler}>Put to basket</button>
+            {!isAdmin && <button onClick={pushHandler}>Put to basket</button>}
+            {isAdmin && <>
+                <button onClick={() => navigate(`/make-product/${id}`)} >Edit</button>
+                <br />
+                <button onClick={() => removeHandler()}>Delete</button>
+            </>}
         </div>
     )
 }

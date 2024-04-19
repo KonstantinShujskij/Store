@@ -3,6 +3,8 @@ const {check} = require('express-validator')
 
 const trappiner = require('../utils/trappiner.utils')
 
+const { auth, isAdmin } = require('../middleware/auth.middleware')
+
 const Category = require('../controllers/Category.controller')
 const Collection = require('../controllers/collection.controller')
 const Product = require('../controllers/Product.controller')
@@ -77,6 +79,16 @@ router.post('/create',
         res.status(201).json(product)
     })
 ) 
+
+router.post('/remove', auth, isAdmin, trappiner(async (req, res) => {     
+    const { id } = req.body
+    
+    await Product.remove(id)
+
+    console.log('---0---');
+
+    res.status(200).json(true)
+})) 
 
 
 module.exports = router
