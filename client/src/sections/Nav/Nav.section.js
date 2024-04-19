@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import useProductsApi from '../api/products.api'
+import useProductsApi from '../../api/products.api'
 
-import * as authSelectors from '../redux/selectors/auth.selectors'
+import * as authSelectors from '../../redux/selectors/auth.selectors'
 import { useSelector } from 'react-redux'
-import useAuth from '../hooks/auth.hook'
+import useAuth from '../../hooks/auth.hook'
+
+import AdminNav from './AdminNav'
+import ClientNav from './ClientNav'
 
 
 function Nav() {
@@ -36,11 +39,6 @@ function Nav() {
                 <br />
             </>}
 
-            {isAuth && !isAdmin && <>
-                <Link to="/account">Account</Link>
-                <br />
-            </>}
-
             {!isAuth && <>
                 <Link to="/login">Login</Link>
                 <br />
@@ -48,17 +46,20 @@ function Nav() {
                 <br />
             </>}
 
-            {isAdmin && <>
-                <Link to="/make-product">Make Product</Link>
+            {isAuth && <>
+                {isAdmin && <AdminNav />}
+                {!isAdmin && <ClientNav />}
+            </>}
+
+            {!isAdmin && <>
+                <Link to="/basket">Basket</Link>
                 <br />
             </>}
 
             <Link to="/about">About</Link>
             <br />
             <Link to="/info">Info</Link>
-
             <br />
-            <Link to="/basket">Basket</Link>
 
             <ul>
                 {categories.map((item) => (

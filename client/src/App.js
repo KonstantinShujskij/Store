@@ -5,7 +5,7 @@ import * as authSelectors from './redux/selectors/auth.selectors'
 import { useSelector } from 'react-redux'
 
 import Alert from './components/Alert/Alert'
-import Nav from './sections/Nav.section'
+import Nav from './sections/Nav/Nav.section'
 
 
 function App() {
