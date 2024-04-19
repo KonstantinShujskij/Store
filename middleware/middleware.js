@@ -1,4 +1,4 @@
-const errors = require('../consts/errors')
+const errors = require('../const/errors')
 
 
 module.exports = (callback) => {

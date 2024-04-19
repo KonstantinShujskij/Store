@@ -1,7 +1,7 @@
 const jwt = require('../utils/jwt.utils')
 
 const config = require('config')
-const errors = require('../consts/errors')
+const errors = require('../const/errors')
 
 const middleware = require('./middleware')
 

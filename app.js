@@ -15,6 +15,8 @@ app.use('/store', express.static(path.join(__dirname, 'store')))
 
 app.use('/api/products', require('./routes/products.routes'))
 app.use('/api/orders', require('./routes/orders.routes'))
+app.use('/api/client', require('./routes/client.routes'))
+
 
 const PORT = config.get('port')
 const SLL_PORT = config.get('sslPort')

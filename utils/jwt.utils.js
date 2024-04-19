@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 const config = require('config')
 
-const errors = require('../consts/errors')
+const errors = require('../const/errors')
 
 
 const loginToken = (_id, expiresIn='24h') => { 

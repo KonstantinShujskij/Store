@@ -1,3 +1,5 @@
+const bcrypt = require('bcrypt')
+
 const Client = require('../models/Client.model')
 
 const errors = require('../const/errors')
@@ -14,7 +16,7 @@ async function signup(email, password) {
     return user
 }
 
-async function login(title) {
+async function login(email, password) {
     const user = await Client.findOne({ email })
     if(!user) { throw errors.notAccess }
 
