@@ -34,6 +34,9 @@ function Nav() {
             {isAuth && <>
                 <Link onClick={logout}>Logout</Link>
                 <br />
+            </>}
+
+            {isAuth && !isAdmin && <>
                 <Link to="/account">Account</Link>
                 <br />
             </>}
@@ -46,8 +49,8 @@ function Nav() {
             </>}
 
             {isAdmin && <>
-                <br />
                 <Link to="/make-product">Make Product</Link>
+                <br />
             </>}
 
             <Link to="/about">About</Link>

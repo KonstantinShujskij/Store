@@ -13,7 +13,7 @@ function Signup() {
 
     const signupHandler = async () => {
         const token = await clientApi.signup(email.value, password.value)
-        signup(token)
+        if(token) { signup(token) }
     }
 
     return (

@@ -22,6 +22,8 @@ const router = Router()
 router.post('/login', trappiner(async (req, res) => {
     const { email, password } = req.body
 
+    console.log(email, password);
+
     const admin = await Admin.login(email, password)
     const token = jwt.loginToken(admin._id)
 

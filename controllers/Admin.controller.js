@@ -20,7 +20,7 @@ async function login(email, password) {
     const admin = await Admin.findOne({ email })
     if(!admin) { throw errors.notAccess }
 
-    const isMatch = await bcrypt.compare(password, user.password)
+    const isMatch = await bcrypt.compare(password, admin.password)
     if(!isMatch) { throw errors.notAuth }
 
     return admin

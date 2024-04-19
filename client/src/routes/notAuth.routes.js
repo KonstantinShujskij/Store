@@ -11,11 +11,13 @@ import Order from '../pages/Order.page'
 import MakeOrder from '../pages/MakeOrder.page'
 import About from '../pages/About.page'
 import Info from '../pages/Info.page'
+import LoginAdmin from '../pages/LoginAdmin.page'
 
 
 const notAuthRoutes = (
     <>
         <Route path="/" element={<Main />} exact />
+        <Route path="/admin" element={<LoginAdmin />} exact />       
         <Route path="/signup" element={<Signup />} exact />       
         <Route path="/login" element={<Login />} exact />
         

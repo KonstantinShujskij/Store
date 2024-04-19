@@ -1,24 +1,24 @@
 import React from 'react'
 import useInput from '../hooks/input.hook'
-import useClientApi from '../api/client.api'
+import useAdminApi from '../api/admin.api'
 import useAuth from '../hooks/auth.hook'
 
 
-function Login() {
-    const clientApi = useClientApi()
+function LoginAdmin() {
+    const adminApi = useAdminApi()
     const { login } = useAuth()
 
     const email = useInput('')
     const password = useInput('')
 
     const loginHandler = async () => {
-        const token = await clientApi.login(email.value, password.value)
-        if(token) { login(token) }
+        const token = await adminApi.login(email.value, password.value)
+        if(token) { login(token, true) }
     }
 
     return (
         <div>
-            <h1>Login</h1>
+            <h1>Admin</h1>
             <br />
 
             <input {...email.bind} placeholder="example@mail.com" />
@@ -32,4 +32,4 @@ function Login() {
     )
 }
 
-export default Login
+export default LoginAdmin
