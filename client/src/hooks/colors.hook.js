@@ -1,21 +1,21 @@
-import {  useState } from 'react'
+import { useState } from 'react'
 
 
-function createStyleColor(value) {
+function createStyleColor(value, _id) {
     return {
-        id: parseInt(`${Date.now()}${Math.random() * 10000}`).toString(16),
+        id: _id? _id : parseInt(`${Date.now()}${Math.random() * 10000}`).toString(16),
         value: value
     }
 }
 
-function createColor(value) {
-    return {...createStyleColor(value), styles: []}
+function createColor(value, _id) {
+    return {...createStyleColor(value, _id), styles: []}
 }
 
 export default function useColors() {
     const [colors, setColors] = useState([])
 
-    const addColor = (value) => setColors((prew) => [...prew, createColor(value)])
+    const addColor = (value, _id) => setColors((prew) => [...prew, createColor(value, _id)])
     const addStyleColor = (id, value) => setColors((prew) => prew.map((item) => {
         if(item.id !== id) { return item }
 

@@ -1,9 +1,9 @@
 import {  useState } from 'react'
 
 
-function createProprty() {
+function createProprty(_id) {
     return {
-        _id: parseInt(`${Date.now()}${Math.random() * 100}`).toString(16),
+        _id: _id? _id : parseInt(`${Date.now()}${Math.random() * 100}`).toString(16),
         title: '',
         min: '',
         max:''
@@ -14,7 +14,7 @@ function createProprty() {
 export default function useProperties() {
     const [values, setValues] = useState([]) 
 
-    const addProp = () => setValues((prew) => [...prew, createProprty()])
+    const addProp = (_id) => { setValues((prew) => [...prew, createProprty(_id)]) }
     const removeProp = (_id) => setValues((prew) => prew.filter((item) => (item._id !== _id)))
 
     const setProp = (_id, value) => { 
