@@ -4,16 +4,6 @@
   box-sizing: border-box;
 }
 
-body {
-  font-family: sans-serif;
-  color: #090909;
-
-}
-
-.App {
-  padding: 24px;
-}
-
 .d-flex {
   display: flex;
 }

@@ -10,7 +10,7 @@ import rootReducer from './redux/rootReducer'
 
 import App from './App'
 import './index.css'
-
+import './main.css'
 
 const persistConfig = {key: 'root', storage}
 const persistedReducer = persistReducer(persistConfig, rootReducer)

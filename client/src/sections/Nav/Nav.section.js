@@ -1,37 +1,58 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import useProductsApi from '../../api/products.api'
+// import useProductsApi from '../../api/products.api'
 
-import * as authSelectors from '../../redux/selectors/auth.selectors'
-import { useSelector } from 'react-redux'
-import useAuth from '../../hooks/auth.hook'
+// import * as authSelectors from '../../redux/selectors/auth.selectors'
+// import { useSelector } from 'react-redux'
+// import useAuth from '../../hooks/auth.hook'
 
-import AdminNav from './AdminNav'
-import ClientNav from './ClientNav'
+// import AdminNav from './AdminNav'
+// import ClientNav from './ClientNav'
+
+import Categories from './components/categories/Categories'
+
+import styles from './Nav.module.css' 
 
 
 function Nav() {
-    const isAuth = useSelector(authSelectors.isAuth)
-    const isAdmin = useSelector(authSelectors.isAdmin)
+    // const isAuth = useSelector(authSelectors.isAuth)
+    // const isAdmin = useSelector(authSelectors.isAdmin)
 
-    const productsApi = useProductsApi()
-    const { logout } = useAuth()
+    // const productsApi = useProductsApi()
+    // const { logout } = useAuth()
 
-    const [categories, setCategories] = useState([])
-    const [collections, setCollections] = useState([])
+    // const [categories, setCategories] = useState([])
+    // const [collections, setCollections] = useState([])
 
-    useEffect(() => {
-        const load = async () => {
-            setCategories(await productsApi.categories())
-            setCollections(await productsApi.collections()) 
-        }
+    // useEffect(() => {
+    //     const load = async () => {
+    //         setCategories(await productsApi.categories())
+    //         setCollections(await productsApi.collections()) 
+    //     }
 
-        load()
-    }, [])
+    //     load()
+    // }, [])
 
     return (
-        <div>
-            <br />
+        <div className={styles.nav}>
+            <Link to="/" className={styles.logo}>
+                <img src="./images/logo.svg" alt="logo" />
+            </Link>
+
+            <div className={styles.menu}>
+                <Categories />
+                <div>collections</div>
+                <div>about</div>
+            </div>
+
+            <div className={styles.info}>
+                <Link to="/info">Info</Link>
+                <Link to="/info">Contacts</Link>
+                <Link to="/info">Bag</Link>
+            </div>
+
+
+            {/* <br />
             <h4>Menu</h4>
 
             {isAuth && <>
@@ -75,7 +96,7 @@ function Nav() {
                         <Link to={`/catalog/${item?._id}`}>{item?.title}</Link>
                     </li>
                 ))}
-            </ul>
+            </ul> */}
         </div>
     )
 }
