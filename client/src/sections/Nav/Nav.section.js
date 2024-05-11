@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom'
 import Categories from './components/Categories'
 
 import styles from './Nav.module.css' 
+import Collections from './components/Collections'
 
 
 function Nav() {
@@ -41,7 +42,7 @@ function Nav() {
 
             <div className={styles.menu}>
                 <Categories />
-                <div>collections</div>
+                <Collections />
                 <div>about</div>
             </div>
 

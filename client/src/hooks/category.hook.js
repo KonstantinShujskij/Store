@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 
 import useCategoryApi from '../api/category.api'
 
-import * as Category from '../redux/actions/static.actions'
+import {setCategory, addCategory, removeCategory} from '../redux/actions/static.actions'
 
 
 export default function useCategory() {
@@ -12,19 +12,27 @@ export default function useCategory() {
 
     useEffect(() => { load().then()}, [])
         
-    const load = async () => { dispath(Category.setCategory(await categoryApi.list())) }
+    const load = async () => { dispath(setCategory(await categoryApi.list())) }
 
     const add = async (title) => { 
         if(!title) { return false }
 
         const category = await categoryApi.create(title)
-        if(category) { dispath(Category.addCategory(category)) }    
+        if(category) { dispath(addCategory(category)) }    
         
         return !!category
     }
 
-    const remove = (id) => { dispath(Category.removeCategory([id])) }
-    const removeList = async (ids) => { if(await categoryApi.remove(ids)) { dispath(Category.removeCategory(ids)) } }
+    const remove = async (id) => await removeList([id])
+    const removeList = async (ids) => { 
+        if(await categoryApi.remove(ids)) { 
+            dispath(removeCategory(ids)) 
+            return true
+        } 
 
+        return false
+    }
+
+    
     return { load, add, remove, removeList }
 }

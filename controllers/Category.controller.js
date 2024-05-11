@@ -1,7 +1,6 @@
 const Category = require('../models/Category.model')
 
 const errors = require('../const/errors')
-const {Types} = require('mongoose')
 
 
 async function create(title) {

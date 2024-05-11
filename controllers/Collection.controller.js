@@ -10,6 +10,12 @@ async function create(title) {
     return collection
 }
 
+async function remove(ids) {
+    await Collection.deleteMany({ _id: {$in: ids} })
+
+    return true
+}
+
 async function get(_id) {
     const collection = await Collection.findOne({_id})
     if(!collection) { throw errors.notFind }
@@ -25,6 +31,7 @@ async function list() {
 
 module.exports = { 
     create,
+    remove, 
     get,
     list
 }
