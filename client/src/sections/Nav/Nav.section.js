@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom'
 // import AdminNav from './AdminNav'
 // import ClientNav from './ClientNav'
 
-import Categories from './components/categories/Categories'
+import Categories from './components/Categories'
 
 import styles from './Nav.module.css' 
 

@@ -15,7 +15,7 @@ export default function useCategoryApi() {
     }
 
     const list = async () => {
-        try { return await publicRequest('api/products/categories') }
+        try { return await publicRequest('api/category/list') }
         catch(error) { return [] } 
     } 
 

@@ -20,7 +20,7 @@ export default function useCategory() {
         const category = await categoryApi.create(title)
         if(category) { dispath(Category.addCategory(category)) }    
         
-        return true
+        return !!category
     }
 
     const remove = (id) => { dispath(Category.removeCategory([id])) }
