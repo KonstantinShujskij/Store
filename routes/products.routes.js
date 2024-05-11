@@ -5,7 +5,6 @@ const trappiner = require('../utils/trappiner.utils')
 
 const { auth, isAdmin } = require('../middleware/auth.middleware')
 
-const Category = require('../controllers/Category.controller')
 const Collection = require('../controllers/collection.controller')
 const Product = require('../controllers/Product.controller')
 
@@ -21,18 +20,12 @@ router.post('/create-collection', trappiner(async (req, res) => {
     res.status(201).json(true)
 })) 
 
-router.post('/create-category', trappiner(async (req, res) => {     
-    const { title } = req.body
+router.post('/remove-collections', trappiner(async (req, res) => {     
+    const { list } = req.body
 
-    await Category.create(title)
+    console.log(list);
 
     res.status(201).json(true)
-})) 
-
-router.post('/categories', trappiner(async (req, res) => {   
-    const list = await Category.list()
-
-    res.status(200).json(list)
 })) 
 
 router.post('/collections', trappiner(async (req, res) => {     

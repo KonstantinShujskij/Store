@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+::-webkit-scrollbar {
+  width: 0;
+}
+
 .d-flex {
   display: flex;
 }
@@ -21,3 +25,4 @@
   overflow: hidden;
   border-radius: 50%;
 }
+

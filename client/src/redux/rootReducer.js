@@ -3,11 +3,15 @@ import authRuducer from './authRuducer'
 import userReducer from './userReducer'
 import alertReducer from './alertRuducer'
 import basketReducer from './basketReducer'
+import staticReducer from './staticReducer'
 
 
 const rootReducer = combineReducers({
+    static: staticReducer,
+
     auth: authRuducer,
     user: userReducer,
+    
     basket: basketReducer,
 
     alert: alertReducer

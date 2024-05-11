@@ -1,0 +1,5 @@
+export const SET_CATEGORY = 'STATIC:CATEGORY:SET'
+export const ADD_CATEGORY = 'STATIC:CATEGORY:ADD'
+export const DEL_CATEGORY = 'STATIC:CATEGORY:DEL'
+
+export const CLEAR = 'STATIC:CLEAR'
