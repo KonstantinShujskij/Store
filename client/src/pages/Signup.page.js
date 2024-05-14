@@ -2,32 +2,43 @@ import React from 'react'
 import useInput from '../hooks/input.hook'
 import useClientApi from '../api/client.api'
 import useAuth from '../hooks/auth.hook'
+import { Link } from 'react-router-dom'
+
+import styles from '../styles/Signup.module.css' 
 
 
 function Signup() {
     const clientApi = useClientApi()
-    const { signup } = useAuth()
+    const { login } = useAuth()
 
+    const name = useInput('')
+    const surname = useInput('')
     const email = useInput('')
     const password = useInput('')
 
     const signupHandler = async () => {
-        const token = await clientApi.signup(email.value, password.value)
-        if(token) { signup(token) }
+        const token = await clientApi.signup(email.value, password.value, { name: name.value, surname: surname.value })
+        if(token) { login(token) }
     }
 
     return (
-        <div>
-            <h1>Signup</h1>
-            <br />
-            
-            <input {...email.bind} placeholder="example@mail.com" />
-            <br />
-            <input {...password.bind} placeholder="Password"/>
-            <br />
-            <br />
+        <div className={styles.wrap}>
+            <div className={styles.image}>
+                <img src="./images/account.svg" alt="people" />
+            </div>
+            <div className={styles.form}>
+                <div className={styles.links}>
+                    <Link to="/login">Sign in</Link>
+                    <Link to="/signup" className={styles.active}>Create</Link>
+                </div>
 
-            <button onClick={() => signupHandler()}>Login</button>
+                <input className={styles.input} {...name.bind} placeholder="Name" />
+                <input className={styles.input} {...surname.bind} placeholder="Surname" />
+                <input className={styles.input} {...email.bind} placeholder="Email" />
+                <input className={styles.input} {...password.bind} type="password" placeholder="Password"/>
+
+                <button className={styles.button} onClick={() => signupHandler()}>Create</button>
+            </div>
         </div>
     )
 }

@@ -5,12 +5,12 @@ const Client = require('../models/Client.model')
 const errors = require('../const/errors')
 
 
-async function signup(email, password) {
+async function signup(email, password, {name, surname}) {
     const candidate = await Client.findOne({ email })
     if(candidate) { throw errors.isExist }
 
     const hashedPassword = await bcrypt.hash(password, 12)
-    const user = new Client({ email, password: hashedPassword })
+    const user = new Client({ email, password: hashedPassword, name, surname })
     await user.save()
 
     return user

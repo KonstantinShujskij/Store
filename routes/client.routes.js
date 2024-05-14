@@ -14,9 +14,9 @@ const router = Router()
 
 
 router.post('/signup', login, trappiner(async (req, res) => {
-    const { email, password } = req.body
+    const { email, password, data } = req.body
 
-    const user = await Client.signup(email, password)
+    const user = await Client.signup(email, password, data)
     const token = jwt.loginToken(user._id)
 
     res.status(201).json(token)

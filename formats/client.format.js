@@ -1,7 +1,9 @@
 function client(client) {
     return {
         id: client._id,
-        email: client.email
+        email: client.email,
+        name: client.name,
+        surname: client.surname
     }
 } 
 

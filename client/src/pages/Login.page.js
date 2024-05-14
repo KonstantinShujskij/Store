@@ -18,7 +18,7 @@ function Login() {
     const loginHandler = async () => {
         const token = await clientApi.login(email.value, password.value)
         if(token) { login(token) }
-    }CLIE
+    }
 
     return (
         <div className={styles.wrap}>
