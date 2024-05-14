@@ -14,8 +14,15 @@ export default function useClientApi() {
         catch(error) { return null } 
     } 
 
+    const load = async () => {
+        try { return await protectedRequest('api/client/load') }
+        catch(error) { return null } 
+    } 
+
     return { 
         login,
-        signup
+        signup,
+
+        load
     }
 }

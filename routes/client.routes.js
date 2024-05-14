@@ -2,7 +2,7 @@ const {Router} = require('express')
 
 const trappiner = require('../utils/trappiner.utils')
 const { auth, isUser } = require('../middleware/auth.middleware')
-const { login } = require('../Validators/client.validator')
+const { login, signup } = require('../Validators/client.validator')
 
 const jwt = require('../utils/jwt.utils')
 
@@ -13,7 +13,7 @@ const Format = require('../formats/client.format')
 const router = Router()
 
 
-router.post('/signup', login, trappiner(async (req, res) => {
+router.post('/signup', signup, trappiner(async (req, res) => {
     const { email, password, data } = req.body
 
     const user = await Client.signup(email, password, data)
