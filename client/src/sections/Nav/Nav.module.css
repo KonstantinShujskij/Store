@@ -21,4 +21,39 @@
     color: #000;
     text-transform: uppercase;
     height: 100%;
+
+    margin-right: auto;
+}
+
+.menu a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.info {
+    display: flex;
+    align-items: center;
+    gap: 70px;
+
+    font-size: 18px;
+    color: #000;
+    text-transform: uppercase;
+    height: 100%;
+}
+
+.info a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.account {
+    width: fit-content;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.account svg{
+    height: 100%;
 }

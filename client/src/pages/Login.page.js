@@ -2,6 +2,10 @@ import React from 'react'
 import useInput from '../hooks/input.hook'
 import useClientApi from '../api/client.api'
 import useAuth from '../hooks/auth.hook'
+import { Link } from 'react-router-dom'
+
+
+import styles from '../styles/Login.module.css' 
 
 
 function Login() {
@@ -14,20 +18,25 @@ function Login() {
     const loginHandler = async () => {
         const token = await clientApi.login(email.value, password.value)
         if(token) { login(token) }
-    }
+    }CLIE
 
     return (
-        <div>
-            <h1>Login</h1>
-            <br />
+        <div className={styles.wrap}>
+            <div className={styles.image}>
+                <img src="./images/people.svg" alt="people" />
+            </div>
+            <div className={styles.form}>
+                <div className={styles.links}>
+                    <Link to="/login" className={styles.active}>Sign in</Link>
+                    <Link to="/signup">Create</Link>
+                </div>
 
-            <input {...email.bind} placeholder="example@mail.com" />
-            <br />
-            <input {...password.bind} type="password" placeholder="Password"/>
-            <br />
-            <br />
+                <input className={styles.input} {...email.bind} placeholder="Email" />
+                <input className={styles.input} {...password.bind} type="password" placeholder="Password"/>
+                <Link to="/" className={styles.forget}>Forgot password?</Link>
 
-            <button onClick={() => loginHandler()}>Login</button>
+                <button className={styles.button} onClick={() => loginHandler()}>Sign in</button>
+            </div>
         </div>
     )
 }

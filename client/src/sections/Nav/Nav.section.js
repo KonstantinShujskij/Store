@@ -1,38 +1,26 @@
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-// import useProductsApi from '../../api/products.api'
+import React from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 
-// import * as authSelectors from '../../redux/selectors/auth.selectors'
-// import { useSelector } from 'react-redux'
-// import useAuth from '../../hooks/auth.hook'
-
-// import AdminNav from './AdminNav'
-// import ClientNav from './ClientNav'
+import * as authSelectors from '../../redux/selectors/auth.selectors'
+import { useSelector } from 'react-redux'
 
 import Categories from './components/Categories'
+import Collections from './components/Collections'
 
 import styles from './Nav.module.css' 
-import Collections from './components/Collections'
+
 
 
 function Nav() {
-    // const isAuth = useSelector(authSelectors.isAuth)
-    // const isAdmin = useSelector(authSelectors.isAdmin)
+    const navigate = useNavigate()
 
-    // const productsApi = useProductsApi()
-    // const { logout } = useAuth()
+    const isAuth = useSelector(authSelectors.isAuth)
+    const isAdmin = useSelector(authSelectors.isAdmin)
 
-    // const [categories, setCategories] = useState([])
-    // const [collections, setCollections] = useState([])
-
-    // useEffect(() => {
-    //     const load = async () => {
-    //         setCategories(await productsApi.categories())
-    //         setCollections(await productsApi.collections()) 
-    //     }
-
-    //     load()
-    // }, [])
+    const accountHandler = () => {
+        if(!isAuth) { return navigate('./login') }
+        if(!isAdmin) { return navigate('./account') }
+    }
 
     return (
         <div className={styles.nav}>
@@ -43,61 +31,21 @@ function Nav() {
             <div className={styles.menu}>
                 <Categories />
                 <Collections />
-                <div>about</div>
+                <Link to="/about">about</Link>
             </div>
 
             <div className={styles.info}>
                 <Link to="/info">Info</Link>
-                <Link to="/info">Contacts</Link>
-                <Link to="/info">Bag</Link>
+                <Link to="/contacts">Contacts</Link>
+                <Link to="/basket">Bag</Link>
             </div>
 
-
-            {/* <br />
-            <h4>Menu</h4>
-
-            {isAuth && <>
-                <Link onClick={logout}>Logout</Link>
-                <br />
-            </>}
-
-            {!isAuth && <>
-                <Link to="/login">Login</Link>
-                <br />
-                <Link to="/signup">Sign Up</Link>
-                <br />
-            </>}
-
-            {isAuth && <>
-                {isAdmin && <AdminNav />}
-                {!isAdmin && <ClientNav />}
-            </>}
-
-            {!isAdmin && <>
-                <Link to="/basket">Basket</Link>
-                <br />
-            </>}
-
-            <Link to="/about">About</Link>
-            <br />
-            <Link to="/info">Info</Link>
-            <br />
-
-            <ul>
-                {categories.map((item) => (
-                    <li key={item?.id}>
-                        <Link to={`/catalog/${item?._id}`}>{item?.title}</Link>
-                    </li>
-                ))}
-            </ul>
-
-            <ul>
-                {collections.map((item) => (
-                    <li key={item?._id}>
-                        <Link to={`/catalog/${item?._id}`}>{item?.title}</Link>
-                    </li>
-                ))}
-            </ul> */}
+            <div className={styles.account} onClick={accountHandler}>
+                <svg width="16" height="32" viewBox="0 0 16 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3.99891 5.20889C3.99891 7.47405 5.97621 9.41778 8.55219 9.41778C11.1282 9.41778 13.1055 7.47405 13.1055 5.20889C13.1055 2.94373 11.1282 1 8.55219 1C5.97621 1 3.99891 2.94373 3.99891 5.20889Z" stroke="black" stroke-width="2"/>
+                    <path d="M8.77492 10.0352V14.7705M8.77492 25.9201L14.2852 30.9999M8.77492 25.9201L5.50322 30.9999M8.77492 25.9201V15.8898M8.77492 14.7705L0.99939 11.4988M8.77492 14.7705V15.8898M8.77492 15.8898L14.2852 11.4988" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
         </div>
     )
 }

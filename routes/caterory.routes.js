@@ -11,8 +11,8 @@ const Format = require('../formats/category.format')
 
 const router = Router()
 
-// , auth, isAdmin
-router.post('/create', create, trappiner(async (req, res) => {     
+
+router.post('/create', auth, isAdmin, create, trappiner(async (req, res) => {     
     const { title } = req.body
 
     const category = await Category.create(title)
@@ -20,9 +20,7 @@ router.post('/create', create, trappiner(async (req, res) => {
     res.status(201).json(Format.client(category))
 })) 
 
-
-// , auth, isAdmin
-router.post('/remove', trappiner(async (req, res) => {     
+router.post('/remove', auth, isAdmin, trappiner(async (req, res) => {     
     const { ids } = req.body
 
     await Category.remove(ids)
