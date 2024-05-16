@@ -1,15 +1,26 @@
 import React from 'react'
-import useAuth from '../hooks/auth.hook'
+import { NavLink } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
+
+import styles from '../styles/Account.module.css' 
 
 
 function Account() {
-    const { logout } = useAuth()
-
     return (
-        <div>
-            Account
+        <div className={styles.wrap}>
+            <div className={styles.image}>
+                <img src="../images/account.svg" alt="people" />
+            </div>
 
-            <div onClick={logout}>Logout</div>
+            <div className={styles.form}>
+                <div className={styles.links}>
+                    <NavLink to="/account/main">My account</NavLink>
+                    <NavLink to="/account/info">My information</NavLink>
+                    <NavLink to="/account/orders">My order</NavLink>
+                </div>
+            </div>
+
+            <Outlet />
         </div>
     )
 }

@@ -18,8 +18,8 @@ function Nav() {
     const isAdmin = useSelector(authSelectors.isAdmin)
 
     const accountHandler = () => {
-        if(!isAuth) { return navigate('./login') }
-        if(!isAdmin) { return navigate('./account') }
+        if(!isAuth) { return navigate('/login') }
+        if(!isAdmin) { return navigate('/account/main') }
     }
 
     return (

@@ -10,11 +10,13 @@ import useUser from './user.hook'
 export default function useData() {
     const token = useSelector(authSelectors.token)
     const isAdmin = useSelector(authSelectors.isAdmin)
-    // const isUserLoad = useSelector(userSelectors.isUserLoad)
+    const isUserLoad = useSelector(userSelectors.isUserLoad)
 
     const User = useUser()
     
     useEffect(() => { 
+        console.log('ddd')
+        
         if(token) { 
             if(isAdmin) { 
                 // load admin data
@@ -26,5 +28,5 @@ export default function useData() {
         else {
             User.clear() 
         }
-    }, [token, isAdmin])
+    }, [token, isUserLoad, isAdmin])
 }
