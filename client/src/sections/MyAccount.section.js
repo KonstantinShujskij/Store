@@ -5,21 +5,46 @@ import useInput from '../hooks/input.hook'
 
 import * as userSelectors from '../redux/selectors/user.selectors'
 import useUser from '../hooks/user.hook'
+import useClientApi from '../api/client.api'
 
 import styles from '../styles/Account.module.css' 
 
 
 
 function MyAccount() {
-    const User = useUser()
-    const user = useSelector(userSelectors.user)
+    const clientApi = useClientApi()
     const { logout } = useAuth()
 
-    const email = useInput(user.email)
+    const User = useUser()
+    const user = useSelector(userSelectors.user) 
 
+    const email = useInput(user.email)
     const password = useInput('')
     const newPassword = useInput('')
     const rePassword = useInput('')
+
+    const saveEmail = async () => {
+        const res = await clientApi.changeEmail(email.value)
+        if(res) { User.load() }
+    }
+
+    const savePassword = async () => {
+        if(!password.value) { return }
+        if(!newPassword.value) { return }
+        if(rePassword.value !== newPassword.value) { return }
+
+        const res = await clientApi.changePassword(password.value, newPassword.value)
+        if(res) {
+            password.clear()
+            newPassword.clear()
+            rePassword.clear()
+        }
+    }
+
+    const saveHandler = () => {
+        if(email.value !== user.email) { saveEmail().then() }
+        if(newPassword.value) { savePassword().then() }
+    }
 
     return (
         <div className={styles.form}>
@@ -35,7 +60,7 @@ function MyAccount() {
 
             <div className={styles.buttons}>
                 <button className={styles.button} onClick={logout}>Logout</button>
-                <button className={styles.button}>Save</button>
+                <button className={styles.button} onClick={saveHandler}>Save</button>
             </div>
         </div>
     )

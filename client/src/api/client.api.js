@@ -19,10 +19,23 @@ export default function useClientApi() {
         catch(error) { return null } 
     } 
 
+    const changeEmail = async (email) => {
+        try { return await protectedRequest('api/client/set-email', {email}) }
+        catch(error) { return null } 
+    } 
+
+    const changePassword = async (password, newPassword) => {
+        try { return await protectedRequest('api/client/set-password', {password, newPassword}) }
+        catch(error) { return null } 
+    } 
+
     return { 
         login,
         signup,
 
-        load
+        load,
+
+        changeEmail,
+        changePassword
     }
 }

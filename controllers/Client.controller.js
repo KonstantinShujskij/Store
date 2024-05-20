@@ -33,9 +33,32 @@ async function get(_id) {
     return user
 }
 
+async function changeEmail(id, email) {
+    const user = await get(id)
+
+    user.email = email
+    await user.save()
+
+    return true
+}
+
+async function changePassword(id, password, newPassword) {
+    const user = await get(id)
+
+    const isMatch = await bcrypt.compare(password, user.password)
+    if(!isMatch) { throw errors.notAuth }
+
+    user.password = await bcrypt.hash(newPassword, 12)
+    await user.save()
+
+    return true
+}
+
 
 module.exports = { 
     signup,
     login,
-    get
+    get,
+    changeEmail,
+    changePassword
 }
