@@ -1,25 +1,44 @@
-const {check} = require('express-validator')
-
+const { check } = require('express-validator')
 const errors = require('../const/errors')
 
 
-const email = (label='email') => check(label, errors.incorectValue.key).isEmail()
-const password = (label='password') => check(label, errors.incorectValue.key).isString().isLength({ min: 6, max: 24 })
-const name = (label='name') => check(label, errors.incorectValue.key).isString().isLength({ min: 3, max: 16 })
-const surname = (label='surname') => check(label, errors.incorectValue.key).isString().isLength({ min: 3, max: 16 })
+const base = (Label, Err) => (label=Label) => check(label, Err.key)
+
+const email = base('email', errors.incorectValue)
+const password = base('password', errors.incorectValue) 
+const name = base('data.name', errors.incorectValue) 
+const surname = base('data.surname', errors.incorectValue) 
+const phone = base('data.phone', errors.incorectValue) 
+const instagram = base('data.instagram', errors.incorectValue) 
+const town = base('data.town', errors.incorectValue) 
+
+const emailChane = (base) => base.isEmail()
+const passwordChane = (base) => base.isString().isLength({ min: 6, max: 24 })
+const nameChane = (base) => base.isString().isLength({ min: 3, max: 16 })
+const surnameChane = (base) => base.isString().isLength({ min: 3, max: 16 })
+const instagramChane = (base) => base.isString().isLength({ min: 3, max: 16 })
+const phoneChane = (base) => base.isMobilePhone()
+const townChane = (base) => base.isString().isLength({ min: 3, max: 16 })
 
 
 module.exports = {
-    email: email(),
-    password: password('newPassword'),
+    email: emailChane(email()),
+    password: passwordChane(password('newPassword')),
     login: [
-        email(), 
-        password()
+        emailChane(email()), 
+        passwordChane(password())
     ],
     signup: [
-        email(), 
-        password(), 
-        name('data.name'), 
-        surname('data.surname')
+        emailChane(email()),  
+        passwordChane(password()),
+        nameChane(name()), 
+        surnameChane(surname())
+    ],
+    info: [
+        nameChane(name().optional()), 
+        surnameChane(surname().optional()),
+        phoneChane(phone().optional()),
+        instagramChane(instagram().optional()), 
+        townChane(town().optional())
     ]
 }

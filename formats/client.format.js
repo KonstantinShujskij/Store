@@ -3,7 +3,11 @@ function client(client) {
         id: client._id,
         email: client.email,
         name: client.name,
-        surname: client.surname
+        surname: client.surname,
+        
+        phone: client.phone,
+        instagram: client.instagram,
+        town: client.town,
     }
 } 
 

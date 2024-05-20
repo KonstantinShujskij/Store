@@ -54,11 +54,26 @@ async function changePassword(id, password, newPassword) {
     return true
 }
 
+async function changeInfo(id, {name, surname, phone, instagram, town}) {
+    const user = await get(id)
+
+    if(name) { user.name = name }
+    if(surname) { user.surname = surname }
+    if(phone) { user.phone = phone }
+    if(instagram) { user.instagram = instagram }
+    if(town) { user.town = town }
+
+    await user.save()
+
+    return true
+}
+
 
 module.exports = { 
     signup,
     login,
     get,
     changeEmail,
-    changePassword
+    changePassword,
+    changeInfo
 }

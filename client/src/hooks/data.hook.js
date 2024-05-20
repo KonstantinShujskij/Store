@@ -14,9 +14,7 @@ export default function useData() {
 
     const User = useUser()
     
-    useEffect(() => { 
-        console.log('ddd')
-        
+    useEffect(() => {        
         if(token) { 
             if(isAdmin) { 
                 // load admin data

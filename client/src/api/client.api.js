@@ -29,6 +29,11 @@ export default function useClientApi() {
         catch(error) { return null } 
     } 
 
+    const changeInfo = async (data) => {
+        try { return await protectedRequest('api/client/set-info', {data}) }
+        catch(error) { return null } 
+    } 
+
     return { 
         login,
         signup,
@@ -36,6 +41,7 @@ export default function useClientApi() {
         load,
 
         changeEmail,
-        changePassword
+        changePassword,
+        changeInfo
     }
 }
