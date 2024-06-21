@@ -3,24 +3,17 @@ const {Schema, model, Types} = require('mongoose')
 const schema = new Schema({
     title: {type: String},
     desc: {type: String},
-    category: {type: Types.ObjectId, ref: 'Category'},
+    price: {type: Number, default: 0},
+    category: {type: Types.ObjectId, ref: 'Category', default: undefined},
     categoryTitle: {type: String, default: ''},
     collection: {type: Types.ObjectId, ref: 'Collection', default: undefined},
     collectionTitle: {type: String, default: ''},
-    price: {type: Number, default: 0},
-    parametrs: [
-        {
-            title: {type: String},
-            min: {type: Number},
-            max: {type: Number}
-        }
-    ],
-    colorSchema: [
-        {
-            main: {type: String},
-            styles: [ {type: String} ]
-        }
-    ]
+    photos: [{type: String}],
+
+    createdAt: { type: Number },
+    updatedAt: { type: Number }
+}, {
+    timestamps: { currentTime: () => Date.now() }
 })
 
 module.exports = model('Product', schema)

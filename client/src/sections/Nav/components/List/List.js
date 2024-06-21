@@ -9,7 +9,7 @@ import styles from './List.module.css'
 
 
 function List({label, list, click, save, remove}) {
-    const isAdmin = true //useSelector(authSelectors.isAdmin)
+    const isAdmin = useSelector(authSelectors.isAdmin)
     
     const value = useInput('')
     const [ids, setIds] = useState([])

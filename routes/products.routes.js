@@ -1,45 +1,48 @@
 const {Router} = require('express')
-const {check} = require('express-validator')
 
 const trappiner = require('../utils/trappiner.utils')
 
 const { auth, isAdmin } = require('../middleware/auth.middleware')
+const { create } = require('../Validators/product.validator')
+const file = require('../middleware/file.middleware')
 
-const Collection = require('../controllers/collection.controller')
 const Product = require('../controllers/Product.controller')
-
+const Format = require('../formats/product.format')
 
 const router = Router()
 
+//
+router.post('/create', auth, isAdmin, 
+    file.array('photos', 6), create,
+    trappiner(async (req, res) => {   
+        const { title, desc, price, category, collection } = req.body
+        const photos = req.files.map((file) => file.filename)
 
-router.post('/create-collection', trappiner(async (req, res) => {     
-    const { title } = req.body
+        const product = await Product.create(title, desc, price, photos, category, collection)
 
-    await Collection.create(title)
+        res.status(201).json(Format.admin(product))
+    })
+) 
 
-    res.status(201).json(true)
-})) 
+//create,
+router.post('/update', auth, isAdmin, 
+    file.array('photos', 6), 
+    trappiner(async (req, res) => {   
+        const { id, title, desc, price, category, collection, existPhotos } = req.body
+        const photos = req.files.map((file) => file.filename)
 
-router.post('/remove-collections', trappiner(async (req, res) => {     
-    const { list } = req.body
+        const product = await Product.update(id, title, desc, price, photos, existPhotos, category, collection)
 
-    console.log(list);
+        res.status(201).json(Format.admin(product))
+    })
+) 
 
-    res.status(201).json(true)
-})) 
-
-router.post('/collections', trappiner(async (req, res) => {     
-    const list = await Collection.list()
-
-    res.status(200).json(list)
-})) 
-
-router.post('/products', trappiner(async (req, res) => {     
+router.post('/list', trappiner(async (req, res) => {     
     const { filter } = req.body
 
     const list = await Product.list(filter)
 
-    res.status(200).json(list)
+    res.status(200).json(list.map(Format.client))
 })) 
 
 router.post('/get', trappiner(async (req, res) => {     
@@ -47,38 +50,13 @@ router.post('/get', trappiner(async (req, res) => {
 
     const product = await Product.get(id)
 
-    res.status(200).json(product)
+    res.status(200).json(Format.admin(product))
 })) 
-
-router.post('/create', 
-    [
-        check('prop', 'incorectValue').optional().isArray(),
-        check('prop.*.title', 'incorectValue').isString(),
-        check('prop.*.min', 'incorectValue').isFloat({ min: 0, max: 10000 }),
-        check('prop.*.max', 'incorectValue').isFloat({ min: 0, max: 10000 }),
-        check('colors', 'incorectValue').optional().isArray(),
-        check('colors.*.value', 'incorectValue').isHexColor(),
-        check('colors.*.styles', 'incorectValue').optional().isArray(),
-        check('colors.*.styles.*', 'incorectValue').isHexColor()
-    ],
-    trappiner(async (req, res) => {   
-        const { title, desc, price, category, collection, prop, colors } = req.body
-
-        const parametrs = prop.map((item) => ({ title: item.title, min: item.min, max: item.max }))
-        const colorSchema = colors.map((item) => ({ main: item.value, styles: item.styles }))
-
-        const product = await Product.create(title, desc, price, category, collection, parametrs, colorSchema)
-
-        res.status(201).json(product)
-    })
-) 
 
 router.post('/remove', auth, isAdmin, trappiner(async (req, res) => {     
     const { id } = req.body
     
     await Product.remove(id)
-
-    console.log('---0---');
 
     res.status(200).json(true)
 })) 

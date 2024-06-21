@@ -8,11 +8,12 @@ import Categories from './components/Categories'
 import Collections from './components/Collections'
 
 import styles from './Nav.module.css' 
-
+import useAuth from '../../hooks/auth.hook'
 
 
 function Nav() {
     const navigate = useNavigate()
+    const { logout } = useAuth()
 
     const isAuth = useSelector(authSelectors.isAuth)
     const isAdmin = useSelector(authSelectors.isAdmin)
@@ -37,7 +38,8 @@ function Nav() {
             <div className={styles.info}>
                 <Link to="/info">Info</Link>
                 <Link to="/contacts">Contacts</Link>
-                <Link to="/basket">Bag</Link>
+                {!isAdmin && <Link to="/basket">Bag</Link>}
+                {isAdmin && <Link to="/login" onClick={logout}>LogOut</Link>}
             </div>
 
             <div className={styles.account} onClick={accountHandler}>

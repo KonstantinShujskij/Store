@@ -1,0 +1,30 @@
+.main {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+
+    margin-bottom: 16px;
+}
+
+.input {
+    width: 200px;
+    padding: 6px 0;
+    border: none;
+    outline: none;
+    font-size: 20px;
+}
+
+.value {
+    width: 200px;
+    margin-right: 4px;
+}
+
+.button {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 4px;
+}

@@ -11,7 +11,7 @@ const app = express()
 app.use(cors())
 app.use(express.json({ extended: true }))
 
-app.use('/store', express.static(path.join(__dirname, 'store')))
+app.use('/static', express.static(path.join(__dirname, 'static')))
 
 app.use('/api/category', require('./routes/caterory.routes'))
 app.use('/api/collection', require('./routes/collection.routes'))

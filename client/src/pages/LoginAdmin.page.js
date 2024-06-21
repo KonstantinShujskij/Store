@@ -2,7 +2,8 @@ import React from 'react'
 import useInput from '../hooks/input.hook'
 import useAdminApi from '../api/admin.api'
 import useAuth from '../hooks/auth.hook'
-
+import styles from '../styles/Login.module.css' 
+import { Link } from 'react-router-dom'
 
 function LoginAdmin() {
     const adminApi = useAdminApi()
@@ -17,17 +18,20 @@ function LoginAdmin() {
     }
 
     return (
-        <div>
-            <h1>Admin</h1>
-            <br />
+        <div className={styles.wrap}>
+            <div className={styles.image}>
+                <img src="./images/people.svg" alt="people" />
+            </div>
+            <div className={styles.form}>
+                <div className={styles.links}>
+                    <Link to="/admin" className={styles.active}>Admin</Link>
+                </div>
 
-            <input {...email.bind} placeholder="example@mail.com" />
-            <br />
-            <input {...password.bind} type="password" placeholder="Password"/>
-            <br />
-            <br />
+                <input className={styles.input} {...email.bind} placeholder="Email" />
+                <input className={styles.input} {...password.bind} type="password" placeholder="Password"/>
 
-            <button onClick={() => loginHandler()}>Login</button>
+                <button className={styles.button} onClick={() => loginHandler()}>Login</button>
+            </div>
         </div>
     )
 }

@@ -8,28 +8,15 @@ function BasketItem({item}) {
 
     return (
         <div className={styles.item}>
-            <h4>{item?.title}</h4>
-            <p>price: {item.price}</p>
-
-            <br />
-
-            <div>
-                {Object.keys(item?.parametrs).map((param) => (
-                    <div key={param}>
-                        {param}: {item?.parametrs[param]} 
-                    </div>
-                ))}
+            <div className={styles.photo}>
+                <img src={`http://127.0.0.1:5000/static/images/${item.photo}`} alt={item.photo} />
             </div>
+            <h4 className={styles.title}>{item?.title}</h4>
+            <p className={styles.price}>price: {item.price} ₴</p>
 
-            <br />
-
-            <div className="d-flex">
-                <div className={styles.color} style={{backgroundColor: item.mainColor}}></div>
-                <div className={styles.color} style={{backgroundColor: item.styleColor}}></div>
-            </div>
-
-            <br />
-            <button onClick={() => remove(item.id)}>Remove</button>
+            <button onClick={() => remove(item.id)} className={styles.remove}>
+                <img src="./images/close.svg" alt="remove" />
+            </button>
         </div>
     )
 }

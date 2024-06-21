@@ -4,19 +4,9 @@ import useApi from '../hooks/api.hook'
 export default function useProductsApi() {
     const { publicRequest, protectedRequest } = useApi()
 
-    const collections = async () => {
-        try { return await publicRequest('api/products/collections') }
+    const list = async (filter={}) => {
+        try { return await publicRequest('api/products/list', {filter}) }
         catch(error) { return [] } 
-    } 
-
-    const products = async (filter) => {
-        try { return await publicRequest('api/products/products', {filter}) }
-        catch(error) { return [] } 
-    } 
-
-    const create = async (title, desc, price, category, collection, prop, colors) => {
-        try { return await publicRequest('api/products/create', {title, desc, price, category, collection, prop, colors}) }
-        catch(error) { return null } 
     } 
 
     const get = async (id) => {
@@ -24,20 +14,38 @@ export default function useProductsApi() {
         catch(error) { return null } 
     } 
 
-    // admins
+    const create = async ({title, desc, price, category, collection}, photos) => {
+        const data = {title, desc, price, category, collection}
+        const form = new FormData()
+        photos.forEach((item) => form.append('photos', item.file))
+        for(let key in data) { form.append(key, data[key]) }
+
+        try { return await protectedRequest('api/products/create', form, 'form') }
+        catch(error) { return null } 
+    } 
+    
+    const update = async (id, {title, desc, price, category, collection}, photos=[], existPhotos=[]) => {
+        const data = {title, desc, price, category, collection}
+        const form = new FormData()
+        form.append('id', id)
+        for(let key in data) { form.append(key, data[key]) }
+        photos.forEach((item) => form.append('photos', item.file))
+        existPhotos.forEach((item) => form.append('existPhotos', item.file.name))
+        
+        try { return await protectedRequest('api/products/update', form, 'form') }
+        catch(error) { return null } 
+    } 
 
     const remove = async (id) => {
         try { return await protectedRequest('api/products/remove', {id}) }
-        catch(error) { return null } 
+        catch(error) { return false } 
     }
 
     return { 
-        collections,
-        products,
-
         create,
+        remove,
+        update,
         get,
-
-        remove
+        list
     }
 }

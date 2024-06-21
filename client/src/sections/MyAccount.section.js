@@ -8,12 +8,14 @@ import useUser from '../hooks/user.hook'
 import useClientApi from '../api/client.api'
 
 import styles from '../styles/Account.module.css' 
-
+import { useNavigate } from 'react-router-dom'
 
 
 function MyAccount() {
     const clientApi = useClientApi()
     const { logout } = useAuth()
+
+    const navigate = useNavigate('navigate')
 
     const User = useUser()
     const user = useSelector(userSelectors.user) 
@@ -46,6 +48,11 @@ function MyAccount() {
         if(newPassword.value) { savePassword().then() }
     }
 
+    const logoutHandler = () => {
+        logout()
+        navigate('/')
+    }
+
     return (
         <div className={styles.form}>
             <h3 className={styles.label}>Main information</h3>
@@ -59,7 +66,7 @@ function MyAccount() {
             <input className={styles.input} {...rePassword.bind} type="password" placeholder="Confirm new password" />
 
             <div className={styles.buttons}>
-                <button className={styles.button} onClick={logout}>Logout</button>
+                <button className={styles.button} onClick={logoutHandler}>Logout</button>
                 <button className={styles.button} onClick={saveHandler}>Save</button>
             </div>
         </div>

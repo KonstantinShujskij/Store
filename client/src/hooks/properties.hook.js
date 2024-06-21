@@ -1,38 +1,40 @@
 import {  useState } from 'react'
 
 
-function createProprty(_id) {
-    return {
-        _id: _id? _id : parseInt(`${Date.now()}${Math.random() * 100}`).toString(16),
-        title: '',
-        min: '',
-        max:''
-    }
-}
-
-
 export default function useProperties() {
-    const [values, setValues] = useState([]) 
+    const [properties, setProperties] = useState([]) 
 
-    const addProp = (_id) => { setValues((prew) => [...prew, createProprty(_id)]) }
-    const removeProp = (_id) => setValues((prew) => prew.filter((item) => (item._id !== _id)))
-
-    const setProp = (_id, value) => { 
-        setValues((prew) => prew.map((item) => {
-            if(item._id !== _id) { return item } 
-            return {...item, ...value}
-        }))
+    const add = () => {
+        setProperties((prew) => {
+            return [...prew, {
+                type: 'range',
+                title: '',
+                min: null,
+                max: null,
+                list: [],
+                id: `${Date.now().toString(16)}-${parseInt(Math.random() * 1000)}`
+            }]
+        })
     }
 
-    const getValue = () => values.map((item) => ({
-        title: item.title,
-        min: item.min,
-        max: item.max
-    }))
+    const change = (id, value) => {
+        setProperties((prew) => {
+            return prew.map((item) => { 
+                if(item.id !== id) { return item }
+                return {...item, ...value}
+            })
+        })
+    } 
+
+    const remove = (id) => {
+        setProperties((prew) => {
+            return prew.filter((item) => (item.id !== id))
+        })
+    }
 
     return {
-        bind: { values, addProp, removeProp, setProp },
-        values,
-        getValue
+        list: properties,
+        setProperties,
+        bind: { properties, add, change, remove }
     }
 }
