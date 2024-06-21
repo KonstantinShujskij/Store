@@ -10,6 +10,7 @@ import useAlert from '../../../hooks/alert.hook'
 import Properties from './components/Properties/Properties'
 import useProperties from '../../../hooks/properties.hook'
 import Tooltip from '../../../components/Tooltip/Tooltip'
+import Material from './components/Material/Material'
 
 
 function MakeProduct() {
@@ -94,6 +95,7 @@ function MakeProduct() {
                 </div>
                 <Properties properties={properties} />
                 <Tooltip />
+                <Material />
             </div>
         </div> 
     )
