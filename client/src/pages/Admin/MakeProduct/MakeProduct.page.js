@@ -41,7 +41,7 @@ function MakeProduct() {
 
                 product.photos.forEach((photo) => {photos.add(`http://127.0.0.1:5000/static/images/${photo}`, {name: photo}, true) })
             
-                
+                properties.setProperties(product.prop)
             }
         }
 
@@ -49,7 +49,7 @@ function MakeProduct() {
     }, [id])
 
     const makeHandler = async () => {
-        const data = {title: title.value, desc: desc.value, price: price.value, category, collection}
+        const data = {title: title.value, desc: desc.value, price: price.value, prop: properties.list, category, collection}
         let product = null
 
         if(!id) { product = await productsApi.create(data, photos.list) }
@@ -60,12 +60,10 @@ function MakeProduct() {
         }
         
         if(product) { 
-            // navigate(`/product/${product.id}`)
+            navigate(`/product/${product.id}`)
             Alert.pushMess('Product has been created')
         }
     }
-
-    
 
     return (
         <div className={styles.main}>

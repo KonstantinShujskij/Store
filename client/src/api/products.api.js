@@ -14,8 +14,8 @@ export default function useProductsApi() {
         catch(error) { return null } 
     } 
 
-    const create = async ({title, desc, price, category, collection}, photos) => {
-        const data = {title, desc, price, category, collection}
+    const create = async ({title, desc, price, category, collection, prop}, photos) => {
+        const data = {title, desc, price, category, collection, prop: JSON.stringify(prop)}
         const form = new FormData()
         photos.forEach((item) => form.append('photos', item.file))
         for(let key in data) { form.append(key, data[key]) }
@@ -24,8 +24,8 @@ export default function useProductsApi() {
         catch(error) { return null } 
     } 
     
-    const update = async (id, {title, desc, price, category, collection}, photos=[], existPhotos=[]) => {
-        const data = {title, desc, price, category, collection}
+    const update = async (id, {title, desc, price, category, collection, prop}, photos=[], existPhotos=[]) => {
+        const data = {title, desc, price, category, collection, prop: JSON.stringify(prop)}
         const form = new FormData()
         form.append('id', id)
         for(let key in data) { form.append(key, data[key]) }

@@ -9,8 +9,8 @@ export default function useProperties() {
             return [...prew, {
                 type: 'range',
                 title: '',
-                min: null,
-                max: null,
+                min: 0,
+                max: 0,
                 list: [],
                 id: `${Date.now().toString(16)}-${parseInt(Math.random() * 1000)}`
             }]

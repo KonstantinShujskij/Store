@@ -9,7 +9,16 @@ const schema = new Schema({
     collection: {type: Types.ObjectId, ref: 'Collection', default: undefined},
     collectionTitle: {type: String, default: ''},
     photos: [{type: String}],
-
+    prop: [
+        {
+            id: {type: String},
+            type: {type: String, default: 'range'},
+            title: {type: String},
+            min: {type: Number, default: 0},
+            max: {type: Number, default: 0},
+            list: [{type: String}]
+        }
+    ],
     createdAt: { type: Number },
     updatedAt: { type: Number }
 }, {

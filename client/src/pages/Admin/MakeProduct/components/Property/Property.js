@@ -19,7 +19,7 @@ function Property({ item, change, remove }) {
 
     const max = {
         value: item.max,
-        onChange: (event) => change(item.id, {min: event.target.value})
+        onChange: (event) => change(item.id, {max: event.target.value})
     } 
 
     const list = {
@@ -35,10 +35,10 @@ function Property({ item, change, remove }) {
                 {item.type === 'list'? <List {...list} /> : <Range min={min} max={max} />}
             </div>
             <div className={style.button} onClick={toggleHandler}>
-                <img src={'./images/mage.svg'} />
+                <img src={'http://127.0.0.1:3000/images/mage.svg'} />
             </div>
             <div className={style.button} onClick={() => remove(item.id)}>
-                <img src={'./images/close.svg'} />
+                <img src={'http://127.0.0.1:3000/images/close.svg'} />
             </div>
         </div>
     )
