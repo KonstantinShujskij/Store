@@ -9,6 +9,7 @@ import useAlert from '../../../hooks/alert.hook'
 
 import Properties from './components/Properties/Properties'
 import useProperties from '../../../hooks/properties.hook'
+import Tooltip from '../../../components/Tooltip/Tooltip'
 
 
 function MakeProduct() {
@@ -92,6 +93,7 @@ function MakeProduct() {
                     </div>
                 </div>
                 <Properties properties={properties} />
+                <Tooltip />
             </div>
         </div> 
     )
