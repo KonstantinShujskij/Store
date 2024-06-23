@@ -13,6 +13,7 @@ function client(product) {
         photo: product.photos.length? product.photos[0] : null,
 
         prop: product.prop,
+        materials: product.materials,
         
         createdAt: product.createdAt
     }
@@ -33,6 +34,7 @@ function admin(product) {
         photo: product.photos.length? product.photos[0] : null,
 
         prop: product.prop,
+        materials: product.materials,
     
         createdAt: product.createdAt
     }

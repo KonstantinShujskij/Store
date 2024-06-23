@@ -10,44 +10,40 @@ module.exports = {
         check('price', errors.incorectValue.key).isFloat({min: 0, max: 10000000})
     ],
     validateProp: (prop) => {
-        prop.forEach((item) => {
+        return prop.map((item) => {
             try {
-                if(typeof item.id !== "string" || item.id.length < 1) { 
-                    console.log('-0');
-                    throw errors.incorectValue 
-                }
-                if(typeof item.title !== "string" || item.title.length < 3) { 
-                    console.log('-1');
-                    throw errors.incorectValue 
-                }
-                if(parseFloat(item.min) < 0) { 
-                    console.log(item);
-                    console.log('-2');
-                    throw errors.incorectValue 
-                }
-                if(parseFloat(item.max) < 0) { 
-                    console.log('-3');
-                    throw errors.incorectValue 
-                }
-                if(item.type !== 'range' && item.type !== 'list') { 
-                    console.log('-4');
-                    throw errors.incorectValue 
-                }
-                if(!Array.isArray(item.list)) { 
-                    console.log('-5');
-                    throw errors.incorectValue 
-                }
+                if(typeof item.id !== "string" || item.id.length < 1) { throw errors.incorectValue }
+                if(typeof item.title !== "string" || item.title.length < 3) { throw errors.incorectValue }
+                if(parseFloat(item.min) < 0) { throw errors.incorectValue }
+                if(parseFloat(item.max) < 0) { throw errors.incorectValue }
+                if(item.type !== 'range' && item.type !== 'list') { throw errors.incorectValue }
+                if(!Array.isArray(item.list)) { throw errors.incorectValue }
 
                 item.list.forEach((val) => {
-                    if(typeof val !== "string" || val.length < 1) { 
-                        console.log('-n');
-                        throw errors.incorectValue 
-                    }
+                    if(typeof val !== "string" || val.length < 1) { throw errors.incorectValue }
                 })
+
+                return {
+                    id: item.id,
+                    title: item.title,
+                    type: item.type,
+                    list: item.list,
+                    min: parseFloat(item.min),
+                    max: parseFloat(item.max),  
+                }
             }
-            catch(err) {
-                throw errors.incorectValue 
+            catch(err) { throw errors.incorectValue }
+        })
+    },
+    validateMaterial: (prop) => {
+        return prop.map((item) => {
+            try {
+                if(typeof item.id !== "string" || item.id.length < 1) { throw errors.incorectValue }
+                if(typeof item.title !== "string" || item.title.length < 3) { throw errors.incorectValue }
+
+                return { id: item.id, title: item.title }
             }
+            catch(err) { throw errors.incorectValue }
         })
     }
 }

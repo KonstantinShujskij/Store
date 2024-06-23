@@ -14,24 +14,26 @@ export default function useProductsApi() {
         catch(error) { return null } 
     } 
 
-    const create = async ({title, desc, price, category, collection, prop}, photos) => {
-        const data = {title, desc, price, category, collection, prop: JSON.stringify(prop)}
+    const create = async ({title, desc, price, category, collection, prop, materials}, photos) => {
+        const data = {title, desc, price, category, collection, prop: JSON.stringify(prop), materials: JSON.stringify(materials)}
         const form = new FormData()
-        photos.forEach((item) => form.append('photos', item.file))
+        
         for(let key in data) { form.append(key, data[key]) }
+        photos.forEach((item) => form.append('photos', item.file))
 
         try { return await protectedRequest('api/products/create', form, 'form') }
         catch(error) { return null } 
     } 
     
-    const update = async (id, {title, desc, price, category, collection, prop}, photos=[], existPhotos=[]) => {
-        const data = {title, desc, price, category, collection, prop: JSON.stringify(prop)}
+    const update = async (id, {title, desc, price, category, collection, prop, materials}, photos=[], existPhotos=[]) => {
+        const data = {title, desc, price, category, collection, prop: JSON.stringify(prop), materials: JSON.stringify(materials)}
         const form = new FormData()
         form.append('id', id)
+
         for(let key in data) { form.append(key, data[key]) }
         photos.forEach((item) => form.append('photos', item.file))
         existPhotos.forEach((item) => form.append('existPhotos', item.file.name))
-        
+       
         try { return await protectedRequest('api/products/update', form, 'form') }
         catch(error) { return null } 
     } 

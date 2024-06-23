@@ -3,7 +3,7 @@ const {Router} = require('express')
 const trappiner = require('../utils/trappiner.utils')
 
 const { auth, isAdmin } = require('../middleware/auth.middleware')
-const { create, validateProp } = require('../Validators/product.validator')
+const { create, validateProp, validateMaterial } = require('../Validators/product.validator')
 const file = require('../middleware/file.middleware')
 
 const Product = require('../controllers/Product.controller')
@@ -11,25 +11,18 @@ const Format = require('../formats/product.format')
 
 const router = Router()
 
-//
+//create,
 router.post('/create', auth, isAdmin, 
-    file.array('photos', 6), create,
+    file.array('photos', 6), 
     trappiner(async (req, res) => {   
-        const { title, desc, price, prop, category, collection } = req.body
-        validateProp(JSON.parse(prop))
+        const { title, desc, price, prop, materials, category, collection } = req.body
 
-        const properties = JSON.parse(prop).map((item) => ({
-            id: item.id,
-            title: item.title,
-            type: item.type,
-            list: item.list,
-            min: parseFloat(item.min),
-            max: parseFloat(item.max),  
-        }))
+        const materialsData = validateMaterial(JSON.parse(materials))
+        const properties = validateProp(JSON.parse(prop))
 
         const photos = req.files.map((file) => file.filename)
 
-        const product = await Product.create(title, desc, price, photos, properties, category, collection)
+        const product = await Product.create(title, desc, price, photos, properties, materialsData, category, collection)
 
         res.status(201).json(Format.admin(product))
     })
@@ -39,21 +32,14 @@ router.post('/create', auth, isAdmin,
 router.post('/update', auth, isAdmin, 
     file.array('photos', 6), 
     trappiner(async (req, res) => {   
-        const { id, title, desc, price, category, collection, existPhotos, prop } = req.body
-        validateProp(JSON.parse(prop))
+        const { id, title, desc, price, prop, materials, category, collection, existPhotos } = req.body
 
-        const properties = JSON.parse(prop).map((item) => ({
-            id: item.id,
-            title: item.title,
-            type: item.type,
-            list: item.list,
-            min: parseFloat(item.min),
-            max: parseFloat(item.max),  
-        }))
+        const materialsData = validateMaterial(JSON.parse(materials))
+        const properties = validateProp(JSON.parse(prop))
 
         const photos = req.files.map((file) => file.filename)
 
-        const product = await Product.update(id, title, desc, price, photos, existPhotos, properties, category, collection)
+        const product = await Product.update(id, title, desc, price, photos, existPhotos, properties, materialsData, category, collection)
 
         res.status(201).json(Format.admin(product))
     })

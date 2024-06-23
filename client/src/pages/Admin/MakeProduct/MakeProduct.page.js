@@ -30,6 +30,8 @@ function MakeProduct() {
     const photos = useFiles()
 
     const properties = useProperties()
+    const [materials, setMaterials] = useState([])
+
 
     useEffect(() => {
         const load = async () => {
@@ -44,6 +46,7 @@ function MakeProduct() {
                 product.photos.forEach((photo) => {photos.add(`http://127.0.0.1:5000/static/images/${photo}`, {name: photo}, true) })
             
                 properties.setProperties(product.prop)
+                setMaterials(product.materials)
             }
         }
 
@@ -51,7 +54,7 @@ function MakeProduct() {
     }, [id])
 
     const makeHandler = async () => {
-        const data = {title: title.value, desc: desc.value, price: price.value, prop: properties.list, category, collection}
+        const data = {title: title.value, desc: desc.value, price: price.value, prop: properties.list, materials, category, collection}
         let product = null
 
         if(!id) { product = await productsApi.create(data, photos.list) }
@@ -95,7 +98,7 @@ function MakeProduct() {
                 </div>
                 <Properties properties={properties} />
                 <Tooltip />
-                <Material />
+                <Material list={materials} setList={setMaterials} />
             </div>
         </div> 
     )

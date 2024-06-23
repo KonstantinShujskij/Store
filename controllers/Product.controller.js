@@ -5,16 +5,19 @@ const Filter = require('../utils/filter.utils')
 const errors = require('../const/errors')
 
 
-async function create(title, desc, price, photos, prop, categoryId, collectionId) {
+async function create(title, desc, price, photos, prop, materials, categoryId, collectionId) {
     // const category = await Category.get(categoryId)
     // const collection = await Collection.get(collectionId)
+
+    console.log(materials)
 
     const product = new Product({ 
         title, 
         desc, 
         price, 
         photos,
-        prop
+        prop,
+        materials
         // category: category._id,
         // categoryTitle: category.title,
         // collection: collection._id,
@@ -26,7 +29,7 @@ async function create(title, desc, price, photos, prop, categoryId, collectionId
     return product
 }
 
-async function update(id, title, desc, price, photos, existPhotos, prop, categoryId, collectionId) {
+async function update(id, title, desc, price, photos, existPhotos, prop, materials, categoryId, collectionId) {
     const product = await get(id)
 
     const newPhotos = [...photos, ...product.photos.filter((photo) => (existPhotos.includes(photo)))]
@@ -39,6 +42,7 @@ async function update(id, title, desc, price, photos, existPhotos, prop, categor
     product.desc = desc
     product.price = price
     product.prop = prop
+    product.materials = materials
 
     await product.save()
 

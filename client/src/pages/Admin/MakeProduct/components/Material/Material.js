@@ -3,8 +3,7 @@ import style from './Material.module.css'
 import useInput from '../../../../../hooks/input.hook'
 
 
-function Material() {
-    const [list, setList] = useState([])
+function Material({list, setList}) {
     const [removeList, setRemoveList] = useState([])
 
     const value = useInput()
