@@ -76,7 +76,7 @@ function Colors({label, colors=[], setColors=()=>{}, newItem=()=>{}, active=()=>
             </div>
             <div className={style.wrap}>
                 {colors.map((item) => (
-                    <div className={`${style.item} ${current === item._id? style.active : null}`}>
+                    <div className={`${style.item} ${current === item._id? style.active : null}`} key={item._id}>
                         <input type="checkbox" checked={removeList.includes(item?._id)} onChange={() => togle(item?._id)} />
                         <div className={style.color} onClick={() => currentHandler(item._id)}>{item.title}</div>
                     </div>

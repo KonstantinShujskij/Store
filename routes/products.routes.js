@@ -3,7 +3,7 @@ const {Router} = require('express')
 const trappiner = require('../utils/trappiner.utils')
 
 const { auth, isAdmin } = require('../middleware/auth.middleware')
-const { create, validateProp, validateMaterial } = require('../Validators/product.validator')
+const { create, validateProp, validateMaterial, validateColors } = require('../Validators/product.validator')
 const file = require('../middleware/file.middleware')
 
 const Product = require('../controllers/Product.controller')
@@ -13,16 +13,41 @@ const router = Router()
 
 //create,
 router.post('/create', auth, isAdmin, 
-    file.array('photos', 6), 
+    file.fields([  
+        { name: 'photos', maxCount: 25 },
+        { name: 'photosColor', maxCount: 100 }
+    ]),
     trappiner(async (req, res) => {   
-        const { title, desc, price, prop, materials, category, collection } = req.body
-
+        const { title, desc, price, prop, materials, category, collection, colors } = req.body
+       
         const materialsData = validateMaterial(JSON.parse(materials))
         const properties = validateProp(JSON.parse(prop))
+        const colorsData = validateColors(JSON.parse(colors))
 
-        const photos = req.files.map((file) => file.filename)
+        const photos = req.files.photos.map((file) => file.filename)
 
-        const product = await Product.create(title, desc, price, photos, properties, materialsData, category, collection)
+        const photosColor = {}
+
+        req.files.photosColor.forEach((file) => { 
+            const name = file.originalname.substr(0, file.originalname.indexOf('.'))
+            photosColor[name] = file.filename
+        })
+
+        colorsData.forEach((color) => {           
+            if(color.file && photosColor[color.file]) { 
+                color.src = photosColor[color.file] 
+                delete color.file
+            }
+
+            color.design.forEach((design) => {
+                if(design.file && photosColor[design.file]) { 
+                    design.src = photosColor[design.file] 
+                    delete design.file
+                }
+            })
+        })
+                
+        const product = await Product.create(title, desc, price, photos, properties, materialsData, colorsData, category, collection)
 
         res.status(201).json(Format.admin(product))
     })

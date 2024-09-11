@@ -5,11 +5,9 @@ const Filter = require('../utils/filter.utils')
 const errors = require('../const/errors')
 
 
-async function create(title, desc, price, photos, prop, materials, categoryId, collectionId) {
+async function create(title, desc, price, photos, prop, materials, colors, categoryId, collectionId) {
     // const category = await Category.get(categoryId)
     // const collection = await Collection.get(collectionId)
-
-    console.log(materials)
 
     const product = new Product({ 
         title, 
@@ -17,7 +15,8 @@ async function create(title, desc, price, photos, prop, materials, categoryId, c
         price, 
         photos,
         prop,
-        materials
+        materials,
+        colors
         // category: category._id,
         // categoryTitle: category.title,
         // collection: collection._id,

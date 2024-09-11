@@ -35,6 +35,7 @@ function admin(product) {
 
         prop: product.prop,
         materials: product.materials,
+        colors: product.colors,
     
         createdAt: product.createdAt
     }

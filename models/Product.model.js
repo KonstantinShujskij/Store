@@ -21,6 +21,14 @@ const schema = new Schema({
         id: {type: String},
         title: {type: String},
     }],
+    colors: [{
+        title: {type: String},
+        src: {type: String},
+        design: [{
+            title: {type: String},
+            src: {type: String},
+        }]
+    }],
     createdAt: { type: Number },
     updatedAt: { type: Number }
 }, {

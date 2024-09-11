@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import Colors from '../Colors/Colors'
-import {getTempId} from '../../../../../utils'
-import style from './ColorProp.module.css'
+import Colors from './Colors/Colors'
+import {getTempId} from '../../../../utils'
+
 
 function ColorProp({ colors, setColors }) {
     const [mainColor, setMainColor] = useState(null)

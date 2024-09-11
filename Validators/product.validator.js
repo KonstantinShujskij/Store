@@ -32,7 +32,7 @@ module.exports = {
                     max: parseFloat(item.max),  
                 }
             }
-            catch(err) { throw errors.incorectValue }
+            catch(err) { throw errors.incorectProp }
         })
     },
     validateMaterial: (prop) => {
@@ -43,7 +43,27 @@ module.exports = {
 
                 return { id: item.id, title: item.title }
             }
-            catch(err) { throw errors.incorectValue }
+            catch(err) { throw errors.incorectMaterial }
+        })
+    },
+    validateColors: (prop) => {
+        return prop.map((item) => {
+            try {
+                if(typeof item.title !== "string" || item.title.length < 3) { throw errors.incorectValue }
+                if(item.src && typeof item.src !== "string") { throw errors.incorectValue }
+                if(item.file && typeof item.file !== "string") { throw errors.incorectValue }
+
+                item.design = item.design.map((item) => {
+                    if(typeof item.title !== "string" || item.title.length < 3) { throw errors.incorectValue }
+                    if(item.src && typeof item.src !== "string") { throw errors.incorectValue }
+                    if(item.file && typeof item.file !== "string") { throw errors.incorectValue }
+
+                    return item
+                })
+
+                return item
+            }
+            catch(err) { throw errors.incorectColors }
         })
     }
 }

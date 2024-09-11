@@ -11,7 +11,7 @@ import Properties from './components/Properties/Properties'
 import useProperties from '../../../hooks/properties.hook'
 import Tooltip from '../../../components/Tooltip/Tooltip'
 import Material from './components/Material/Material'
-import ColorProp from './components/ColorProp/ColorProp'
+import ColorProp from './components/ColorProp'
 
 
 function MakeProduct() {
@@ -48,17 +48,23 @@ function MakeProduct() {
             
                 properties.setProperties(product.prop)
                 setMaterials(product.materials)
+
+                product.colors.forEach((color) => {
+                    color.src = `http://127.0.0.1:5000/static/images/${color.src}`
+                    color.design.forEach((design) => { design.src = `http://127.0.0.1:5000/static/images/${design.src}` })
+                })
+                
+                setColors(product.colors)              
             }
         }
 
         load()
     }, [id])
 
-    const makeHandler = async () => {
-        console.log(colors)
-        
-        return
-        const data = {title: title.value, desc: desc.value, price: price.value, prop: properties.list, materials, category, collection}
+    const makeHandler = async () => {       
+        console.log('maker handler')
+
+        const data = {title: title.value, desc: desc.value, price: price.value, prop: properties.list, materials, colors, category, collection}
         let product = null
 
         if(!id) { product = await productsApi.create(data, photos.list) }
@@ -68,10 +74,10 @@ function MakeProduct() {
             product = await productsApi.update(id, data, loadPhotos, existPhotos) 
         }
         
-        if(product) { 
-            navigate(`/product/${product.id}`)
-            Alert.pushMess('Product has been created')
-        }
+        // if(product) { 
+        //     //navigate(`/product/${product.id}`)
+        //     Alert.pushMess('Product has been created')
+        // }
     }
 
     return (
