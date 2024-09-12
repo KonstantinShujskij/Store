@@ -1,5 +1,6 @@
 const Product = require('../models/Product.model')
 
+const {removeFile} = require('../utils/file.utils')
 const Filter = require('../utils/filter.utils')
 
 const errors = require('../const/errors')
@@ -33,10 +34,13 @@ async function update(id, title, desc, price, photos, existPhotos, prop, materia
     const product = await get(id)    
 
     const newPhotos = [...photos, ...product.photos.filter((photo) => (existPhotos.includes(photo)))]
-    // const trashPhotos = product.photos.filter((photo) => (!existPhotos.includes(photo)))
-
-    // clear photos
-    // clear colors photos
+    const trashPhotos = product.photos.filter((photo) => (!existPhotos.includes(photo)))
+    trashPhotos.forEach((item) => removeFile(`static/images/${item}`))
+        
+    product.colorsList.forEach((item) => {
+        if(colors.list.includes(item)) { return }
+        removeFile(`static/images/${item}`)
+    })
 
     product.photos = newPhotos
     product.title = title
@@ -85,6 +89,10 @@ async function get(_id) {
 
 async function remove(_id) {
     const product = await get(_id)
+
+    product.photos.forEach((item) => { removeFile(`static/images/${item}`) })
+    product.colorsList.forEach((item) => { removeFile(`static/images/${item}`) })
+
     await Product.deleteOne(product._id)
 
     return true

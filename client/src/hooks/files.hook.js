@@ -31,11 +31,13 @@ export default function useFiles(type='image') {
     }
 
     const remove = (id) => { setList((prew) => prew.filter((item) => (item.id !== id))) }
+    const clear = () => setList([])
 
     return {
         list,
         upload,
         add,
-        remove
+        remove,
+        clear
     }
 }

@@ -50,19 +50,13 @@ function MakeProduct() {
         
             properties.setProperties(product.prop)
             setMaterials(product.materials)
-
-            // product.colors.forEach((color) => {
-            //     color.src = `${IMG_SRC}${color.src}`
-            //     color.design.forEach((design) => { design.src = `${IMG_SRC}${design.src}` })
-            // })
-            
             setColors(product.colors)              
         }
 
         load()
     }, [id])
 
-    const makeHandler = async () => {       
+    const makeHandler = async () => {   
         const data = {
             title: title.value, 
             desc: desc.value, 
@@ -74,20 +68,22 @@ function MakeProduct() {
             collection
         }
 
-        let product = null
-
-        if(!id) { product = await productsApi.create(data, photos.list) }
-        else {
+        if(id) { 
             const loadPhotos = photos.list.filter((item) => (!item.exist))
             const existPhotos = photos.list.filter((item) => (item.exist))
 
-            product = await productsApi.update(id, data, loadPhotos, existPhotos) 
+            const product = await productsApi.update(id, data, loadPhotos, existPhotos) 
+            if(product) { Alert.pushMess('Product has been updated')}
+
+            return
         }
-        
-        // if(product) { 
-        //     //navigate(`/product/${product.id}`)
-        //     Alert.pushMess('Product has been created')
-        // }
+
+        const product = await productsApi.create(data, photos.list) 
+        if(!product) { return }
+
+        Alert.pushMess('Product has been created')
+        photos.clear()
+        navigate(`/product/${product.id}`)
     }
 
     return (
@@ -122,7 +118,7 @@ function MakeProduct() {
                 <Material list={materials} setList={setMaterials} />
                 <ColorProp colors={colors} setColors={setColors} />
             </div>
-        </div> 
+        </div>
     )
 }
 

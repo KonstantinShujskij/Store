@@ -16,7 +16,7 @@ function prepareColors(colorsData, files) {
     const dict = {}
     const list = []
 
-    files.forEach((file) => { dict[file.originalname.substr(0, file.originalname.lastIndexOf('.'))] = file.filename })
+    files?.forEach((file) => { dict[file.originalname.substr(0, file.originalname.lastIndexOf('.'))] = file.filename })
 
     const colors = colorsData.map((color) => {     
         const handler = (item) => {
@@ -48,7 +48,7 @@ router.post('/create', auth, isAdmin,
         const properties = validateProp(JSON.parse(prop))
         const colorsData = validateColors(JSON.parse(colors))
 
-        const photos = req.files.photos.map((file) => file.filename)
+        const photos = req.files.photos?.map((file) => file.filename) || []  
         const Colors = prepareColors(colorsData, req.files.photosColor)
 
         const product = await Product.create(title, desc, price, photos, properties, materialsData, Colors, category, collection)
