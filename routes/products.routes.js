@@ -35,12 +35,12 @@ function prepareColors(colorsData, files) {
     return { colors, list }
 }
 
-//create,
 router.post('/create', auth, isAdmin, 
     file.fields([  
         { name: 'photos', maxCount: 25 },
         { name: 'photosColor', maxCount: 100 }
     ]),
+    create, 
     trappiner(async (req, res) => {   
         const { title, desc, price, prop, materials, category, collection, colors } = req.body
        
@@ -57,12 +57,12 @@ router.post('/create', auth, isAdmin,
     })
 ) 
 
-//create,
 router.post('/update', auth, isAdmin, 
     file.fields([  
         { name: 'photos', maxCount: 25 },
         { name: 'photosColor', maxCount: 100 }
     ]),
+    create, 
     trappiner(async (req, res) => {   
         const { id, title, desc, price, prop, materials, category, collection, colors, existPhotos } = req.body
 

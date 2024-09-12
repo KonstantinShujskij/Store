@@ -6,6 +6,10 @@ module.exports = {
 
     incorectValue: { answer: { error: 'Incorect Value' }, key: 'incorectValue', custom: true },
 
+    incorectTitle: { answer: { error: 'Incorect Title' }, key: 'incorectTitle', custom: true },
+    incorectDesc: { answer: { error: 'Incorect Description' }, key: 'incorectDesc', custom: true },
+    incorectPrice: { answer: { error: 'Incorect Price' }, key: 'incorectPrice', custom: true },
+
     incorectProp: { answer: { error: 'Incorect Prop' }, key: 'incorectProp', custom: true },
     incorectMaterial: { answer: { error: 'Incorect Material' }, key: 'incorectMaterial', custom: true },
     incorectColors: { answer: { error: 'Incorect Colors' }, key: 'incorectColors', custom: true },

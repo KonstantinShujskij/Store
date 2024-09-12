@@ -11,17 +11,7 @@ export default function useFiles(type='image') {
             if(type && !file.type.match(type)) { return }
 
             const reader = new FileReader()
-            reader.onload = (ev) => {
-                add(ev.target.result, file)
-                // setList((prew) => ([
-                //     {
-                //         img: ev.target.result, 
-                //         file: file, 
-                //         id: (Date.now()) + file.name
-                //     },
-                //     ...prew
-                // ]))
-            }
+            reader.onload = (ev) => add(ev.target.result, file)
             reader.readAsDataURL(file)
         })
     }

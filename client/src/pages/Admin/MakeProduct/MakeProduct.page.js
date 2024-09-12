@@ -23,7 +23,7 @@ function MakeProduct() {
     const productsApi = useProductsApi()
 
     const [category, setCategory] = useState('')
-    const [collection, setCollection] = useState('') 
+    const [collection, setCollection] = useState('')
 
     const title = useInput()
     const desc = useInput()
