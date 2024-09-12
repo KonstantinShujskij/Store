@@ -1,5 +1,6 @@
 import useApi from '../hooks/api.hook'
-import { renameFile } from '../utils'
+import { parseColors } from '../utils/colors.utils'
+
 
 export default function useProductsApi() {
     const { publicRequest, protectedRequest } = useApi()
@@ -15,50 +16,42 @@ export default function useProductsApi() {
     } 
 
     const create = async ({title, desc, price, category, collection, prop, materials, colors}, photos) => {
-        const tempFiles = []
-        const tempColors = []
-
-        colors.forEach((color) => {
-            const fileName = `C-${color._id}`
-            if(!!color.file) { tempFiles.push(renameFile(color.file, fileName)) }
-            const tempColor = {title: color.title, file: color.file? fileName : false, src: color.file? false : color.src, design: []}
-            
-            const tempDesigns = []
-            color.design.forEach((design) => {
-                const fileName = `D-${design._id}`
-                if(!!design.file) { tempFiles.push(renameFile(design.file, fileName)) }
-                tempDesigns.push({title: design.title, file: design.file? fileName : false, src: design.file? false : design.src})
-            })
-            tempColor.design = tempDesigns
-
-            tempColors.push(tempColor)
-        })
+        const colorData = parseColors(colors)
         
         const data = {
             title, desc, price, category, collection, 
             prop: JSON.stringify(prop), 
             materials: JSON.stringify(materials),
-            colors: JSON.stringify(tempColors)
+            colors: JSON.stringify(colorData.colors)
         }
 
         const form = new FormData()
         
-        for(let key in data) { form.append(key, data[key]) }
+        for(const key in data) { form.append(key, data[key]) }
         photos.forEach((item) => form.append('photos', item.file))
-        tempFiles.forEach((file) => form.append('photosColor', file))
+        colorData.files.forEach((file) => form.append('photosColor', file))
 
         try { return await protectedRequest('api/products/create', form, 'form') }
         catch(error) { return null } 
     } 
     
     const update = async (id, {title, desc, price, category, collection, prop, materials, colors}, photos=[], existPhotos=[]) => {
-        const data = {title, desc, price, category, collection, prop: JSON.stringify(prop), materials: JSON.stringify(materials)}
+        const colorData = parseColors(colors)
+        
+        const data = {
+            title, desc, price, category, collection, 
+            prop: JSON.stringify(prop), 
+            materials: JSON.stringify(materials),
+            colors: JSON.stringify(colorData.colors)
+        }
+
         const form = new FormData()
         form.append('id', id)
 
-        for(let key in data) { form.append(key, data[key]) }
+        for(const key in data) { form.append(key, data[key]) }
         photos.forEach((item) => form.append('photos', item.file))
         existPhotos.forEach((item) => form.append('existPhotos', item.file.name))
+        colorData.files.forEach((file) => form.append('photosColor', file))
        
         try { return await protectedRequest('api/products/update', form, 'form') }
         catch(error) { return null } 

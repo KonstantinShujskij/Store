@@ -29,6 +29,8 @@ const schema = new Schema({
             src: {type: String},
         }]
     }],
+    colorsList: [{type: String}],
+    
     createdAt: { type: Number },
     updatedAt: { type: Number }
 }, {

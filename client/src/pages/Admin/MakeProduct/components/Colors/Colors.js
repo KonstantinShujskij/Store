@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import style from './Colors.module.css'
 import useInput from '../../../../../hooks/input.hook'
+import { IMG_SRC } from '../../../../../const'
 
 
 function Colors({label, colors=[], setColors=()=>{}, newItem=()=>{}, active=()=>{}, root=null}) {
@@ -22,7 +23,6 @@ function Colors({label, colors=[], setColors=()=>{}, newItem=()=>{}, active=()=>
     }
 
     const remove = () => setColors((prew) => prew.filter((item) => !removeList.includes(item._id)))
-
 
     const upHandler = (event) => {
         if(!event.target.files) { return }
@@ -64,6 +64,11 @@ function Colors({label, colors=[], setColors=()=>{}, newItem=()=>{}, active=()=>
 
     const curentColor = getCurrentColor()
 
+    const getSourse = (item) => {
+        if(!item.src) { return 'http://127.0.0.1:3000/images/default.png' }
+        return `${!item.file? IMG_SRC : ''}${item.src}`
+    }
+
     return (
         <div className={style.main}>
             <div className={style.top}>
@@ -90,9 +95,8 @@ function Colors({label, colors=[], setColors=()=>{}, newItem=()=>{}, active=()=>
             {curentColor && (
                 <div className={style.preview}>
                     <div className={style.photo}>
-                        {root? root.src? <img src={root.src} alt="main" /> : <img src="http://127.0.0.1:3000/images/default.png" alt="default" /> : null}
-                        
-                        <img src={curentColor.src || 'http://127.0.0.1:3000/images/default.png'} alt="temp"/>
+                        {root? <img src={getSourse(root)} alt="main" /> : null}
+                        <img src={getSourse(curentColor)} alt="temp"/>
                     </div>
                     <label className={style.load}>
                         <input type="file" className="hide" onChange={upHandler} />

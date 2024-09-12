@@ -12,6 +12,7 @@ import useProperties from '../../../hooks/properties.hook'
 import Tooltip from '../../../components/Tooltip/Tooltip'
 import Material from './components/Material/Material'
 import ColorProp from './components/ColorProp'
+import { IMG_SRC } from '../../../const'
 
 
 function MakeProduct() {
@@ -36,41 +37,50 @@ function MakeProduct() {
 
     useEffect(() => {
         const load = async () => {
-            if(id) {
-                const product = await productsApi.get(id)
-                if(!product) { return }
+            if(!id) { return }
 
-                title.changeValue(product?.title)
-                desc.changeValue(product?.desc)
-                price.changeValue(product?.price)
+            const product = await productsApi.get(id)
+            if(!product) { return }
 
-                product.photos.forEach((photo) => {photos.add(`http://127.0.0.1:5000/static/images/${photo}`, {name: photo}, true) })
+            title.changeValue(product?.title)
+            desc.changeValue(product?.desc)
+            price.changeValue(product?.price)
+
+            product.photos.forEach((photo) => {photos.add(`${IMG_SRC}${photo}`, {name: photo}, true) })
+        
+            properties.setProperties(product.prop)
+            setMaterials(product.materials)
+
+            // product.colors.forEach((color) => {
+            //     color.src = `${IMG_SRC}${color.src}`
+            //     color.design.forEach((design) => { design.src = `${IMG_SRC}${design.src}` })
+            // })
             
-                properties.setProperties(product.prop)
-                setMaterials(product.materials)
-
-                product.colors.forEach((color) => {
-                    color.src = `http://127.0.0.1:5000/static/images/${color.src}`
-                    color.design.forEach((design) => { design.src = `http://127.0.0.1:5000/static/images/${design.src}` })
-                })
-                
-                setColors(product.colors)              
-            }
+            setColors(product.colors)              
         }
 
         load()
     }, [id])
 
     const makeHandler = async () => {       
-        console.log('maker handler')
+        const data = {
+            title: title.value, 
+            desc: desc.value, 
+            price: price.value, 
+            prop: properties.list, 
+            materials, 
+            colors, 
+            category, 
+            collection
+        }
 
-        const data = {title: title.value, desc: desc.value, price: price.value, prop: properties.list, materials, colors, category, collection}
         let product = null
 
         if(!id) { product = await productsApi.create(data, photos.list) }
         else {
             const loadPhotos = photos.list.filter((item) => (!item.exist))
             const existPhotos = photos.list.filter((item) => (item.exist))
+
             product = await productsApi.update(id, data, loadPhotos, existPhotos) 
         }
         

@@ -16,7 +16,8 @@ async function create(title, desc, price, photos, prop, materials, colors, categ
         photos,
         prop,
         materials,
-        colors
+        colors: colors.colors,
+        colorsList: colors.list
         // category: category._id,
         // categoryTitle: category.title,
         // collection: collection._id,
@@ -28,13 +29,14 @@ async function create(title, desc, price, photos, prop, materials, colors, categ
     return product
 }
 
-async function update(id, title, desc, price, photos, existPhotos, prop, materials, categoryId, collectionId) {
-    const product = await get(id)
+async function update(id, title, desc, price, photos, existPhotos, prop, materials, colors, categoryId, collectionId) {
+    const product = await get(id)    
 
     const newPhotos = [...photos, ...product.photos.filter((photo) => (existPhotos.includes(photo)))]
-    const trashPhotos = product.photos.filter((photo) => (!existPhotos.includes(photo)))
+    // const trashPhotos = product.photos.filter((photo) => (!existPhotos.includes(photo)))
 
     // clear photos
+    // clear colors photos
 
     product.photos = newPhotos
     product.title = title
@@ -42,6 +44,8 @@ async function update(id, title, desc, price, photos, existPhotos, prop, materia
     product.price = price
     product.prop = prop
     product.materials = materials
+    product.colors = colors.colors,
+    product.colorsList = colors.list
 
     await product.save()
 
