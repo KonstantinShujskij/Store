@@ -1,0 +1,40 @@
+.title {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 4px;
+
+    margin-bottom: 20px;
+    margin-top: 16px;
+
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.item {
+    width: 100%;
+    padding-left: 20px;
+}
+
+.point {
+    display: flex;
+    align-items: flex-start;
+    flex-shrink: 0;
+    gap: 6px;
+
+
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 300;
+}
+
+.label {
+    width: 20px;
+    text-align: center;
+}
+
+.content {
+    width: 100%;
+}
