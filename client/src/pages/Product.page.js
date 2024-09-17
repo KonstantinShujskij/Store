@@ -7,6 +7,8 @@ import useBasket from '../hooks/basket.hook'
 import * as authSelectors from '../redux/selectors/auth.selectors'
 import { useSelector } from 'react-redux'
 import styles from '../styles/Product.module.css'
+import { IMG_SRC } from '../const'
+import Tooltip from '../components/Tooltip/Tooltip'
 
 
 function Product() {
@@ -38,21 +40,6 @@ function Product() {
         // setStyleColor(color?.styles[0])
     })
 
-    const setProp = (title, value) => {
-        // setParametrs((prew) => {
-        //     const newValue = {...prew}
-        //     newValue[title] = value
-        //     return newValue
-        // })
-    }
-
-    const mainColorHandler = (id) => {
-        // const color = product?.colorSchema.filter((item) => (item._id === id))[0]
-        
-        // setMainColor(color?.main)
-        // setStyleColors(color?.styles)
-    }
-
     const pushHandler = () => {
         Basket.add({
             _id: product._id,
@@ -62,62 +49,12 @@ function Product() {
         })
     }
 
-    const removeHandler = async () => {
-        await productsApi.remove(id)
-        navigate('/')
-    }
-
-        //     <div>
-        //     <h2>{product?.title}</h2>
-        //     <p>{product?.desc}</p>
-        //     <h4>{product?.price}</h4>
-        //     <p>{product?.category}</p>
-
-        //     <br />
-        //     <hr />
-        //     <br />
-
-        //     {/* <div>
-        //         {product?.parametrs?.map((item) => (
-        //             <div key={item._id}>
-        //                 <span>{item.title} </span>
-        //                 <input value={parametrs[item.title]} onChange={(e) => setProp(item.title, e.target.value)} />
-        //             </div>
-        //         ))}
-        //     </div> */}
-
-        //     <br />
-        //     <hr />
-        //     <br />
-
-        //     {/* <div>
-        //         <select onChange={(event) => mainColorHandler(event.target.value)}>
-        //             {product?.colorSchema?.map((item) => (
-        //                 <option key={item._id} value={item._id}>{item?.main}</option>
-        //             ))}
-        //         </select>
-        //         <select onChange={(event) => setStyleColor(event.target.value)}>
-        //             {styleColors?.map((color) => (
-        //                 <option key={color} value={color}>{color}</option>
-        //             ))}
-        //         </select>
-        //     </div> */}
-
-        //     <br />
-        //     {!isAdmin && <button onClick={pushHandler}>Put to basket</button>}
-        //     {isAdmin && <>
-        //         <button onClick={() => navigate(`/make-product/${id}`)} >Edit</button>
-        //         <br />
-        //         <button onClick={() => removeHandler()}>Delete</button>
-        //     </>}
-        // </div>
-
     return (
         <div className={styles.main}>
             <div className={styles.photos}>
                 {product?.photos.map((photo) => (
                     <div className={styles.photo} key={photo}>
-                        <img src={`http://127.0.0.1:5000/static/images/${photo}`} alt={photo} />
+                        <img src={`${IMG_SRC}${photo}`} alt={photo} />
                     </div>
                 ))}
             </div>
@@ -136,6 +73,16 @@ function Product() {
                         <div>₴</div>
                     </div>
                 </div>
+                
+                <div>
+                    {product?.prop.map((item) => <div key={item._id}>{item.title}</div>)}
+                </div>
+                <div>
+                    {product?.materials.map((item) => <div key={item._id}>{item.title}</div>)}
+                </div>
+
+                <Tooltip />
+
                 <button className={styles.button} onClick={pushHandler}>Bay</button>
             </div>
         </div> 

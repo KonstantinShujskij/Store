@@ -98,9 +98,9 @@
     gap: 24px;
 } 
 
-.info {
+/* .info {
     width: calc(100% - 144px);
-}
+} */
 
 .title {
     width: 100%;
@@ -123,7 +123,7 @@
     border: none;
     font-size: 20px;
     resize: none;
-    min-height: 600px;
+    min-height: 100px;
 }
 
 .priceWrap {
