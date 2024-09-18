@@ -1,0 +1,52 @@
+.prop {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.listProp {
+    align-items: flex-start;
+}
+
+.title {
+    width: 180px;
+
+    font-size: 20px;
+    font-weight: 400;
+    text-transform: capitalize;
+}
+
+.input {
+    border-radius: 21px;
+    padding: 4px 6px;
+    border: 1.5px solid #000;
+    height: 30px;
+    width: 84px;
+    text-align: center;
+
+    font-size: 12px;
+    font-weight: 400;
+    outline: none;
+}
+
+.error {
+    color: #A82525;
+    font-size: 14px;
+    font-weight: 400;
+    align-self: center;
+    display: none;
+}
+
+.inputWrap {
+    display: flex;
+    align-self: center;
+    gap: 12px;
+}
+
+.inputWrap.active .error {
+    display: block;
+}
+
+.inputWrap.active .input {
+    border-color: #A82525;
+}

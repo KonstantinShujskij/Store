@@ -36,7 +36,7 @@ function Nav() {
             </div>
 
             <div className={styles.info}>
-                <Link to="/info">Info</Link>
+                <Link to="/info/offer-agreement">Info</Link>
                 <Link to="/contacts">Contacts</Link>
                 {!isAdmin && <Link to="/basket">Bag</Link>}
                 {isAdmin && <Link to="/login" onClick={logout}>LogOut</Link>}

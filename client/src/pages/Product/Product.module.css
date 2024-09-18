@@ -114,6 +114,22 @@
     font-size: 24px;
     font-weight: 700;
     margin-bottom: 12px;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.title img {
+    width: 16px;
+    margin-bottom: 4px;
+    transform: scale(-1, -1);
+}
+
+.title.open img {
+    transform: scale(1, 1);
 }
 
 .description {
@@ -177,4 +193,41 @@
 .button:hover {
     color: #fff;
     background-color: #000;
+}
+
+.material {
+    margin-bottom: 8px;
+
+    font-size: 18px;
+    font-weight: 300;
+    text-transform: capitalize;
+    cursor: pointer;
+}
+
+.material.active {
+    text-decoration-line: underline;
+}
+
+.tooltip {
+    margin-bottom: 70px;
+}
+
+.materials {
+    margin-bottom: 20px;
+}
+
+.careItem {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 18px;
+    font-weight: 300;
+}
+
+.icon {
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
