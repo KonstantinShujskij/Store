@@ -12,7 +12,6 @@ module.exports = {
     validateProp: (prop) => {
         return prop.map((item) => {
             try {
-                if(typeof item.id !== "string" || item.id.length < 1) { throw errors.incorectValue }
                 if(typeof item.title !== "string" || item.title.length < 3) { throw errors.incorectValue }
                 if(parseFloat(item.min) < 0) { throw errors.incorectValue }
                 if(parseFloat(item.max) < 0) { throw errors.incorectValue }
@@ -24,7 +23,6 @@ module.exports = {
                 })
 
                 return {
-                    id: item.id,
                     title: item.title,
                     type: item.type,
                     list: item.list,
@@ -38,10 +36,9 @@ module.exports = {
     validateMaterial: (prop) => {
         return prop.map((item) => {
             try {
-                if(typeof item.id !== "string" || item.id.length < 1) { throw errors.incorectValue }
                 if(typeof item.title !== "string" || item.title.length < 3) { throw errors.incorectValue }
 
-                return { id: item.id, title: item.title }
+                return { title: item.title }
             }
             catch(err) { throw errors.incorectMaterial }
         })

@@ -13,14 +13,21 @@ import Tooltip from '../../../components/Tooltip/Tooltip'
 import Material from './components/Material/Material'
 import ColorProp from './components/ColorProp'
 import { IMG_SRC } from '../../../const'
+import { useSelector } from 'react-redux'
+
+import * as staticSelectors from '../../../redux/selectors/static.selectors'
+import Select from '../../../components/UI/Select/Select'
 
 
 function MakeProduct() {
     const { id } = useParams()
     const navigate = useNavigate()
+    
+    const productsApi = useProductsApi()
     const Alert = useAlert()
 
-    const productsApi = useProductsApi()
+    const categories = useSelector(staticSelectors.categories)
+    const collections = useSelector(staticSelectors.collections)
 
     const [category, setCategory] = useState('')
     const [collection, setCollection] = useState('')
@@ -50,7 +57,9 @@ function MakeProduct() {
         
             properties.setProperties(product.prop)
             setMaterials(product.materials)
-            setColors(product.colors)              
+            setColors(product.colors)      
+            setCategory({id: product.category, title: product.categoryTitle})        
+            setCollection({id: product.collection, title: product.collectionTitle})        
         }
 
         load()
@@ -64,8 +73,8 @@ function MakeProduct() {
             prop: properties.list, 
             materials, 
             colors, 
-            category, 
-            collection
+            category: category.id, 
+            collection: collection.id
         }
 
         if(id) { 
@@ -99,20 +108,25 @@ function MakeProduct() {
 
             <div className={styles.form}>
                 <div className={styles.top}>
-                    <div className={styles.path}>categories / Tracksuits / {title.value}</div>
+                    <div className={styles.path}>categories / {category?.title} / {title.value}</div>
                     <div className={styles.save} onClick={() => makeHandler()}>Save</div>
                 </div>
+
                 <div className={styles.infoWrap}>
                     <div className={styles.info}>
                         <input {...title.bind} className={styles.title} placeholder="Title"/>
                         <textarea {...desc.bind} className={styles.description} placeholder="Description" />
+                        <div className={styles.lists}>
+                            <Select list={categories} current={category.title} handler={setCategory} placeholder="Category" />
+                            <Select list={collections} current={collection.title} handler={setCollection} placeholder="Collection" />
+                        </div>
                     </div>
                     <div className={styles.priceWrap}>
                         <input {...price.bind} className={styles.price}/>
                         <div>₴</div>
                     </div>
                 </div>
-                
+
                 <Properties properties={properties} />
                 <Tooltip />
                 <Material list={materials} setList={setMaterials} />

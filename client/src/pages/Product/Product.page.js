@@ -29,9 +29,9 @@ function Product() {
 
     const [careOpen, setCareOpen] = useState(false)
     const [materialOpen, setMaterialOpen] = useState(false)
-    const [propOpen, setPropOpen] = useState(false)
+    const [propOpen, setPropOpen] = useState(true)
 
-    const setParametr = (key, value) => {
+    const setParametr = (key, value) => {       
         setParametrs((prew) => {
             const newItem = {...prew}
             newItem[key] = value
@@ -40,16 +40,16 @@ function Product() {
     }
 
     const setColors = (color, design) => {
-        setColor({ title: color.title, src: color.src })
-        setDesign({ title: design.title, src: design.src })
+        setColor(color.title)
+        setDesign(design.title)
     }
 
     useLoad(async () => {
         const loadProduct = await productsApi.get(id)
         setProduct(loadProduct)
         setMaterial(loadProduct?.materials[0]?.title)
-        setColor({title: loadProduct.colors[0]?.title, src: loadProduct.colors[0]?.src})
-        setDesign({title: loadProduct.colors[0]?.design[0]?.title, src: loadProduct.colors[0]?.design[0]?.src})
+        setColor(loadProduct.colors[0]?.title)
+        setDesign(loadProduct.colors[0]?.design[0]?.title)
     })
 
     const pushHandler = () => {

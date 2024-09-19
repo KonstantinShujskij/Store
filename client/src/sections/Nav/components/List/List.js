@@ -36,6 +36,11 @@ function List({label, list, click, save, remove}) {
         } 
     }
 
+    const clickHandler = (id) => {
+        setOpen(false)
+        click(id)
+    }
+
     const Panel = <div className={styles.panel}>
         {edit && <>
             <div onClick={() => saveHandler()}>save</div>
@@ -49,7 +54,7 @@ function List({label, list, click, save, remove}) {
 
         {list.map((item) => 
             <div className={styles.item} key={item.id}>
-                <div onClick={() => click(item?.id)} className={styles.link}>{item?.title}</div>
+                <div onClick={() => clickHandler(item?.id)} className={styles.link}>{item?.title}</div>
                 {edit? <input type="checkbox" checked={ids.includes(item?.id)} onChange={() => togle(item?.id)}/> : null}
             </div>
         )}

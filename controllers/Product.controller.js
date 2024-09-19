@@ -3,12 +3,15 @@ const Product = require('../models/Product.model')
 const {removeFile} = require('../utils/file.utils')
 const Filter = require('../utils/filter.utils')
 
+const Category = require('./Category.controller')
+const Collection = require('./Collection.controller')
+
 const errors = require('../const/errors')
 
 
 async function create(title, desc, price, photos, prop, materials, colors, categoryId, collectionId) {
-    // const category = await Category.get(categoryId)
-    // const collection = await Collection.get(collectionId)
+    const category = await Category.get(categoryId)
+    const collection = await Collection.get(collectionId)
 
     const product = new Product({ 
         title, 
@@ -18,11 +21,11 @@ async function create(title, desc, price, photos, prop, materials, colors, categ
         prop,
         materials,
         colors: colors.colors,
-        colorsList: colors.list
-        // category: category._id,
-        // categoryTitle: category.title,
-        // collection: collection._id,
-        // collectionTitle: collection.title
+        colorsList: colors.list,
+        category: category._id,
+        categoryTitle: category.title,
+        collection: collection._id,
+        collectionTitle: collection.title
     })
 
     await product.save()
@@ -30,8 +33,11 @@ async function create(title, desc, price, photos, prop, materials, colors, categ
     return product
 }
 
-async function update(id, title, desc, price, photos, existPhotos, prop, materials, colors, categoryId, collectionId) {
+async function update(id, title, desc, price, photos, existPhotos, prop, materials, colors, categoryId, collectionId) {    
     const product = await get(id)    
+
+    const category = await Category.get(categoryId)
+    const collection = await Collection.get(collectionId)
 
     const newPhotos = [...photos, ...product.photos.filter((photo) => (existPhotos.includes(photo)))]
     const trashPhotos = product.photos.filter((photo) => (!existPhotos.includes(photo)))
@@ -50,6 +56,11 @@ async function update(id, title, desc, price, photos, existPhotos, prop, materia
     product.materials = materials
     product.colors = colors.colors,
     product.colorsList = colors.list
+
+    product.category = category._id
+    product.categoryTitle = category.title
+    product.collection = collection._id
+    product.collectionTitle = collection.title
 
     await product.save()
 

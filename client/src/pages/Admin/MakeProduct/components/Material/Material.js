@@ -10,7 +10,7 @@ function Material({list, setList}) {
 
     const add = () => {
         setList((prew) => {
-            return [...prew, {id: `${Date.now().toString(16)}-${parseInt(Math.random() * 1000)}`, title: value.value}] 
+            return [...prew, {_id: `${Date.now().toString(16)}-${parseInt(Math.random() * 1000)}`, title: value.value}] 
         })
         value.clear()
     }
@@ -21,7 +21,7 @@ function Material({list, setList}) {
     })
 
     const remove = () => {
-        setList((prew) => prew.filter((item) => !removeList.includes(item.id)))
+        setList((prew) => prew.filter((item) => !removeList.includes(item._id)))
     }
 
     return (
@@ -35,8 +35,8 @@ function Material({list, setList}) {
             </div>
             <div className={style.list}>
                 {list.map((item) => (
-                    <div className={style.item} key={item.id}>
-                        <input type="checkbox" checked={removeList.includes(item?.id)} onChange={() => togle(item?.id)} />
+                    <div className={style.item} key={item._id}>
+                        <input type="checkbox" checked={removeList.includes(item?._id)} onChange={() => togle(item?._id)} />
                         <div className={style.label}>{item.title}</div>
                     </div>
                 ))}

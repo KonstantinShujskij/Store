@@ -12,7 +12,7 @@ export default function useProperties() {
                 min: 0,
                 max: 0,
                 list: [],
-                id: `${Date.now().toString(16)}-${parseInt(Math.random() * 1000)}`
+                _id: `${Date.now().toString(16)}-${parseInt(Math.random() * 1000)}`
             }]
         })
     }
@@ -20,7 +20,7 @@ export default function useProperties() {
     const change = (id, value) => {
         setProperties((prew) => {
             return prew.map((item) => { 
-                if(item.id !== id) { return item }
+                if(item._id !== id) { return item }
                 return {...item, ...value}
             })
         })
@@ -28,7 +28,7 @@ export default function useProperties() {
 
     const remove = (id) => {
         setProperties((prew) => {
-            return prew.filter((item) => (item.id !== id))
+            return prew.filter((item) => (item._id !== id))
         })
     }
 

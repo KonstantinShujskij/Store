@@ -10,7 +10,7 @@ function Properties({properties}) {
                 <div className={style.title}>SIZE</div>
                 <button className={style.button} onClick={properties.bind.add}>Add</button>
             </div>
-            {properties.list.map((item) => <Property {...properties.bind} item={item} key={item.id} />)}
+            {properties.list.map((item) => <Property {...properties.bind} item={item} key={item._id} />)}
         </div>
     )
 }

@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 body {
-    font-family: sans-serif;
+    font-family: "Inter", sans-serif;
     color: #090909;
     padding: 21px;
 
@@ -38,9 +40,8 @@ a.active {
 }
 
 main {
-    /* background-color: aqua; */
     width: 100%;
-    height: 100%;
+    height: calc(100% - 21px);
     overflow-y: scroll;
 
     font-size: 20px;

@@ -159,3 +159,9 @@
     outline: none;
     border: none;
 }
+
+.lists {
+    display: flex;
+    gap: 24px;
+    max-width: 520px;
+}
