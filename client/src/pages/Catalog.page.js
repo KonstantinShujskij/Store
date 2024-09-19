@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import useProductsApi from '../api/products.api'
-import Product from '../components/Product/Product'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
+import useProductsApi from '../api/products.api'
 import * as authSelectors from '../redux/selectors/auth.selectors'
+
+import Product from '../components/Product/Product'
+
 import styles from '../styles/Catalog.module.css' 
 
 
@@ -15,13 +17,9 @@ function Catalog() {
 
     const [products, setProducts] = useState([])
 
-    const load = async () => {
-        setProducts(await productsApi.list())
-    }
+    const load = async () => setProducts(await productsApi.list())
 
-    useEffect(() => {
-        load()
-    }, [])
+    useEffect(() => { load() }, [])
     
     
     return (

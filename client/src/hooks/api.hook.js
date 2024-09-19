@@ -2,11 +2,10 @@ import { useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import useHttp from './http.hook'
+import useAlert from './alert.hook'
 
 import { logout } from '../redux/actions/auth.actions'
 import * as selectors from '../redux/selectors/auth.selectors'
-
-import useAlert from './alert.hook'
 
 
 export default function useApi() {

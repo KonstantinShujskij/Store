@@ -1,14 +1,15 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-
-import * as authSelectors from '../../redux/selectors/auth.selectors'
 import { useSelector } from 'react-redux'
+
+import useAuth from '../../hooks/auth.hook'
+import * as authSelectors from '../../redux/selectors/auth.selectors'
 
 import Categories from './components/Categories'
 import Collections from './components/Collections'
 
 import styles from './Nav.module.css' 
-import useAuth from '../../hooks/auth.hook'
+import { FRONT_URL } from '../../const'
 
 
 function Nav() {
@@ -26,7 +27,7 @@ function Nav() {
     return (
         <div className={styles.nav}>
             <Link to="/" className={styles.logo}>
-                <img src="./images/logo.svg" alt="logo" />
+                <img src={`${FRONT_URL}/images/logo.svg`} alt="logo" />
             </Link>
 
             <div className={styles.menu}>

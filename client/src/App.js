@@ -1,12 +1,12 @@
 import React from 'react'
-import {useRoutes} from './routes/routes'
-
-import * as authSelectors from './redux/selectors/auth.selectors'
 import { useSelector } from 'react-redux'
+
+import {useRoutes} from './routes/routes'
+import useData from './hooks/data.hook'
+import * as authSelectors from './redux/selectors/auth.selectors'
 
 import Alert from './components/Alert/Alert'
 import Nav from './sections/Nav/Nav.section'
-import useData from './hooks/data.hook'
 
 
 function App() {

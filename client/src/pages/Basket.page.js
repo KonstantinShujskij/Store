@@ -2,11 +2,13 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
+import useInput from '../hooks/input.hook'
 import * as userSelectors from '../redux/selectors/user.selectors'
 import * as basket from '../redux/selectors/basket.selectors'
+
 import BasketItem from '../components/BasketItem/BasketItem'
+
 import styles from '../styles/Basket.module.css'
-import useInput from '../hooks/input.hook'
 
 
 function Basket() {

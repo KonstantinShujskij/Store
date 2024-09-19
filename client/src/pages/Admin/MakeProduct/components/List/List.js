@@ -1,6 +1,7 @@
 import React from 'react'
-import styles from './List.module.css'
 import useInput from '../../../../../hooks/input.hook'
+import styles from './List.module.css'
+
 
 function List({values=[], add, remove}) {
     const newVal = useInput()

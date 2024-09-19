@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { FRONT_URL, IMG_SRC } from '../../../../const'
 import styles from './ColorsList.module.css'
 
+
 function ColorsList({list=[], handler=()=>{}, bg=''}) {
     const [current, setCurrent] = useState(list[0])
 

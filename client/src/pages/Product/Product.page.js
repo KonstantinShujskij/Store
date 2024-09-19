@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 import { FRONT_URL, IMG_SRC } from '../../const'
 
@@ -16,7 +16,6 @@ import styles from './Product.module.css'
 
 function Product() {
     const { id } = useParams()
-    const navigate = useNavigate()
 
     const productsApi = useProductsApi()
     const Basket = useBasket()

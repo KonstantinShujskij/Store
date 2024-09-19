@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
+import { useParams } from 'react-router-dom'
+
 import useOrdersApi from '../api/orders.api'
 import useLoad from '../hooks/load.hook'
-import { useParams } from 'react-router-dom'
 
 
 function Order() {

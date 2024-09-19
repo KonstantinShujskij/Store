@@ -1,9 +1,10 @@
 import React from 'react'
-import useInput from '../hooks/input.hook'
-import useClientApi from '../api/client.api'
-import useAuth from '../hooks/auth.hook'
 import { Link } from 'react-router-dom'
 
+import { FRONT_URL } from '../const'
+import useClientApi from '../api/client.api'
+import useInput from '../hooks/input.hook'
+import useAuth from '../hooks/auth.hook'
 
 import styles from '../styles/Login.module.css' 
 
@@ -23,7 +24,7 @@ function Login() {
     return (
         <div className={styles.wrap}>
             <div className={styles.image}>
-                <img src="./images/people.svg" alt="people" />
+                <img src={`${FRONT_URL}/images/people.svg`} alt="people" />
             </div>
             <div className={styles.form}>
                 <div className={styles.links}>

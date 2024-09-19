@@ -4,10 +4,8 @@ import { useNavigate } from 'react-router-dom'
 
 import * as basket from '../redux/selectors/basket.selectors'
 import BasketItem from '../components/BasketItem/BasketItem'
-import Delivery from '../components/Delivery/Delivery'
 import useDelivery from '../hooks/delivery.hook'
 import useContacts from '../hooks/contact.hook'
-import Contacts from '../components/Contacts/Contacts'
 import useOrdersApi from '../api/orders.api'
 
 import useBasket from '../hooks/basket.hook'
@@ -35,7 +33,7 @@ function MakeOrder() {
 
     return (
         <div>
-            <div>
+            {/* <div>
                 {list.map((item) => <BasketItem item={item} key={item.id} />)}
             </div>
             <div>
@@ -46,9 +44,9 @@ function MakeOrder() {
             <div className="d-flex">
                 <h3>Fill this fields or login </h3>
                 <button>Login</button>
-            </div>
+            </div> */}
 
-            <br />
+            {/* <br />
             <hr />
             <br />
 
@@ -62,7 +60,7 @@ function MakeOrder() {
 
             <br />
             <hr />
-            <br />
+            <br /> */}
 
             <button onClick={() => makeHandler()}>Make Order</button>
         </div>

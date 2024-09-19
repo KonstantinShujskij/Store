@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import styles from './Select.module.css'
 import { FRONT_URL } from '../../../const'
+import styles from './Select.module.css'
 
 
 function Select({list, current, handler=()=>{}, placeholder=''}) {

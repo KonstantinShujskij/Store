@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import style from './Tooltip.module.css'
 
+
 function Tooltip() {
     const [open, setOpen] = useState(false)
     const [man, setMan] = useState(true)
@@ -93,7 +94,6 @@ function Tooltip() {
                 </div>
             }
         </div>
-
     )
 }
 

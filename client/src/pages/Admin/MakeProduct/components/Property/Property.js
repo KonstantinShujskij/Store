@@ -1,8 +1,8 @@
 import React from 'react'
-import style from './Property.module.css'
+import { FRONT_URL } from '../../../../../const'
 import List from '../List/List'
 import Range from '../Range/Range'
-import { FRONT_URL } from '../../../../../const'
+import style from './Property.module.css'
 
 
 function Property({ item, change, remove }) {

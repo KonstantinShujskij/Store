@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import style from './Material.module.css'
 import useInput from '../../../../../hooks/input.hook'
+import style from './Material.module.css'
 
 
 function Material({list, setList}) {

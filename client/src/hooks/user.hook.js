@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux'
-import * as User from '../redux/actions/user.actions'
 import useClientApi from '../api/client.api'
+import * as User from '../redux/actions/user.actions'
 
 
 export default function useUser() {

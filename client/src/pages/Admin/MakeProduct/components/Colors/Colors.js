@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import style from './Colors.module.css'
+import { FRONT_URL, IMG_SRC } from '../../../../../const'
 import useInput from '../../../../../hooks/input.hook'
-import { IMG_SRC } from '../../../../../const'
+import style from './Colors.module.css'
 
 
 function Colors({label, colors=[], setColors=()=>{}, newItem=()=>{}, active=()=>{}, root=null}) {
@@ -65,7 +65,7 @@ function Colors({label, colors=[], setColors=()=>{}, newItem=()=>{}, active=()=>
     const curentColor = getCurrentColor()
 
     const getSourse = (item) => {
-        if(!item.src) { return 'http://127.0.0.1:3000/images/default.png' }
+        if(!item.src) { return `${FRONT_URL}/images/default.png` }
         return `${!item.file? IMG_SRC : ''}${item.src}`
     }
 
@@ -91,7 +91,6 @@ function Colors({label, colors=[], setColors=()=>{}, newItem=()=>{}, active=()=>
                     <input {...title.bind} className={style.input} type="text" />
                 </div>
             </div>
-
             {curentColor && (
                 <div className={style.preview}>
                     <div className={style.photo}>
@@ -101,7 +100,7 @@ function Colors({label, colors=[], setColors=()=>{}, newItem=()=>{}, active=()=>
                     <label className={style.load}>
                         <input type="file" className="hide" onChange={upHandler} />
                         <div className={style.loadImg}>
-                            <img src={'http://127.0.0.1:3000/images/load.svg'} alt="load" />
+                            <img src={`${FRONT_URL}/images/load.svg`} alt="load" />
                         </div>
                         <div className={style.loadLabel}>Добавтие изображение</div>
                     </label>

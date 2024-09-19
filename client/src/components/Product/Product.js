@@ -1,10 +1,10 @@
 import React from 'react'
-
-import styles from './Product.module.css' 
-import useProductsApi from '../../api/products.api'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import { IMG_SRC } from '../../const'
+import useProductsApi from '../../api/products.api'
 import * as authSelectors from '../../redux/selectors/auth.selectors'
+import styles from './Product.module.css' 
 
 
 function Product({product, refresh}) {
@@ -27,7 +27,7 @@ function Product({product, refresh}) {
     return (
         <div className={styles.product}>
             <div className={styles.image}>
-                <img src={`http://127.0.0.1:5000/static/images/${product.photo}`} alt={styles.title}/>
+                <img src={`${IMG_SRC}${product.photo}`} alt={styles.title}/>
 
                 {isAdmin && 
                     <div className={styles.menu}>

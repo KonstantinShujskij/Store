@@ -1,9 +1,13 @@
 import React from 'react'
-import useInput from '../hooks/input.hook'
-import useAdminApi from '../api/admin.api'
-import useAuth from '../hooks/auth.hook'
-import styles from '../styles/Login.module.css' 
 import { Link } from 'react-router-dom'
+
+import { FRONT_URL } from '../const'
+import useAdminApi from '../api/admin.api'
+import useInput from '../hooks/input.hook'
+import useAuth from '../hooks/auth.hook'
+
+import styles from '../styles/Login.module.css' 
+
 
 function LoginAdmin() {
     const adminApi = useAdminApi()
@@ -20,7 +24,7 @@ function LoginAdmin() {
     return (
         <div className={styles.wrap}>
             <div className={styles.image}>
-                <img src="./images/people.svg" alt="people" />
+                <img src={`${FRONT_URL}/images/people.svg`} alt="people" />
             </div>
             <div className={styles.form}>
                 <div className={styles.links}>

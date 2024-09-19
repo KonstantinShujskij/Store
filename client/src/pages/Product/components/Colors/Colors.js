@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ColorsList from '../ColorsList/ColorsList'
-import styles from '../../Product.module.css'
 import { FRONT_URL } from '../../../../const'
+import styles from '../../Product.module.css'
 
 
 function Colors({list=[], handler=()=>{}}) {

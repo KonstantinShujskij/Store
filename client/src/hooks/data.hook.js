@@ -1,10 +1,10 @@
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
+import useUser from './user.hook'
+
 import * as authSelectors from '../redux/selectors/auth.selectors'
 import * as userSelectors from '../redux/selectors/user.selectors'
-
-import useUser from './user.hook'
 
 
 export default function useData() {

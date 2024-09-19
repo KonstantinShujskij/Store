@@ -1,7 +1,8 @@
 import { useDispatch } from 'react-redux'
 
-import * as auth from '../redux/actions/auth.actions'
 import useBasket from './basket.hook'
+import * as auth from '../redux/actions/auth.actions'
+
 
 export default function useAuth() {
     const dispath = useDispatch()

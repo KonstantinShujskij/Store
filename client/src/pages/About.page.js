@@ -1,4 +1,5 @@
 import React from 'react'
+import { FRONT_URL } from '../const'
 import styles from '../styles/About.module.css'
 
 
@@ -6,7 +7,7 @@ function About() {
     return (
         <>
             <div className={styles.image}>
-                <img src="./images/about-bg.png" alt="bg" />
+                <img src={`${FRONT_URL}/images/about-bg.png`} alt="bg" />
             </div>
             <div className={styles.info}>
                 <div className={styles.row1}>

@@ -1,22 +1,26 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+
+import { IMG_SRC } from '../../../const'
+
 import useProductsApi from '../../../api/products.api'
+
 import useInput from '../../../hooks/input.hook'
-import styles from './MakeProduct.module.css'
-import Photo from './Photo'
 import useFiles from '../../../hooks/files.hook'
 import useAlert from '../../../hooks/alert.hook'
+import useProperties from '../../../hooks/properties.hook'
+
+import * as staticSelectors from '../../../redux/selectors/static.selectors'
 
 import Properties from './components/Properties/Properties'
-import useProperties from '../../../hooks/properties.hook'
+import Select from '../../../components/UI/Select/Select'
 import Tooltip from '../../../components/Tooltip/Tooltip'
 import Material from './components/Material/Material'
 import ColorProp from './components/ColorProp'
-import { IMG_SRC } from '../../../const'
-import { useSelector } from 'react-redux'
+import Photo from './Photo'
 
-import * as staticSelectors from '../../../redux/selectors/static.selectors'
-import Select from '../../../components/UI/Select/Select'
+import styles from './MakeProduct.module.css'
 
 
 function MakeProduct() {

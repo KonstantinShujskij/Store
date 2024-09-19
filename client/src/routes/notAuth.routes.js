@@ -13,7 +13,6 @@ import Order from '../pages/Order.page'
 import About from '../pages/About.page'
 import Info from '../pages/Info/Info.page'
 import Contract from '../pages/Info/sections/Contract/Contract.section'
-import Policy from '../pages/Info/sections/Policy.section'
 import DeliveryAndPayment from '../pages/Info/sections/DeliveryAndPayment.section'
 import ReturnAndChange from '../pages/Info/sections/ReturnAndChange.section'
 
@@ -30,7 +29,6 @@ const notAuthRoutes = (
 
         <Route path="/info" element={<Info />} exact >
             <Route path="offer-agreement" element={<Contract />} exact />
-            <Route path="privacy-policy" element={<Policy />} exact />
             <Route path="delivery-and-payment" element={<DeliveryAndPayment />} exact />
             <Route path="return-and-change" element={<ReturnAndChange />} exact />
         </Route>

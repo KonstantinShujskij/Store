@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import Colors from './Colors/Colors'
 import {getTempId} from '../../../../utils/utils'
+import Colors from './Colors/Colors'
 
 
 function ColorProp({ colors, setColors }) {
