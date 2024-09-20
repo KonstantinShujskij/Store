@@ -26,16 +26,49 @@ const PORT = config.get('port')
 const SLL_PORT = config.get('sslPort')
 
 
-async function start() {
-    try {
-        const mongoUri = config.get('mongoUri')
-        await mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true })
+if(process.env.NODE_ENV === 'production') {
+    // const privateKey = fs.readFileSync('/etc/letsencrypt/live/ncpay.tech/privkey.pem', 'utf8');
+    // const certificate = fs.readFileSync('/etc/letsencrypt/live/ncpay.tech/cert.pem', 'utf8');
+    // const ca = fs.readFileSync('/etc/letsencrypt/live/ncpay.tech/chain.pem', 'utf8');
 
-        app.listen(PORT, () => console.log(`App has been started on port ${PORT}`))
-    } catch(error) {
-        console.log("Server error: ", error.message)
-        process.exit(1)
+    // const credentials = { key: privateKey, cert: certificate, ca: ca }
+
+    const httpServer = http.createServer(app)
+    // const httpsServer = https.createServer(credentials, app)
+    
+    app.use('/', express.static(path.join(__dirname, 'client', 'build')))
+    app.get('*', (req, res) => { res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html')) })
+
+
+    async function start() {
+        try {
+            const mongoUri = config.get('mongoUri')
+            await mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true })
+        
+            httpServer.listen(PORT, () => console.log(`App has been started on port ${PORT}`))
+            // httpsServer.listen(SLL_PORT, () => console.log(`App has been started with ssl on port ${SLL_PORT}`))
+        } catch(error) {
+            console.log("Server error: ", error.message)
+            process.exit(1)
+        }
     }
+    
+    start()
+}
+else {
+    async function start() {
+        try {
+            const mongoUri = config.get('mongoUri')
+            await mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true })
+    
+            app.listen(PORT, () => console.log(`App has been started on port ${PORT}`))
+        } catch(error) {
+            console.log("Server error: ", error.message)
+            process.exit(1)
+        }
+    }
+    
+    start()
 }
 
-start()
+
