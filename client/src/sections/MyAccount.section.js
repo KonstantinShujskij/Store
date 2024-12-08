@@ -9,10 +9,13 @@ import useUser from '../hooks/user.hook'
 import * as userSelectors from '../redux/selectors/user.selectors'
 
 import styles from '../styles/Account.module.css' 
+import useAlert from '../hooks/alert.hook'
 
 
 function MyAccount() {
     const clientApi = useClientApi()
+    const Alert = useAlert()
+
     const { logout } = useAuth()
 
     const navigate = useNavigate('navigate')
@@ -36,11 +39,13 @@ function MyAccount() {
         if(rePassword.value !== newPassword.value) { return }
 
         const res = await clientApi.changePassword(password.value, newPassword.value)
-        if(res) {
-            password.clear()
-            newPassword.clear()
-            rePassword.clear()
-        }
+        if(!res) { return }
+        
+        password.clear()
+        newPassword.clear()
+        rePassword.clear()
+        
+        Alert.pushMess('Success')
     }
 
     const saveHandler = () => {

@@ -12,13 +12,7 @@ import Select from '../../components/UI/Select/Select'
 import styles from './Basket.module.css'
 import useOrdersApi from '../../api/orders.api'
 import useBasket from '../../hooks/basket.hook'
-
-
-const deliveryOptions = [
-    {id: 'department', title: 'У відділення'},
-    {id: 'address', title: 'За адресою'},
-    {id: 'terminal', title: 'У поштомат'}
-]
+import { deliveryOptions } from '../../const'
 
 
 function Basket() {

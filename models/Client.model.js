@@ -6,8 +6,12 @@ const schema = new Schema({
     name: {type: String},
     surname: {type: String},
     phone: {type: String},
-    town: {type: String},
     instagram: {type: String},
+    delivery: {
+        town: {type: String},
+        type: {type: String, default: 'department'},
+        data: {type: String}
+    }
 })
 
 module.exports = model('Client', schema)

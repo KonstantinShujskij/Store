@@ -7,7 +7,11 @@ function client(client) {
         
         phone: client.phone,
         instagram: client.instagram,
-        town: client.town,
+        delivery: {
+            town: client.delivery.town,
+            type: client.delivery.type,
+            data: client.delivery.data
+        }
     }
 } 
 

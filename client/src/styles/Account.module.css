@@ -95,3 +95,8 @@
     max-width: 215px;
     display: block;
 }
+
+.hr {
+    width: 100%;
+    height: 30px;
+}

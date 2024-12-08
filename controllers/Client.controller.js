@@ -54,14 +54,18 @@ async function changePassword(id, password, newPassword) {
     return true
 }
 
-async function changeInfo(id, {name, surname, phone, instagram, town}) {
+async function changeInfo(id, {name, surname, phone, instagram, delivery}) {
     const user = await get(id)
-
+    
     if(name) { user.name = name }
     if(surname) { user.surname = surname }
     if(phone) { user.phone = phone }
     if(instagram) { user.instagram = instagram }
-    if(town) { user.town = town }
+    if(delivery?.town) { user.delivery.town = delivery.town }
+    if(delivery?.type && delivery?.data) { 
+        user.delivery.type = delivery.type 
+        user.delivery.data = delivery.data
+    }
 
     await user.save()
 
