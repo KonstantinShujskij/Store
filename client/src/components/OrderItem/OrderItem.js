@@ -1,15 +1,13 @@
 import React from 'react'
-import {FRONT_URL, IMG_SRC} from '../../const'
-import useBasket from '../../hooks/basket.hook'
-import styles from './BasketItem.module.css' 
+import {IMG_SRC} from '../../const'
+import styles from './OrderItem.module.css' 
 import { useNavigate } from 'react-router-dom'
 
 
-function BasketItem({item}) {
+function OrderItem({item}) {
     const navigate = useNavigate()
-    const { remove } = useBasket()
 
-    const navigateHandler = () => navigate(`/product/${item._id}`)
+    const navigateHandler = () => navigate(`/product/${item.productId}`)
 
     return (
         <div className={styles.item}>
@@ -24,12 +22,8 @@ function BasketItem({item}) {
             <div className={styles.size}>
                 <span>SIZE</span> {Object.values(item?.parametrs).map((value) => <span key={value}>{value}</span>)}
             </div>
-
-            <button onClick={() => remove(item.id)} className={styles.remove}>
-                <img src={`${FRONT_URL}/images/close.svg`} alt="remove" />
-            </button>
         </div>
     )
 }
 
-export default BasketItem
+export default OrderItem

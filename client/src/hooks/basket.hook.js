@@ -8,10 +8,7 @@ export default function useBasket() {
 
     const add = (product) => { dispath(basket.addProduct(product)) }
     const remove = (id) => { dispath(basket.removeProduct(id)) }
-    const clear = () => { 
-        console.log('clear basket')
-        dispath(basket.clear()) 
-    }
+    const clear = () => { dispath(basket.clear()) }
 
     return { add, remove, clear }
 }

@@ -9,19 +9,19 @@ const Filter = require('../utils/filter.utils')
 const errors = require('../const/errors')
 
 
-async function create(client, products, delivery, contacts) {
-    let totalPrice = 0
-    for(let i = 0; i < products.length; i++) { 
-        const product = products[i]
-        const price = await Product.validate(product)
+async function create(list, price, delivery, contacts, client=null) {
+    const order = new Order({client, delivery, contacts, list, price, count: list.length})
 
-        totalPrice += price
-    }
+    return await order.save()
+}
 
-    const order = new Order({ client, products, delivery, contacts, price: totalPrice })
-    await order.save()
+async function pay(id) {
+    const order = await get(id)
+    if(order.status !== 'CREATE') { throw errors.notFind }
 
-    return order
+    order.status = "PAID"
+
+    return await order.save()
 }
 
 async function get(_id) {
@@ -40,6 +40,7 @@ async function list(filter) {
 
 module.exports = { 
     create,
+    pay,
     get,
     list
 }

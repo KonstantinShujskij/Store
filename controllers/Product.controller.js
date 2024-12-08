@@ -85,7 +85,7 @@ async function validate(productData) {
         const value = parseFloat(productData.parametrs[item.title])
 
         if(value === undefined) { throw errors.incorectValue }
-        if(value < item.min || value > item.max) { throw errors.incorectValue }
+        if(value < item.min || value > item.max) { throw errors.incorectValue } // list ??
     })
 
     return product.price

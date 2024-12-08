@@ -51,9 +51,9 @@ function Product() {
         setDesign(loadProduct.colors[0]?.design[0]?.title)
     })
 
-    const pushHandler = () => {
+    const pushHandler = () => {        
         Basket.add({
-            _id: product._id,
+            _id: product.id,
             title: product.title,
             price: product.price,
             photo: product.photo,

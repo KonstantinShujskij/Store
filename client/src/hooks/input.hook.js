@@ -6,7 +6,7 @@ const noop = () => true
 export default function useInput(defaultValue='', callback=noop, validation=noop) {
     const [value, setValue] = useState(defaultValue)
 
-    const onChange = (event) => { 
+    const onChange = (event) => {        
         const tempValue = event.target.value
 
         if(!validation(tempValue)) { return }
