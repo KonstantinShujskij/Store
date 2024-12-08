@@ -14,7 +14,7 @@ function Order() {
     const [order, setOrder] = useState() 
     const [step, setStep] = useState(0) 
 
-    useLoad(async () => {
+    const load = async () => {
         const order = await ordersApi.get(id)
         if(!order) { return }
         setOrder(order)
@@ -23,13 +23,16 @@ function Order() {
         if(['PAID', 'WORK', 'CONFIRM'].includes(order.status)) { setStep(1) }
         if(['WORK', 'CONFIRM'].includes(order.status)) { setStep(2) }
         if(['CONFIRM'].includes(order.status)) { setStep(3) }
-    })
+    }
+
+    useLoad(load)
 
     const payHandler = async () => {
         const newOrder = await ordersApi.pay(order._id)
         if(!newOrder) { return }
         
         setOrder(newOrder)
+        load().then()
     }
 
     return (

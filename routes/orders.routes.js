@@ -1,30 +1,28 @@
 const {Router} = require('express')
-const {check} = require('express-validator')
-
+const { auth, isUser } = require('../middleware/auth.middleware')
 const trappiner = require('../utils/trappiner.utils')
-const { validateProducts } = require('../Validators/order.validator')
-
+const Validator = require('../Validators/order.validator')
 const Order = require('../controllers/Order.controller')
+
 
 const router = Router()
 
 
-router.post('/create',
-    [
-        check('products', 'incorectValue').isArray(),
-        check('delivery.type', 'incorectValue').isIn(['department', 'address', 'terminal']),
-        check('delivery.town', 'incorectValue').isString(),
-        check('delivery.data', 'incorectValue').isString(),
-        check('delivery.note', 'incorectValue').isString(),
-        check('contacts.name', 'incorectValue').isString(),
-        check('contacts.surname', 'incorectValue').isString(),
-        check('contacts.email', 'incorectValue').isEmail(),
-        check('contacts.phone', 'incorectValue').isMobilePhone(),
-        check('contacts.instagram', 'incorectValue').isString()
-    ],
+router.post('/create', auth, isUser, Validator.create,
     trappiner(async (req, res) => {     
         const { products, delivery, contacts } = req.body
-        const {price, list} = await validateProducts(products)
+        const { price, list } = await Validator.validateProducts(products)
+
+        const order = await Order.create(list, price, delivery, contacts, req.user._id)    
+
+        res.status(201).json(order)
+    })
+) 
+
+router.post('/create-public', Validator.create,
+    trappiner(async (req, res) => {     
+        const { products, delivery, contacts } = req.body
+        const {price, list} = await Validator.validateProducts(products)
 
         const order = await Order.create(list, price, delivery, contacts)    
 

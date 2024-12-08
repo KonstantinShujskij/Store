@@ -5,6 +5,18 @@ const errors = require('../const/errors')
 
 
 module.exports = {
+    create: [
+        check('products', 'incorectValue').isArray(),
+        check('delivery.type', 'incorectValue').isIn(['department', 'address', 'terminal']),
+        check('delivery.town', 'incorectValue').isString(),
+        check('delivery.data', 'incorectValue').isString(),
+        check('delivery.note', 'incorectValue').isString(),
+        check('contacts.name', 'incorectValue').isString(),
+        check('contacts.surname', 'incorectValue').isString(),
+        check('contacts.email', 'incorectValue').isEmail(),
+        check('contacts.phone', 'incorectValue').isMobilePhone(),
+        check('contacts.instagram', 'incorectValue').isString()
+    ],
     validateProducts: async (products) => {
         const resault = { list: [], price: 0 }
 

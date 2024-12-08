@@ -10,6 +10,8 @@ const errors = require('../const/errors')
 
 
 async function create(list, price, delivery, contacts, client=null) {
+    console.log('098-000');
+    
     const order = new Order({client, delivery, contacts, list, price, count: list.length})
 
     return await order.save()

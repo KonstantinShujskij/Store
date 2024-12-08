@@ -30,14 +30,17 @@ function Basket() {
     const surname = useInput(user?.surname)
     const phone = useInput(user?.phone)
     const email = useInput(user?.email)
-    const town = useInput(user?.town)
+    const town = useInput(user?.delivery?.town)
     const instagram = useInput(user?.instagram)
     const note = useInput()
     
-    const [delivery, setDelivery] = useState(deliveryOptions[0])
-    const address = useInput()
-    const department = useInput()
-    const terminal = useInput()
+    const options = deliveryOptions.filter((item) => (user?.delivery?.type === item.id))
+
+    const [delivery, setDelivery] = useState(options.length? options[0] : deliveryOptions[0])
+    const address = useInput(user?.delivery?.type === 'address'? user?.delivery?.data : '')
+    const department = useInput(user?.delivery?.type === 'department'? user?.delivery?.data : '')
+    const terminal = useInput(user?.delivery?.type === 'terminal'? user?.delivery?.data : '')
+
 
     const deliveryHandler = (item) => setDelivery(item)
 
@@ -60,7 +63,7 @@ function Basket() {
         }
 
         const order = await Order.create(deliveryItem, contacts)
-        if(!order?._id) { return }
+        if(!order) { return }
 
         clear()
         navigate(`/order/${order._id}`)
