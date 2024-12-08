@@ -10,6 +10,7 @@ import Collections from './components/Collections'
 
 import styles from './Nav.module.css' 
 import { FRONT_URL } from '../../const'
+import Bag from './components/Bag/Bag'
 
 
 function Nav() {
@@ -39,7 +40,8 @@ function Nav() {
             <div className={styles.info}>
                 <Link to="/info/offer-agreement">Info</Link>
                 <Link to="/contacts">Contacts</Link>
-                {!isAdmin && <Link to="/basket">Bag</Link>}
+                {/* <Link to="/basket">Bag</Link> */}
+                {!isAdmin && <Bag />}
                 {isAdmin && <Link to="/login" onClick={logout}>LogOut</Link>}
             </div>
 

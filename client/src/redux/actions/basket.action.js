@@ -1,4 +1,4 @@
-import { ADD, REMOVE, CLEAR } from '../types/basket.types'
+import { ADD, REMOVE, CLEAR, OPEN } from '../types/basket.types'
 
 export function addProduct(product) {
     return {
@@ -20,5 +20,12 @@ export function removeProduct(id) {
 export function clear() {
     return {
         type: CLEAR
+    }
+}
+
+export function open(open=false) {
+    return {
+        type: OPEN,
+        payload: open
     }
 }

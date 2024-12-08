@@ -7,8 +7,9 @@ export default function useBasket() {
     const dispath = useDispatch()
 
     const add = (product) => { dispath(basket.addProduct(product)) }
+    const open = (isOpen=true) => { dispath(basket.open(isOpen)) }
     const remove = (id) => { dispath(basket.removeProduct(id)) }
     const clear = () => { dispath(basket.clear()) }
 
-    return { add, remove, clear }
+    return { add, open, remove, clear }
 }

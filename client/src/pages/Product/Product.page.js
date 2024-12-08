@@ -62,6 +62,8 @@ function Product() {
             color,
             design
         })
+
+        Basket.open()
     }
 
     return (
