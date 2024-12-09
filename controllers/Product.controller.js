@@ -117,10 +117,17 @@ async function recomend(size=3) {
     
 
 async function list(filter) {
-    const options = {...Filter.client(filter)}
-    const products = await Product.find(options)
-
-    return products
+    try {
+        const options = {...Filter.client(filter)}
+        console.log(options);
+        const products = await Product.find(options)
+        console.log(products);
+        
+        return products
+    }
+    catch(err) {
+        console.log(err);        
+    }
 }
 
 module.exports = { 

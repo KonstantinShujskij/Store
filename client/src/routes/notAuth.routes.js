@@ -33,8 +33,9 @@ const notAuthRoutes = (
             <Route path="return-and-change" element={<ReturnAndChange />} exact />
         </Route>
 
-        <Route path="/catalog" element={<Catalog />} exact />
-        
+        <Route path="/category/:id" element={<Catalog isCat={true} />} exact />
+        <Route path="/collection/:id" element={<Catalog isColl={true} />} exact />
+
         <Route path="/product/:id" element={<Product />} exact />
         <Route path="/basket" element={<Basket />} exact />
         <Route path="/make-order" element={<MakeOrder />} exact />

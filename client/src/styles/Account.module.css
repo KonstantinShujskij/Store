@@ -94,6 +94,13 @@
     min-height: 50px;   
     max-width: 215px;
     display: block;
+    transition: 0.3s;
+}
+
+.button:hover {
+    background-color: black;
+    color: #fff;
+    cursor: pointer;
 }
 
 .hr {

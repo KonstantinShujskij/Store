@@ -14,7 +14,7 @@ function Categories() {
 
     const categories = useSelector(staticSelectors.categories)
 
-    const click = (id) => navigate('/catalog')
+    const click = (id) => navigate(`/category/${id}`)
 
     return <List label={'categories'} list={categories} click={click} save={Category.add} remove={Category.removeList} />
 }

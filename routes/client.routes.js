@@ -54,8 +54,6 @@ router.post('/set-password', auth, isUser, Validator.password, trappiner(async (
 router.post('/set-info', auth, isUser, Validator.info, trappiner(async (req, res) => {
     const { data } = req.body
 
-    console.log(data);
-
     await Client.changeInfo(req.user._id, data)
 
     res.status(200).json(true)

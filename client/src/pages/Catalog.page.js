@@ -1,31 +1,44 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 import useProductsApi from '../api/products.api'
 import * as authSelectors from '../redux/selectors/auth.selectors'
+import * as staticSelectors from '../redux/selectors/static.selectors'
 
 import Product from '../components/Product/Product'
 
 import styles from '../styles/Catalog.module.css' 
 
 
-function Catalog() {
-    const isAdmin = useSelector(authSelectors.isAdmin)
-
+function Catalog({isColl, isCat}) {
+    const { id } = useParams()
     const productsApi = useProductsApi()
 
+    const isAdmin = useSelector(authSelectors.isAdmin)
+    const catalog = useSelector(staticSelectors.getCatalog(id))
+
     const [products, setProducts] = useState([])
+    const [title, setTitle] = useState()
 
-    const load = async () => setProducts(await productsApi.list())
+    const load = async () => {
+        const options = {}
+        if(isColl) { options.collection = id }
+        if(isCat) { options.category = id }
 
-    useEffect(() => { load() }, [])
-    
+        setTitle(catalog)        
+        setProducts(await productsApi.list(options))
+    }
+
+    useEffect(() => { load() }, [id])
     
     return (
         <div className={styles.wrap}>
             <div className={styles.top}>
-                <div className={styles.label}>Categories / Sweatshirts</div>
+                <div className={styles.label}>
+                    {isColl && `collection/${title}`}
+                    {isCat && `category/${title}`}
+                </div>
                 <div className={styles.active}>
                     {isAdmin && <Link className={styles.button} to="/make-product">CREATE</Link>}
                 </div>

@@ -82,6 +82,8 @@ router.post('/update', auth, isAdmin,
 router.post('/list', trappiner(async (req, res) => {     
     const { filter } = req.body
 
+    console.log(filter);
+    
     const list = await Product.list(filter)
 
     res.status(200).json(list.map(Format.client))
@@ -89,9 +91,7 @@ router.post('/list', trappiner(async (req, res) => {
 
 router.post('/recomend', trappiner(async (req, res) => {        
     const list = await Product.recomend()
-    console.log(list);    
-
-    res.status(200).json(list)
+    res.status(200).json(list.map(Format.client))
 })) 
 
 router.post('/get', trappiner(async (req, res) => {     

@@ -21,7 +21,6 @@ function MyOrders() {
         const done = list.filter((item) => ['CONFIRM', 'REJECT'].includes(item.status))
 
         const recomend = await Product.recomends()
-        console.log(recomend)        
         setRecomend(recomend)
 
         setWaitList(progresse)
