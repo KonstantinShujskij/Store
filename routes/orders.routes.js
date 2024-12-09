@@ -46,5 +46,13 @@ router.post('/get', trappiner(async (req, res) => {
     res.status(200).json(order)
 })) 
 
+router.post('/list', auth, isUser, 
+    trappiner(async (req, res) => {     
+        const list = await Order.list(req.user._id)
+
+        res.status(200).json(list)
+    })
+) 
+
 
 module.exports = router

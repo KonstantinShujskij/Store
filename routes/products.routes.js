@@ -87,6 +87,13 @@ router.post('/list', trappiner(async (req, res) => {
     res.status(200).json(list.map(Format.client))
 })) 
 
+router.post('/recomend', trappiner(async (req, res) => {        
+    const list = await Product.recomend()
+    console.log(list);    
+
+    res.status(200).json(list)
+})) 
+
 router.post('/get', trappiner(async (req, res) => {     
     const { id } = req.body
 

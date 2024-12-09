@@ -109,6 +109,13 @@ async function remove(_id) {
     return true
 }
 
+async function recomend(size=3) {
+    const products = await Product.aggregate([{ $sample: { size } }])
+    
+    return products
+}
+    
+
 async function list(filter) {
     const options = {...Filter.client(filter)}
     const products = await Product.find(options)
@@ -121,6 +128,7 @@ module.exports = {
     validate,
     update,
     remove,
+    recomend,
     get,
     list
 }

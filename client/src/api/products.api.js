@@ -63,10 +63,16 @@ export default function useProductsApi() {
         catch(error) { return false } 
     }
 
+    const recomends = async () => {
+        try { return await protectedRequest('api/products/recomend') }
+        catch(error) { return [] } 
+    }
+
     return { 
         create,
         remove,
         update,
+        recomends,
         get,
         list
     }

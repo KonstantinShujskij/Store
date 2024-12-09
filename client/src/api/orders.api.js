@@ -28,9 +28,15 @@ export default function useOrdersApi() {
         catch(error) { return null } 
     } 
 
+    const listByClient = async () => {
+        try { return await protectedRequest('api/orders/list') }
+        catch(error) { return [] } 
+    } 
+
     return { 
         create,
         pay,
-        get
+        get,
+        listByClient
     }
 }
