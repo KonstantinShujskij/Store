@@ -23,6 +23,7 @@ function Nav() {
     const accountHandler = () => {
         if(!isAuth) { return navigate('/login') }
         if(!isAdmin) { return navigate('/account/main') }
+        if(isAdmin) { return navigate('/orders') }
     }
 
     return (
@@ -34,11 +35,11 @@ function Nav() {
             <div className={styles.menu}>
                 <Categories />
                 <Collections />
-                <Link to="/about">about</Link>
+                {!isAdmin && <Link to="/about">about</Link>}
             </div>
 
             <div className={styles.info}>
-                <Link to="/info/offer-agreement">Info</Link>
+                {!isAdmin && <Link to="/info/offer-agreement">Info</Link>}
                 <Link to="/contacts">Contacts</Link>
                 {!isAdmin && <Bag />}
                 {isAdmin && <Link to="/login" onClick={logout}>LogOut</Link>}

@@ -19,6 +19,7 @@
     min-width: 300px;
 
     position: absolute;
+    z-index: 1;
     left: -6px;
     bottom: calc(100% + 20px);
 

@@ -1,0 +1,61 @@
+.main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 34px;
+    user-select: none;
+}
+
+.label {
+    color: #DBDBDB;
+    font-family: Inter;
+    font-size: 26.041px;
+    font-weight: 400;
+    letter-spacing: -0.521px;
+}
+
+.conroller {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+}
+
+.left, .right {
+    width: 13px;
+    cursor: pointer;
+}
+
+.page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: default;
+
+    width: 52px;
+    height: 52px;
+    border: 1px solid #000;
+    border-radius: 50%;
+}
+
+.value {
+    color: #DBDBDB;
+    text-align: center;
+    /* font-family: "Work Sans"; */
+    font-size: 28px;
+    font-weight: 400;
+    letter-spacing: -0.555px;
+}
+
+.list {
+    display: none;
+}
+
+/* .left {
+    padding-right: 8px;
+}
+
+.right {
+    padding-left: 8px;
+} */

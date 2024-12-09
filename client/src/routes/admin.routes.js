@@ -2,7 +2,7 @@ import React from 'react'
 import { Route } from 'react-router-dom'
 
 import MakeProduct from '../pages/Admin/MakeProduct/MakeProduct.page'
-import Orders from '../pages/Admin/Orders.page'
+import Orders from '../pages/Admin/Orders/Orders.page'
 import Order from '../pages/Admin/Order.page'
 import Main from '../pages/Main.page'
 

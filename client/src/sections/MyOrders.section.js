@@ -82,7 +82,7 @@ function MyOrders() {
                         <div className={styles.photo}>
                             <img src={`${IMG_SRC}${item.photos[0]}`} alt={item.photos[0]} />
                         </div>
-                        <Link className={styles.title} to={`/product/${item._id}`}>{item?.title}</Link>
+                        <Link className={styles.title} to={`/product/${item.id}`}>{item?.title}</Link>
                     </div>
                 </>))}
             </div>
