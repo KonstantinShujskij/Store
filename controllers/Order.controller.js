@@ -31,10 +31,13 @@ async function list(client) {
     return orders
 }
 
-async function listAll() {
-    const orders = await Order.find()
+async function listAll(page, limit, sort) {
+    const skip = (page - 1) * limit
 
-    return orders
+    return {
+        list: await Order.find().sort(sort).skip(skip).limit(limit),
+        count: await Order.countDocuments()
+    }
 }
 
 module.exports = { 

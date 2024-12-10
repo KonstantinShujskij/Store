@@ -7,26 +7,20 @@ import Item from './Item/Item'
 
 
 function Orders() {
-    const paginate = usePaginate(100)
-
+    const paginate = usePaginate(100, 1, 1, () => load())
     const Order = useOrdersApi()
 
     const [list, setList] = useState([])
+    const price = useMemo(() => list.reduce((total, order) => total + order.price, 0), [list])
 
-    const price = useMemo(() => {
-        let price = 0
-        list.forEach((order) => price += order.price)
-        return price
-    }, [list])
-
+    
     const load = async () => {
-        const orders = await Order.listAll()
-        setList(orders)
+        const {list, count} = await Order.listAll(paginate.page, paginate.limit)
+        paginate.setCount(count)
+        setList(list)
     } 
 
-    useEffect(() => { 
-        load().then() 
-    }, [])
+    useEffect(() => { load().then() }, [paginate.page, paginate.limit])
 
 
     return (

@@ -54,11 +54,14 @@ router.post('/list', auth, isUser,
     })
 ) 
 
-router.post('/list-all', auth, isAdmin, 
+router.post('/list-all', auth, isAdmin, Validator.paginate,
     trappiner(async (req, res) => {     
-        const list = await Order.listAll()
+        const { page, limit } = req.body    
+        const sort = { createdAt: -1 }
 
-        res.status(200).json(list)
+        const { list, count } = await Order.listAll(page, limit, sort)
+
+        res.status(200).json({list, count})
     })
 ) 
 

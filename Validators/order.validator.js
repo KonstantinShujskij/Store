@@ -5,6 +5,10 @@ const errors = require('../const/errors')
 
 
 module.exports = {
+    paginate: [
+        check('page', 'incorectValue').isInt({min: 1}),
+        check('limit', 'incorectValue').isInt({min: 1})
+    ],
     create: [
         check('products', 'incorectValue').isArray(),
         check('delivery.type', 'incorectValue').isIn(['department', 'address', 'terminal']),

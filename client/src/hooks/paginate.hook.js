@@ -1,28 +1,26 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 
-export default function usePaginate(count=1, current=1, callback=()=>{}) {
+export default function usePaginate(initCount=1, current=1, initLimit=10) {
     const [page, setPage] = useState(current)
-    const [limit, setLimit] = useState(10)
-
-    const Len = Math.ceil(count / limit)
+    const [limit, setLimit] = useState(initLimit)
+    const [count, setCount] = useState(initCount)
 
     const back = () => {
         const nextPage = page > 1? page - 1 : 1
-        callback(nextPage, limit)
         setPage(nextPage)
     } 
 
     const next = () => {
+        const Len = Math.ceil(count / limit)
         const nextPage = page < Len? page + 1 : Len
-        callback(nextPage, limit)
         setPage(nextPage)
     } 
-
-    useEffect(() => callback(page, limit), [limit])
     
     return { 
         bind: { page, limit, next, back, setLimit },
+        setLimit,
+        setCount,
         page,
         limit
     }
