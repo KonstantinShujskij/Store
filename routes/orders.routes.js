@@ -1,5 +1,5 @@
 const {Router} = require('express')
-const { auth, isUser } = require('../middleware/auth.middleware')
+const { auth, isUser, isAdmin } = require('../middleware/auth.middleware')
 const trappiner = require('../utils/trappiner.utils')
 const Validator = require('../Validators/order.validator')
 const Order = require('../controllers/Order.controller')
@@ -49,6 +49,14 @@ router.post('/get', trappiner(async (req, res) => {
 router.post('/list', auth, isUser, 
     trappiner(async (req, res) => {     
         const list = await Order.list(req.user._id)
+
+        res.status(200).json(list)
+    })
+) 
+
+router.post('/list-all', auth, isAdmin, 
+    trappiner(async (req, res) => {     
+        const list = await Order.listAll()
 
         res.status(200).json(list)
     })

@@ -33,10 +33,16 @@ export default function useOrdersApi() {
         catch(error) { return [] } 
     } 
 
+    const listAll = async () => {
+        try { return await protectedRequest('api/orders/list-all') }
+        catch(error) { return [] } 
+    } 
+
     return { 
         create,
         pay,
         get,
-        listByClient
+        listByClient,
+        listAll
     }
 }

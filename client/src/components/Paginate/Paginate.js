@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './Paginate.module.css'
 import { FRONT_URL } from '../../const'
 
-function Paginate({ page, range, next, back, setRange }) {   
+function Paginate({ page, range, next, back, setLimit }) {   
     return (
         <div className={styles.main}>
             <div className={styles.label}>Page</div>

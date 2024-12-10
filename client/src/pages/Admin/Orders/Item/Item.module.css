@@ -1,0 +1,150 @@
+.main {
+    width: 100%;
+}
+
+.top {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 10px;
+    padding: 10px 0;
+}
+
+.label {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+
+    color: #000;
+    text-align: center;
+    font-family: Inter;
+    font-size: 17.579px;
+    font-weight: 400;
+}
+
+.window {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 30px;
+    max-width: 950px;
+    margin: 0 auto;
+}
+
+.order {
+    width: 100%;
+}
+
+.data {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 35px;
+    height: 210px;
+}
+
+.info {
+    width: 100%;
+    margin-bottom: auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.line {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    color: #000;
+    font-family: Inter;
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 2px;
+}
+
+.title {
+    color: #000;
+    font-family: Inter;
+    font-size: 20px;
+    font-weight: 700;
+    text-transform: capitalize;
+    margin-bottom: 16px;
+}
+
+.note {
+    color: #000;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 400;
+    border-radius: 35px;
+    border: 1px solid #CCC;
+    padding: 14px 30px;
+    margin-top: auto;
+}
+
+
+.photo {
+    flex-shrink: 0;
+    width: 140px;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    background-color: aliceblue;
+    user-select: none;
+}
+
+.photo img {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+}
+
+.bottom {
+    width: 100%;
+    display: flex;
+    gap: 35px;
+}
+
+.pay {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.subtitle {
+    width: 140px;
+    color: #000;
+    font-family: Inter;
+    font-size: 20px;
+    font-weight: 400;
+    text-transform: capitalize;
+    flex-shrink: 0;
+}
+
+.tth {
+    color: #000;
+    font-family: Inter;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.price {
+    color: #000;
+    font-family: Inter;
+    font-size: 20px;
+    font-weight: 500;
+    text-transform: capitalize;
+}

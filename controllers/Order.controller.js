@@ -31,9 +31,16 @@ async function list(client) {
     return orders
 }
 
+async function listAll() {
+    const orders = await Order.find()
+
+    return orders
+}
+
 module.exports = { 
     create,
     pay,
     get,
-    list
+    list,
+    listAll
 }
