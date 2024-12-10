@@ -1,8 +1,12 @@
 import React from 'react'
 import styles from './Orders.module.css'
 import Paginate from '../../../components/Paginate/Paginate'
+import usePaginate from '../../../hooks/paginate.hook'
 
 function Orders() {
+    const paginate = usePaginate(100)
+
+
     return (
         <div className={styles.main}>
             <div className={styles.logo}></div>
@@ -15,13 +19,14 @@ function Orders() {
             <div className={styles.info}>
                 <div>
                     <div className={styles.title}>Замовлення</div>
-                    <div className={styles.price}>50000</div>
+                    <div className={styles.count}>1233 total</div>
                 </div>
-                <div>
-                    <div className={styles.label}>1233 total</div>
+                <div className={styles.right}>
+                    <div className={styles.price}>50000</div>
                     <div className={styles.label}>Income</div>
                 </div>
             </div>
+            <div className={styles.hr}></div>
             <div className={styles.table}>
                 <div className={styles.nav}>
                     <div>Имя фамилия</div>
@@ -31,9 +36,10 @@ function Orders() {
                     <div>Колір</div>
                     <div>Статус</div>
                 </div>
+                <div className={styles.hr}></div>
                 <div className={styles.list}></div>
             </div>
-            <Paginate />
+            <Paginate {...paginate.bind} />
         </div>
     )
 }

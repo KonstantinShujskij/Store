@@ -1,0 +1,63 @@
+.info {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.title {
+    color: #000;
+    font-family: Inter;
+    font-size: 50.225px;
+    font-weight: 700;
+}
+
+.price {
+    color: #000;
+    font-family: Inter;
+    font-size: 60.27px;
+    font-weight: 500;
+}
+
+.count {
+    color: #313642;
+    font-family: Inter;
+    font-size: 18.834px;
+    font-weight: 500;
+}
+
+.label {
+    color: #797C80;
+    font-family: Inter;
+    font-size: 17.361px;
+    font-weight: 500;
+}
+
+.right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.hr {
+    background-color: #D8D8D8;
+    height: 1px;
+    margin: 12px 0;
+}
+
+.table {
+    width: 100%;
+}
+
+.nav {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    
+    color: #808387;
+    font-family: Inter;
+    font-size: 17.579px;
+    font-weight: 400;
+}
