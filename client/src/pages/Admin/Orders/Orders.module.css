@@ -84,3 +84,36 @@
     overflow-y: scroll;
     margin-bottom: 20px;
 }
+
+.find {
+    position: relative;
+    width: fit-content;
+}
+
+.find input {
+    min-width: 336px;
+    padding: 14px 22px;
+    color: #75787F;
+    font-family: Inter;
+    font-size: 14.92px;
+    font-weight: 400;
+    border-radius: 124.332px;
+    border: 1.424px solid #5F5F5F;
+    outline: none;
+    padding-right: 50px;
+}
+
+.find .icon {
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+
+    right: 22px;
+    top: calc(50% - 11px);
+    z-index: 1;
+    cursor: pointer;
+}

@@ -9,6 +9,9 @@ module.exports = {
         check('page', 'incorectValue').isInt({min: 1}),
         check('limit', 'incorectValue').isInt({min: 1})
     ],
+    filter: [
+        check('filter.id', 'incorectValue').optional().isString(),
+    ],
     create: [
         check('products', 'incorectValue').isArray(),
         check('delivery.type', 'incorectValue').isIn(['department', 'address', 'terminal']),

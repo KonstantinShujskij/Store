@@ -12,7 +12,7 @@ function Item({order}) {
                     <div className={styles.btn}>+</div>
                     <div className={styles.name}>{order?.contacts?.name} {order.contacts?.surname}</div>
                 </div>
-                <div className={styles.label}></div>
+                <div className={styles.label}>{order?._id}</div>
                 <div className={styles.label}>{order?.contacts?.phone}</div>
                 <div className={styles.label}>{order?.createdAt}</div>
                 <div className={styles.label}></div>

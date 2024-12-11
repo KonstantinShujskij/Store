@@ -2,35 +2,55 @@ import React, { useEffect, useMemo, useState } from 'react'
 import styles from './Orders.module.css'
 import Paginate from '../../../components/Paginate/Paginate'
 import usePaginate from '../../../hooks/paginate.hook'
+import useInput from '../../../hooks/input.hook'
 import useOrdersApi from '../../../api/orders.api'
 import Item from './Item/Item'
+import { FRONT_URL } from '../../../const'
 
 
 function Orders() {
-    const paginate = usePaginate(100, 1, 1, () => load())
+    const paginate = usePaginate(100, 1, 10, () => load())
     const Order = useOrdersApi()
 
     const [list, setList] = useState([])
     const price = useMemo(() => list.reduce((total, order) => total + order.price, 0), [list])
 
+    const [filter, setFiler] = useState({
+        options: {},
+        trigger: false
+    })
+
+    const setFilterHandler = (options) => {
+        setFiler((prew) => {
+            return {
+                options: {...prew.options, ...options},
+                trigger: !prew.trigger
+            }    
+        })
+    }
+
+    const id = useInput('', (value) => setFilterHandler({ id: value }))
     
     const load = async () => {
-        const {list, count} = await Order.listAll(paginate.page, paginate.limit)
+        const {list, count} = await Order.listAll(paginate.page, paginate.limit, filter.options)
         paginate.setCount(count)
         setList(list)
     } 
 
     useEffect(() => { load().then() }, [paginate.page, paginate.limit])
-
+    useEffect(() => { load().then() }, [filter.trigger])
 
     return (
         <div className={styles.main}>
             <div className={styles.logo}></div>
             <div className={styles.head}>
                 <div className={styles.find}>
-                    <input className={styles.input} placeholder="Пошук" />
+                    <input {...id.bind} className={styles.input} placeholder="Пошук" />
+                    <div className={styles.icon}>
+                        <img src={`${FRONT_URL}/images/find.svg`} alt="find" />
+                    </div>
                 </div>
-                <div></div>
+                <div></div> 
             </div>
             <div className={styles.info}>
                 <div>

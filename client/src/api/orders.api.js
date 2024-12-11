@@ -33,8 +33,8 @@ export default function useOrdersApi() {
         catch(error) { return [] } 
     } 
 
-    const listAll = async (page=1, limit=10) => {
-        try { return await protectedRequest('api/orders/list-all', {page, limit}) }
+    const listAll = async (page=1, limit=10, filter={}) => {
+        try { return await protectedRequest('api/orders/list-all', {page, limit, filter}) }
         catch(error) { return { list: [], count: 0 } } 
     } 
 

@@ -31,12 +31,12 @@ async function list(client) {
     return orders
 }
 
-async function listAll(page, limit, sort) {
-    const skip = (page - 1) * limit
+async function listAll(page, limit, sort, filter) {    
+    const skip = (page - 1) * limit   
 
     return {
-        list: await Order.find().sort(sort).skip(skip).limit(limit),
-        count: await Order.countDocuments()
+        list: await Order.find(filter).sort(sort).skip(skip).limit(limit),
+        count: await Order.countDocuments(filter)
     }
 }
 

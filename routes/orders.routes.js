@@ -3,7 +3,7 @@ const { auth, isUser, isAdmin } = require('../middleware/auth.middleware')
 const trappiner = require('../utils/trappiner.utils')
 const Validator = require('../Validators/order.validator')
 const Order = require('../controllers/Order.controller')
-
+const Filter = require('../utils/filter.utils')
 
 const router = Router()
 
@@ -54,12 +54,13 @@ router.post('/list', auth, isUser,
     })
 ) 
 
-router.post('/list-all', auth, isAdmin, Validator.paginate,
+router.post('/list-all', auth, isAdmin, Validator.paginate, //Validator.filter,
     trappiner(async (req, res) => {     
-        const { page, limit } = req.body    
+        const { page, limit, filter } = req.body    
+        
         const sort = { createdAt: -1 }
 
-        const { list, count } = await Order.listAll(page, limit, sort)
+        const { list, count } = await Order.listAll(page, limit, sort, Filter.order(filter))
 
         res.status(200).json({list, count})
     })
