@@ -54,16 +54,18 @@ function Item({order, load}) {
                                         <div>{order?.contacts?.name}</div>
                                     </div>
                                     <div className={styles.line}>
-                                        <div>Колір дизайну: white</div>
+                                        <div>Розмір: {Object.values(item?.parametrs).map((value) => <span key={value}>{value} </span>)}</div>
                                         <div>{order?.contacts?.surname}</div>
                                     </div>
                                     <div className={styles.line}>
-                                        <div>Розмір: 90/60/90  163</div>
+                                        <div>Матеріал: {item.material}</div>
                                         <div>{order?.contacts?.phone}</div>
                                     </div>
                                     <div className={styles.line}>
-                                        <div>Матеріал: {item.material}</div>
-                                        <div>{order?.delivery?.town}</div>
+                                        {order?.delivery?.type === 'department' && <div>Відділення</div>}
+                                        {order?.delivery?.type === 'terminal' && <div>Поштомат</div>}
+                                        {order?.delivery?.type === 'address' && <div>Aдреса</div>}
+                                        <div>{order?.delivery?.data} {order?.delivery?.town}</div>
                                     </div>
                                     <div className={styles.note}>note{order?.delivery?.note}</div>
                                 </div>

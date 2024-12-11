@@ -19,6 +19,10 @@ function order(filter) {
         let options = {}
 
         if(filter?.id) { options = {...options, _id: new Types.ObjectId(filter.id)} }
+        if(filter?.phone) { options = {...options, "contacts.phone": filter.phone} }
+        if(filter?.status && ['CREATE', 'PAID', 'WORK', 'SEND', 'DONE', 'CANCEL'].includes(filter?.status)) { 
+            options = {...options, status: filter.status} 
+        }
         
         return options
     }

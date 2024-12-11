@@ -55,7 +55,7 @@ router.post('/list', auth, isUser,
     })
 ) 
 
-router.post('/list-all', auth, isAdmin, Validator.paginate, Validator.filter,
+router.post('/list-all', auth, isAdmin, Validator.paginate,
     trappiner(async (req, res) => {     
         const { page, limit, filter } = req.body    
         

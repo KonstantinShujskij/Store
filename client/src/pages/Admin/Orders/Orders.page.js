@@ -30,6 +30,7 @@ function Orders() {
     }
 
     const id = useInput('', (value) => setFilterHandler({ id: value }))
+    const phone = useInput('', (value) => setFilterHandler({ phone: value }))
     
     const load = async () => {
         const {list, count} = await Order.listAll(paginate.page, paginate.limit, filter.options)
@@ -39,6 +40,15 @@ function Orders() {
 
     useEffect(() => { load().then() }, [paginate.page, paginate.limit])
     useEffect(() => { load().then() }, [filter.trigger])
+
+    const [phoneOpen, setPhoneOpen] = useState(false)
+    const [statusOpen, setStatusOpen] = useState(false)
+    const [statusListOpen, setStatusListOpen] = useState(false)
+
+    const setStatus = (status) => { 
+        setFilterHandler({ status }) 
+        setStatusListOpen(false)
+    }
 
     return (
         <div className={styles.main}>
@@ -67,10 +77,59 @@ function Orders() {
                 <div className={styles.nav}>
                     <div>Имя фамилия</div>
                     <div>Модель</div>
-                    <div>Номер телефона</div>
+                    <div className={styles.phone}>
+                        <div className={styles.column} onClick={() => setPhoneOpen((prew) => !prew)}>
+                            <div className={styles.icon} open={phoneOpen? 1 : 0}>
+                                <img src={`${FRONT_URL}/images/up.svg`} alt="more" />
+                            </div>
+                            <div>Номер телефона</div>
+                        </div>
+                        {phoneOpen && (
+                            <div className={styles.input}>
+                                <input {...phone.bind} placeholder="Пошук" />
+                                <div className={styles.icon}>
+                                    <img src={`${FRONT_URL}/images/find.svg`} alt="find" />
+                                </div>
+                            </div>
+                        )}
+                    </div>
                     <div>Число</div>
                     <div>Колір</div>
-                    <div>Статус</div>
+                    <div>
+                        <div className={styles.column} onClick={() => setStatusOpen((prew) => !prew)}>
+                            <div className={styles.icon} open={phoneOpen? 1 : 0}>
+                                <img src={`${FRONT_URL}/images/up.svg`} alt="more" />
+                            </div>
+                            <div>Статус</div>
+                        </div>
+                        {statusOpen && (
+                            <div className={styles.status}>
+                                <div className={styles.value} onClick={() => setStatusListOpen((prew) => !prew)}>
+                                    <div className={styles.icon} open={statusListOpen? 1 : 0}>
+                                        <img src={`${FRONT_URL}/images/up-arrow.svg`} alt="^" />
+                                    </div>
+                                    {filter?.options?.status === 'CREATE' && <div>не оплачено</div>}
+                                    {filter?.options?.status === 'PAID' && <div>нове замовлення</div>}
+                                    {filter?.options?.status === 'SEND' && <div>відправлено</div>}
+                                    {filter?.options?.status === 'WORK' && <div>в процессе</div>}
+                                    {filter?.options?.status === 'DONE' && <div>завершено</div>}
+                                    {filter?.options?.status === 'CANCEL' && <div>скасовано</div>}
+                                    {!filter?.options?.status && <div>всі</div>}
+                                </div>
+                                {statusListOpen && (
+                                    <div className={styles.statusList}>
+                                        <div onClick={() => setStatus('CANCEL')}>скасовано</div>
+                                        <div onClick={() => setStatus('CREATE')}>не оплачено</div>
+                                        <div onClick={() => setStatus('PAID')}>нове замовлення</div>
+                                        <div onClick={() => setStatus('WORK')}>в процессе</div>
+                                        <div onClick={() => setStatus('SEND')}>відправлено</div>
+                                        <div onClick={() => setStatus('DONE')}>завершено</div>
+                                        <div onClick={() => setStatus('')}>всі</div>
+                                    </div>
+                                )}
+                            </div>
+                        )}
+                    </div>
                 </div>
                 <div className={styles.hr}></div>
                 <div className={styles.list}>

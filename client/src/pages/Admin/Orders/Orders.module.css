@@ -75,6 +75,41 @@
     user-select: none;
 }
 
+.phone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+}
+
+.input {
+    position: relative;
+    width: fit-content;
+    max-width: 170px;
+}
+
+.phone input {    
+    width: 100%;
+    border-radius: 53.512px;
+    border: 0.613px solid #5F5F5F;
+    padding: 6px 14px;
+    outline: none;
+}
+
+.input .icon {
+    width: 14px;
+    height: 10px;
+    position: absolute;
+    right: 12px;
+    top: calc(50% - 10px);
+    cursor: pointer;
+}
+
+.input .icon img {
+    width: 100%;
+}
+
 .list {
     width: 100%;
     display: flex;
@@ -84,6 +119,7 @@
     flex-direction: column;
 
     max-height: 100%;
+    height: 100vh;
     overflow-y: scroll;
     margin-bottom: 20px;
 }
@@ -119,4 +155,98 @@
     top: calc(50% - 11px);
     z-index: 1;
     cursor: pointer;
+}
+
+.column {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.column .icon {
+    width: 14px;
+    height: 14px;
+    position: relative;
+    transform: scale(-1, -1);
+}
+
+.column .icon[open] {
+    transform: scale(1, 1);
+}
+
+.column img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.status {
+    border-radius: 32px;
+    border: 0.613px solid #5F5F5F;
+    padding: 6px 12px;
+    padding-left: 36px;
+
+    color: #000;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 400;
+    position: relative;
+
+    max-width: 190px;
+
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 12px;
+}
+
+
+.status .icon {
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    left: 12px;
+    top: calc(50% - 9px);
+    transform: scale(-1, -1);
+    margin-top: 3px;
+    cursor: pointer;
+}
+
+.status .icon[open] {
+    transform: scale(1, 1);
+}
+
+.status .icon img {
+    width: 100%;
+    height: 100%;
+}
+
+
+.status .statusList{
+    width: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(100% + 4px);
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    color: #000;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 400;
+    background-color: #fff;
+}
+
+.status .statusList div {
+    width: 100%;
+    padding: 8px 12px;
+    border-bottom: 1px solid #CCC;
+    text-align: left;
+    cursor: pointer;
+    background-color: #fff;
+    z-index: 10;
 }
