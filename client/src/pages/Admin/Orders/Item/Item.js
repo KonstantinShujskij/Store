@@ -2,6 +2,7 @@ import React from 'react'
 import styles from './Item.module.css'
 import { IMG_SRC } from '../../../../const'
 import { Link } from 'react-router-dom'
+import Status from '../Status/Status'
 
 
 function Item({order}) {    
@@ -16,7 +17,9 @@ function Item({order}) {
                 <div className={styles.label}>{order?.contacts?.phone}</div>
                 <div className={styles.label}>{order?.createdAt}</div>
                 <div className={styles.label}></div>
-                <div className={styles.label}>{order?.status}</div>
+                <div className={styles.label}>
+                    <Status order={order} />
+                </div>
             </div>
             <div className={styles.window}>
                 {order?.list.map((item) => (
