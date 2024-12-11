@@ -16,6 +16,7 @@
     font-family: Inter;
     font-size: 50.225px;
     font-weight: 700;
+    user-select: none;
 }
 
 .price {
@@ -37,6 +38,7 @@
     font-family: Inter;
     font-size: 17.361px;
     font-weight: 500;
+    user-select: none;
 }
 
 .right {
@@ -70,6 +72,7 @@
     font-family: Inter;
     font-size: 17.579px;
     font-weight: 400;
+    user-select: none;
 }
 
 .list {

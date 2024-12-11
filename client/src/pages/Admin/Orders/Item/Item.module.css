@@ -15,8 +15,6 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    margin-bottom: 20px;
-
     color: #000;
     text-align: center;
     font-family: Inter;
@@ -49,6 +47,7 @@
     margin-right: 12px;
     margin-top: 4px;
     cursor: pointer;
+    user-select: none;
 }
 
 .open[open] {
