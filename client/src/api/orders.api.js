@@ -38,11 +38,23 @@ export default function useOrdersApi() {
         catch(error) { return { list: [], count: 0 } } 
     } 
 
+    const next = async (id) => {        
+        try { return await protectedRequest('api/orders/next', {id}) }
+        catch(error) { return null } 
+    } 
+
+    const setStatus = async (id, status) => {       
+        try { return await protectedRequest('api/orders/set-status', {id, status}) }
+        catch(error) { return null } 
+    } 
+
     return { 
         create,
         pay,
         get,
         listByClient,
-        listAll
+        listAll,
+        next,
+        setStatus
     }
 }

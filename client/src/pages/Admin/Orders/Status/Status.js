@@ -1,10 +1,29 @@
 import React, { useState } from 'react'
 import styles from './Status.module.css'
 import { FRONT_URL } from '../../../../const'
+import useOrdersApi from '../../../../api/orders.api'
 
 
-function Status({order, next=()=>{}, cancel=()=>{}, setStatus=()=>{}}) {
+function Status({order, callback=()=>{}}) {
+    const Order = useOrdersApi()
     const [open, setOpen] = useState(false)
+
+    const next = async () => {      
+        const newOrder = await Order.next(order?._id)
+        if(!newOrder) { return }
+        
+        setOpen(false)
+        callback(newOrder) 
+    }
+    const setStatus = async (status='CANCEL') => {
+        const newOrder = await Order.setStatus(order?._id, status)
+        if(!newOrder) { return }
+        
+        setOpen(false)
+        callback(newOrder) 
+    }
+
+    
     
     return (
         <div className={styles.status}>
@@ -22,22 +41,22 @@ function Status({order, next=()=>{}, cancel=()=>{}, setStatus=()=>{}}) {
             {open && (
                 <div className={styles.list}>
                     {order?.status === 'CREATE' && (<>
-                        <div onClick={cancel}>скасувати</div>
+                        <div onClick={() => setStatus()}>скасувати</div>
                     </>)}
                     {order?.status === 'PAID' && (<>
-                        <div onClick={cancel}>скасувати</div>
-                        <div onClick={next}>прийняти</div>
+                        <div onClick={() => setStatus()}>скасувати</div>
+                        <div onClick={() => next()}>прийняти</div>
                     </>)}
                     {order?.status === 'WORK' && (<>
-                        <div onClick={cancel}>скасувати</div>
-                        <div onClick={next}>відправлено</div>
+                        <div onClick={() => setStatus()}>скасувати</div>
+                        <div onClick={() => next()}>відправлено</div>
                     </>)}
                     {order?.status === 'SEND' && (<>
-                        <div onClick={cancel}>скасувати</div>
-                        <div onClick={next}>завершити</div>
+                        <div onClick={() => setStatus()}>скасувати</div>
+                        <div onClick={() => next()}>завершити</div>
                     </>)}
                     {order?.status === 'DONE' && (<>
-                        <div onClick={cancel}>скасувати</div>
+                        <div onClick={() => setStatus()}>скасувати</div>
                     </>)}
                     {order?.status === 'CANCEL' && (<>
                         <div onClick={() => setStatus('PAID')}>оплачено</div>

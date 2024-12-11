@@ -40,10 +40,34 @@ async function listAll(page, limit, sort, filter) {
     }
 }
 
+async function next(id) {
+    const order = await get(id)
+
+    if(order.status === 'CREATE') { throw errors.notFind }
+    else if(order.status === 'PAID') { order.status = 'WORK' }
+    else if(order.status === 'WORK') { order.status = 'SEND' }
+    else if(order.status === 'SEND') { order.status = 'DONE' }
+    else if(order.status === 'DONE') { throw errors.notFind }
+    else if(order.status === 'CANCEL') { throw errors.notFind }
+    else { throw errors.notFind }
+    
+    return await order.save()
+}
+
+async function setStatus(id, status) {
+    const order = await get(id)
+
+    order.status = status
+
+    return await order.save()
+}
+
 module.exports = { 
     create,
     pay,
     get,
     list,
-    listAll
+    listAll,
+    setStatus,
+    next
 }

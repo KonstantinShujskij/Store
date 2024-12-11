@@ -1,4 +1,5 @@
 const {Router} = require('express')
+const {check} = require('express-validator')
 const { auth, isUser, isAdmin } = require('../middleware/auth.middleware')
 const trappiner = require('../utils/trappiner.utils')
 const Validator = require('../Validators/order.validator')
@@ -54,7 +55,7 @@ router.post('/list', auth, isUser,
     })
 ) 
 
-router.post('/list-all', auth, isAdmin, Validator.paginate, //Validator.filter,
+router.post('/list-all', auth, isAdmin, Validator.paginate, Validator.filter,
     trappiner(async (req, res) => {     
         const { page, limit, filter } = req.body    
         
@@ -63,6 +64,35 @@ router.post('/list-all', auth, isAdmin, Validator.paginate, //Validator.filter,
         const { list, count } = await Order.listAll(page, limit, sort, Filter.order(filter))
 
         res.status(200).json({list, count})
+    })
+) 
+
+router.post('/next', auth, isAdmin,
+    [
+        check('id', 'incorectValue').isString(),
+    ],
+    trappiner(async (req, res) => {     
+        const { id } = req.body    
+
+        console.log(id)        
+    
+        const order = await Order.next(id)
+
+        res.status(200).json(order)
+    })
+) 
+
+router.post('/set-status', auth, isAdmin,
+    [
+        check('id', 'incorectValue').isString(),
+        check('status', 'incorectValue').isIn(['CREATE', 'PAID', 'WORK', 'SEND', 'DONE', 'CANCEL'])
+    ],
+    trappiner(async (req, res) => {     
+        const { id, status } = req.body   
+            
+        const order = await Order.setStatus(id, status)
+
+        res.status(200).json(order)
     })
 ) 
 

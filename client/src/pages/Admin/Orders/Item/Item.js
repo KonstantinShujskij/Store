@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import Status from '../Status/Status'
 
 
-function Item({order}) {    
+function Item({order, load}) {    
     return (
         <div className={styles.main}>
             <div className={styles.top}>
@@ -18,7 +18,7 @@ function Item({order}) {
                 <div className={styles.label}>{order?.createdAt}</div>
                 <div className={styles.label}></div>
                 <div className={styles.label}>
-                    <Status order={order} />
+                    <Status order={order} callback={load}/>
                 </div>
             </div>
             <div className={styles.window}>

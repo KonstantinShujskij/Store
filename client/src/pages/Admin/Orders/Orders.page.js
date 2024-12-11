@@ -74,7 +74,7 @@ function Orders() {
                 </div>
                 <div className={styles.hr}></div>
                 <div className={styles.list}>
-                    {list.map((order) => <Item order={order} key={order._id} />)}
+                    {list.map((order) => <Item order={order} load={() => load()} key={order._id} />)}
                 </div>
             </div>
             <Paginate {...paginate.bind} />
