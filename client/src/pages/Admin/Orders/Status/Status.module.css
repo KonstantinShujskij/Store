@@ -1,6 +1,7 @@
 .status {
     width: 100%;
-    max-width: 200px;
+    max-width: 220px;
+    width: fit-content;
     position: relative;
     user-select: none;
 }
@@ -9,13 +10,16 @@
     border-radius: 32px;
     border: 1px solid #CCC;
     padding: 6px 12px;
-    padding-left: 34px;
+    padding-left: 36px;
 
     color: #000;
     font-family: Inter;
     font-size: 17px;
     font-weight: 400;
     position: relative;
+
+    display: flex;
+    justify-content: flex-end;
 }
 
 .icon {
@@ -27,6 +31,10 @@
     transform: scale(-1, -1);
     margin-top: 3px;
     cursor: pointer;
+}
+
+.icon[open] {
+    transform: scale(1, 1);
 }
 
 .icon img {
@@ -50,6 +58,7 @@
     font-family: Inter;
     font-size: 17.361px;
     font-weight: 400;
+    background-color: #fff;
 }
 
 .list div {
@@ -58,4 +67,6 @@
     border-bottom: 1px solid #CCC;
     text-align: left;
     cursor: pointer;
+    background-color: #fff;
+    z-index: 10;
 }

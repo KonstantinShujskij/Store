@@ -21,14 +21,12 @@ function Status({order, callback=()=>{}}) {
         
         setOpen(false)
         callback(newOrder) 
-    }
-
-    
+    }   
     
     return (
         <div className={styles.status}>
             <div className={styles.value} onClick={() => setOpen((prew) => !prew)}>
-                <div className={styles.icon}>
+                <div className={styles.icon} open={open? 1 : 0}>
                     <img src={`${FRONT_URL}/images/up-arrow.svg`} alt="^" />
                 </div>
                 {order?.status === 'CREATE' && <div>не оплачено</div>}
