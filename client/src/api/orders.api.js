@@ -48,6 +48,11 @@ export default function useOrdersApi() {
         catch(error) { return null } 
     } 
 
+    const setTTH = async (id, tth) => {       
+        try { return await protectedRequest('api/orders/set-tth', {id, tth}) }
+        catch(error) { return null } 
+    } 
+
     return { 
         create,
         pay,
@@ -55,6 +60,7 @@ export default function useOrdersApi() {
         listByClient,
         listAll,
         next,
-        setStatus
+        setStatus,
+        setTTH
     }
 }

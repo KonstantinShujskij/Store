@@ -3,9 +3,22 @@ import styles from './Item.module.css'
 import { IMG_SRC } from '../../../../const'
 import { Link } from 'react-router-dom'
 import Status from '../Status/Status'
+import useOrdersApi from '../../../../api/orders.api'
+import useInput from '../../../../hooks/input.hook'
 
 
 function Item({order, load}) {    
+    const Order = useOrdersApi()
+
+    const tth = useInput(order.delivery.tth)
+
+    const tthHandler = async () => {
+        const newOrder = await Order.setTTH(order._id, tth.value)
+        if(!newOrder) { return }
+
+        load()
+    }
+
     return (
         <div className={styles.main}>
             <div className={styles.top}>
@@ -55,7 +68,14 @@ function Item({order, load}) {
                 <div className={styles.bottom}>
                     <div className={styles.subtitle}>subtotal</div>
                     <div className={styles.pay}>
-                        <div className={styles.tth}>ТТН: </div>
+                        {order?.status !== 'SEND' && <div className={styles.tth}>ТТН: {order?.delivery?.tth}</div>}
+                        {order?.status === 'SEND' && (
+                            <div className={styles.tth}>
+                                <span>TTH:</span>
+                                <input {...tth.bind} placeholder="TTH" />
+                                <div className={styles.btn} onClick={() => tthHandler()}>Зберегти</div>
+                            </div>
+                        )}
                         <div className={styles.price}>2300 ₴</div>
                     </div>
                 </div>

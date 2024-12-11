@@ -139,6 +139,32 @@
     font-family: Inter;
     font-size: 20px;
     font-weight: 600;
+
+    border-bottom: 1px solid#000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.tth input {
+    padding: 0;
+    border: 0;
+    outline: none;
+    color: #000;
+    font-family: Inter;
+    font-size: 20px;
+    font-weight: 600;
+    max-width: 180px;
+}
+
+.btn {
+    color: #000;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 400;
+    text-transform: uppercase;
+    cursor: pointer;
 }
 
 .price {

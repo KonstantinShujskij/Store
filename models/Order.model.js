@@ -7,7 +7,8 @@ const schema = new Schema({
         town: {type: String},
         type: {type: String, default: 'department'}, // department/address/terminal
         data: {type: String},
-        note: {type: String}
+        note: {type: String},
+        tth: {type: String, default: ''}
     },
     contacts: {
         name: {type: String},

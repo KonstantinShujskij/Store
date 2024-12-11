@@ -62,6 +62,14 @@ async function setStatus(id, status) {
     return await order.save()
 }
 
+async function setTTH(id, tth) {
+    const order = await get(id)
+
+    order.delivery.tth = tth
+
+    return await order.save()
+}
+
 module.exports = { 
     create,
     pay,
@@ -69,5 +77,6 @@ module.exports = {
     list,
     listAll,
     setStatus,
+    setTTH,
     next
 }

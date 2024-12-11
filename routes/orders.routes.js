@@ -96,5 +96,19 @@ router.post('/set-status', auth, isAdmin,
     })
 ) 
 
+router.post('/set-tth', auth, isAdmin,
+    [
+        check('id', 'incorectValue').isString(),
+        check('tth', 'incorectValue').isString()
+    ],
+    trappiner(async (req, res) => {     
+        const { id, tth } = req.body   
+            
+        const order = await Order.setTTH(id, tth)
+
+        res.status(200).json(order)
+    })
+) 
+
 
 module.exports = router
