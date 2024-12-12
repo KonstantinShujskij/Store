@@ -12,6 +12,7 @@ import Prop from './components/prop/Prop'
 import Colors from './components/Colors/Colors'
 
 import styles from './Product.module.css'
+import Also from '../../components/Also/Also'
 
 
 function Product() {
@@ -66,7 +67,7 @@ function Product() {
         Basket.open()
     }
 
-    return (
+    return (<>
         <div className={styles.main}>
             <div className={styles.photos}>
                 {product?.photos.map((photo) => (
@@ -193,7 +194,8 @@ function Product() {
                 <button className={styles.button} onClick={pushHandler}>Bay</button>
             </div>
         </div> 
-    )
+        <Also product={product?.id} />
+    </>)
 }
 
 export default Product

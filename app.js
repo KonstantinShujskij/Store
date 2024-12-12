@@ -20,6 +20,8 @@ app.use('/api/products', require('./routes/products.routes'))
 app.use('/api/orders', require('./routes/orders.routes'))
 app.use('/api/client', require('./routes/client.routes'))
 app.use('/api/admin', require('./routes/admin.routes'))
+app.use('/api/also', require('./routes/also.routes'))
+
 
 
 const PORT = config.get('port')
