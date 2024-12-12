@@ -2,7 +2,7 @@ const {Schema, model, Types} = require('mongoose')
 
 const schema = new Schema({
     client: {type: Types.ObjectId, ref: 'Client', default: null},
-    status: {type: String, default: 'CREATE'}, // CREATE/PAID/WORK/CONFIRM/REJECT
+    status: {type: String, default: 'CREATE'}, // CREATE/PAID/WORK/SEND/DONE/REJECT
     delivery: {
         town: {type: String},
         type: {type: String, default: 'department'}, // department/address/terminal
@@ -29,6 +29,7 @@ const schema = new Schema({
     }],
     price: {type: Number},
     count: {type: Number},
+    paid: {type: Boolean, default: false},
     
     createdAt: { type: Number },
     updatedAt: { type: Number }

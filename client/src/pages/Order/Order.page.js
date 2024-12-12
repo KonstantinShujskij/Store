@@ -12,17 +12,11 @@ function Order() {
     const ordersApi = useOrdersApi()
 
     const [order, setOrder] = useState() 
-    const [step, setStep] = useState(0) 
 
     const load = async () => {
         const order = await ordersApi.get(id)
         if(!order) { return }
         setOrder(order)
-
-        // CREATE/PAID/WORK/CONFIRM/REJECT
-        if(['PAID', 'WORK', 'CONFIRM'].includes(order.status)) { setStep(1) }
-        if(['WORK', 'CONFIRM'].includes(order.status)) { setStep(2) }
-        if(['CONFIRM'].includes(order.status)) { setStep(3) }
     }
 
     useLoad(load)
@@ -46,18 +40,87 @@ function Order() {
             <div className={styles.order}>
                 <div className={styles.title}>Інформація про доставку</div>
                 <div className={styles.status}>
-                    <div className={styles.points}>
-                        <div className={styles.point} active={step > 0? 'active' : null}>1</div>
-                        <div className={styles.line}></div>
-                        <div className={styles.point} active={step > 1? 'active' : null}>2</div>
-                        <div className={styles.line}></div>
-                        <div className={styles.point} active={step > 2? 'active' : null}>3</div>
-                    </div>
-                    <div className={styles.labels}>
-                        <div className={styles.label}>Оплачено</div>
-                        <div className={styles.label}>Відправленно</div>
-                        <div className={styles.label}>Доставлено</div>
-                    </div>
+                    {order?.status === 'CREATE' && (<>
+                        <div className={styles.points}>
+                            <div className={styles.point}>1</div>
+                            <div className={styles.line}></div>
+                            <div className={styles.point}>2</div>
+                            <div className={styles.line}></div>
+                            <div className={styles.point}>3</div>
+                        </div>
+                        <div className={styles.labels}>
+                            <div className={styles.label}>Оплачено</div>
+                            <div className={styles.label}>Відправленно</div>
+                            <div className={styles.label}>Доставлено</div>
+                        </div>
+                    </>)}
+                    {order?.status === 'PAID' && (<>
+                        <div className={styles.points}>
+                            <div className={styles.point} active="active">1</div>
+                            <div className={styles.line}></div>
+                            <div className={styles.point}>2</div>
+                            <div className={styles.line}></div>
+                            <div className={styles.point}>3</div>
+                        </div>
+                        <div className={styles.labels}>
+                            <div className={styles.label}>Оплачено</div>
+                            <div className={styles.label}>В процессі</div>
+                            <div className={styles.label}>Доставлено</div>
+                        </div>
+                    </>)}
+                    {order?.status === 'WORK' && (<>
+                        <div className={styles.points}>
+                            <div className={styles.point} active="active">1</div>
+                            <div className={styles.line}></div>
+                            <div className={styles.point} active="active">2</div>
+                            <div className={styles.line}></div>
+                            <div className={styles.point}>3</div>
+                        </div>
+                        <div className={styles.labels}>
+                            <div className={styles.label}>Оплачено</div>
+                            <div className={styles.label}>В процессі</div>
+                            <div className={styles.label}>Доставлено</div>
+                        </div>
+                    </>)}
+                    {order?.status === 'SEND' && (<>
+                        <div className={styles.points}>
+                            <div className={styles.point} active="active">1</div>
+                            <div className={styles.line}></div>
+                            <div className={styles.point} active="active">2</div>
+                            <div className={styles.line}></div>
+                            <div className={styles.point}>3</div>
+                        </div>
+                        <div className={styles.labels}>
+                            <div className={styles.label}>Оплачено</div>
+                            <div className={styles.label}>Відправленно</div>
+                            <div className={styles.label}>Доставлено</div>
+                        </div>
+                    </>)}
+                    {order?.status === 'DONE' && (<>
+                        <div className={styles.points}>
+                            <div className={styles.point} active="active">1</div>
+                            <div className={styles.line}></div>
+                            <div className={styles.point} active="active">2</div>
+                            <div className={styles.line}></div>
+                            <div className={styles.point} active="active">3</div>
+                        </div>
+                        <div className={styles.labels}>
+                            <div className={styles.label}>Оплачено</div>
+                            <div className={styles.label}>Відправленно</div>
+                            <div className={styles.label}>Доставлено</div>
+                        </div>
+                    </>)}
+                    {order?.status === 'CANCEL' && (<>
+                        <div className={styles.points}>
+                            <div className={styles.point}  active="active">1</div>
+                            <div className={styles.line}></div>
+                            <div className={styles.point} active="active">2</div>
+                        </div>
+                        <div className={styles.labels}>
+                            <div className={styles.label}>Створено</div>
+                            <div className={styles.label}>Скасовано</div>
+                        </div>
+                    </>)}
                 </div>
                 <div className={styles.form}>
                     <div className={styles.input}>{order?.contacts?.name}</div>
@@ -71,6 +134,8 @@ function Order() {
                         {order?.delivery?.type === 'terminal' && <span>Поштомат {order?.delivery?.data}</span>}
                         {order?.delivery?.type === 'address' && <span>{order?.delivery?.data}</span>}
                     </div>
+
+                    {!!order?.delivery?.tth && <div className={styles.input}>TTH: {order?.delivery?.tth}</div>}
                     
                     <div className={styles.input}>{order?.contacts?.instagram}</div>
                     {order?.delivery?.note && <div className={styles.note}>{order?.delivery?.note}</div>}
@@ -79,7 +144,7 @@ function Order() {
                     <p className={styles.count}>items: {order?.count | 0}</p>
                     <p className={styles.price}>Total: {order?.price | 0}</p>
 
-                    {step === 0 && <Link className={styles.button} onClick={() => payHandler()}>PAY</Link>  }
+                    {order?.status === 'CREATE' && <Link className={styles.button} onClick={() => payHandler()}>PAY</Link>  }
                 </div>
             </div>
         </div>

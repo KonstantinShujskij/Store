@@ -17,8 +17,8 @@ function MyOrders() {
 
     useLoad(async () => {
         const list = await Order.listByClient()
-        const progresse = list.filter((item) => ['CREATE', 'PAID', 'WORK'].includes(item.status))
-        const done = list.filter((item) => ['CONFIRM', 'REJECT'].includes(item.status))
+        const progresse = list.filter((item) => ['CREATE', 'PAID', 'WORK', 'SEND'].includes(item.status))
+        const done = list.filter((item) => ['DONE', 'CANCEL'].includes(item.status))
 
         const recomend = await Product.recomends()
         setRecomend(recomend)

@@ -73,8 +73,6 @@ router.post('/next', auth, isAdmin,
     ],
     trappiner(async (req, res) => {     
         const { id } = req.body    
-
-        console.log(id)        
     
         const order = await Order.next(id)
 
