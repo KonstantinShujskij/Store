@@ -92,12 +92,7 @@ async function validate(productData) {
 }
 
 async function setSoldOut(id, soldOut) {
-    console.log(id, soldOut);
-    
-    const product = await get(id)
-
-    console.log(product);
-    
+    const product = await get(id)    
 
     product.soldOut = soldOut
 
@@ -132,6 +127,7 @@ async function recomend(size=3) {
 async function list(filter) {
     try {
         const options = {...Filter.client(filter)}
+        
         const products = await Product.find(options)
         
         return products

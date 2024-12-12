@@ -7,7 +7,12 @@ export default function useProductsApi() {
     const { publicRequest, protectedRequest } = useApi()
 
     const list = async (filter={}) => {
-        try { return await publicRequest('api/products/list', {filter}) }
+        try { return await protectedRequest('api/products/list', {filter}) }
+        catch(error) { return [] } 
+    } 
+
+    const clientList = async (filter={}) => {
+        try { return await publicRequest('api/products/client-list', {filter}) }
         catch(error) { return [] } 
     } 
 
@@ -80,6 +85,7 @@ export default function useProductsApi() {
         recomends,
         get,
         list,
+        clientList,
         setSoldOut
     }
 }

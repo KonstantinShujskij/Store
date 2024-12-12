@@ -79,12 +79,22 @@ router.post('/update', auth, isAdmin,
     })
 ) 
 
-router.post('/list', trappiner(async (req, res) => {     
-    const { filter } = req.body
+router.post('/list', auth, isAdmin,
+    trappiner(async (req, res) => {     
+        const { filter } = req.body
 
-    console.log(filter);
+        console.log('biba');
+        
+        const list = await Product.list(filter)
+
+        res.status(200).json(list.map(Format.admin))
+    })
+) 
+
+router.post('/client-list', trappiner(async (req, res) => {     
+    const { filter } = req.body   
     
-    const list = await Product.list(filter)
+    const list = await Product.list({...filter, soldOut: false})
 
     res.status(200).json(list.map(Format.client))
 })) 
@@ -95,10 +105,7 @@ router.post('/recomend', trappiner(async (req, res) => {
 })) 
 
 router.post('/set-soldout', trappiner(async (req, res) => {     
-    const { id, soldOut } = req.body
-
-    console.log('hui', id, soldOut);
-    
+    const { id, soldOut } = req.body  
 
     const product = await Product.setSoldOut(id, soldOut)
 

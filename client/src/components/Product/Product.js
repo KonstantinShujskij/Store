@@ -36,8 +36,8 @@ function Product({product, refresh}) {
                     <div className={styles.menu}>
                         <div className={styles.action} onClick={() => removeHandler()}>REMOVe</div>
                         <div className={styles.action} onClick={navigateHandler}>Edit</div>
-                        {product?.soldOut && <div className={styles.action} onClick={() => soldOutHandler()}>Sold Out</div>}
-                        {!product?.soldOut && <div className={styles.action} onClick={() => soldOutHandler()}>Sold In</div>}
+                        {product?.soldOut && <div className={styles.action} onClick={() => soldOutHandler()}>Sold In</div>}
+                        {!product?.soldOut && <div className={styles.action} onClick={() => soldOutHandler()}>Sold Out</div>}
                     </div>
                 }
             </div>

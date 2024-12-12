@@ -26,8 +26,9 @@ function Catalog({isColl, isCat}) {
         if(isColl) { options.collection = id }
         if(isCat) { options.category = id }
 
-        setTitle(catalog)        
-        setProducts(await productsApi.list(options))
+        setTitle(catalog)   
+        if(isAdmin) { setProducts(await productsApi.list(options)) }
+        else { setProducts(await productsApi.clientList(options)) }        
     }
 
     useEffect(() => { load() }, [id])
