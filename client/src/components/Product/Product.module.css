@@ -32,9 +32,11 @@
     background-color: rgba(211, 211, 211, 0.49);
 
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     display: none;
+    gap: 36px;
 }
 
 .image:hover .menu {

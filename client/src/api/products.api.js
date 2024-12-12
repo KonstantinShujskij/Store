@@ -16,6 +16,11 @@ export default function useProductsApi() {
         catch(error) { return null } 
     } 
 
+    const setSoldOut = async (id, soldOut) => {
+        try { return await publicRequest('api/products/set-soldout', {id, soldOut}) }
+        catch(error) { return null } 
+    } 
+
     const create = async ({title, desc, price, category, collection, prop, materials, colors}, photos) => {
         const colorData = parseColors(colors)
         
@@ -74,6 +79,7 @@ export default function useProductsApi() {
         update,
         recomends,
         get,
-        list
+        list,
+        setSoldOut
     }
 }

@@ -94,6 +94,17 @@ router.post('/recomend', trappiner(async (req, res) => {
     res.status(200).json(list.map(Format.client))
 })) 
 
+router.post('/set-soldout', trappiner(async (req, res) => {     
+    const { id, soldOut } = req.body
+
+    console.log('hui', id, soldOut);
+    
+
+    const product = await Product.setSoldOut(id, soldOut)
+
+    res.status(200).json(Format.admin(product))
+})) 
+
 router.post('/get', trappiner(async (req, res) => {     
     const { id } = req.body
 

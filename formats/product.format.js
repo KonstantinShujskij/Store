@@ -1,6 +1,7 @@
 function client(product) {
     return {
         id: product._id,
+        soldOut: product.soldOut,
         title: product.title,
         desc: product.desc,
         price: product.price,
@@ -22,6 +23,7 @@ function client(product) {
 function admin(product) {
     return {
         id: product._id,
+        soldOut: product.soldOut,
         title: product.title,
         desc: product.desc,
         price: product.price,

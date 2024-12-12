@@ -91,6 +91,19 @@ async function validate(productData) {
     return product.price
 }
 
+async function setSoldOut(id, soldOut) {
+    console.log(id, soldOut);
+    
+    const product = await get(id)
+
+    console.log(product);
+    
+
+    product.soldOut = soldOut
+
+    return await product.save()
+}
+
 async function get(_id) {
     const product = await Product.findOne({_id})
     if(!product) { throw errors.notFind }
@@ -119,9 +132,7 @@ async function recomend(size=3) {
 async function list(filter) {
     try {
         const options = {...Filter.client(filter)}
-        console.log(options);
         const products = await Product.find(options)
-        console.log(products);
         
         return products
     }
@@ -137,5 +148,6 @@ module.exports = {
     remove,
     recomend,
     get,
-    list
+    list,
+    setSoldOut
 }

@@ -2,6 +2,7 @@ const {Schema, model, Types} = require('mongoose')
 
 const schema = new Schema({
     title: {type: String},
+    soldOut: {type: Boolean, default: false},
     desc: {type: String},
     price: {type: Number, default: 0},
     category: {type: Types.ObjectId, ref: 'Category', default: undefined},

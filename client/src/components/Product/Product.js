@@ -20,8 +20,11 @@ function Product({product, refresh}) {
         }
     }
 
-    const navigateHandler = () => {
-        navigate(isAdmin? `/make-product/${product.id}` : `/product/${product.id}`)
+    const navigateHandler = () => navigate(isAdmin? `/make-product/${product.id}` : `/product/${product.id}`)
+
+    const soldOutHandler = async () => {
+        if(!product) { return }
+        if(await productApi.setSoldOut(product.id, !product.soldOut)) { return refresh() }        
     }
 
     return (
@@ -32,6 +35,9 @@ function Product({product, refresh}) {
                 {isAdmin && 
                     <div className={styles.menu}>
                         <div className={styles.action} onClick={() => removeHandler()}>REMOVe</div>
+                        <div className={styles.action} onClick={navigateHandler}>Edit</div>
+                        {product?.soldOut && <div className={styles.action} onClick={() => soldOutHandler()}>Sold Out</div>}
+                        {!product?.soldOut && <div className={styles.action} onClick={() => soldOutHandler()}>Sold In</div>}
                     </div>
                 }
             </div>
