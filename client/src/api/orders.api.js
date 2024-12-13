@@ -11,9 +11,9 @@ export default function useOrdersApi() {
     const isUserLoad = useSelector(user.isUserLoad)
 
     const create = async (delivery, contacts) => {     
-        try { 
-            if(isUserLoad) { return protectedRequest('api/orders/create', {delivery, contacts, products: list}) }
-            else { return publicRequest('api/orders/create-public', {delivery, contacts, products: list}) }
+        try {             
+            if(isUserLoad) { return await protectedRequest('api/orders/create', {delivery, contacts, products: list}) }
+            else { return await publicRequest('api/orders/create-public', {delivery, contacts, products: list}) }
         }
         catch(error) { return null } 
     } 

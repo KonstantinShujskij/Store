@@ -25,8 +25,8 @@ export default function useApi() {
 
     const protectedRequest = useCallback(async (queris, data, type) => {
         try { return await request(queris, 'POST', data, {Authorization: `Bearer ${token}`}, type) }
-        catch(error) { 
-            pushError(error.message)
+        catch(error) {            
+            pushError(error?.message)
 
             if(error.status === 401) { dispatch(logout()) } 
             throw error
