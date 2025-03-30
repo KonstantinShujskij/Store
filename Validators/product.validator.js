@@ -5,9 +5,9 @@ const errors = require('../const/errors')
 
 module.exports = {
     create: [
-        check('title', errors.incorectTitle.key).isString().isLength({ min: 3, max: 16 }),
-        check('desc', errors.incorectDesc.key).isString().isLength({ min: 10, max: 1600 }),
-        check('price', errors.incorectPrice.key).isFloat({min: 0, max: 10000000})
+        check('title', errors.incorectTitle.key).isString().isLength({ min: 3, max: 64 }),
+        check('desc', errors.incorectDesc.key).isString().isLength({ min: 10, max: 5000 }),
+        check('price', errors.incorectPrice.key).isFloat({min: 0, max: 1000000})
     ],
     validateProp: (prop) => {
         return prop.map((item) => {
