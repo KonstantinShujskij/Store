@@ -1,10 +1,12 @@
 import { SET_CATEGORY, ADD_CATEGORY, DEL_CATEGORY } from './types/static.types'
 import { SET_COLLECTION, ADD_COLLECTION, DEL_COLLECTION } from './types/static.types'
+import { SET_CONTACTS, ADD_CONTACTS, DEL_CONTACTS } from './types/static.types'
 import { CLEAR } from './types/static.types'
 
 const initialState = {
     categories: [],
-    collections: []
+    collections: [],
+    contactsList: []
 }
 
 export default function staticReducer(state=initialState, action) {
@@ -21,6 +23,12 @@ export default function staticReducer(state=initialState, action) {
         return {...state, collections: [...state.collections, action.payload]}
     case DEL_COLLECTION:
         return {...state, collections: state.collections.filter((item) => (!action.payload.includes(item.id)))}
+    case SET_CONTACTS:
+        return {...state, contactsList: action.payload}
+    case ADD_CONTACTS:
+        return {...state, contactsList: [...state.contactsList, action.payload]}
+    case DEL_CONTACTS:
+        return {...state, contactsList: state.contactsList.filter((item) => (!action.payload.includes(item.id)))}
     case CLEAR: 
         return initialState
     default:

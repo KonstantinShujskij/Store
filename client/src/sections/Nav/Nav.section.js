@@ -7,6 +7,7 @@ import * as authSelectors from '../../redux/selectors/auth.selectors'
 
 import Categories from './components/Categories'
 import Collections from './components/Collections'
+import Contacts from './components/Contacts'
 
 import styles from './Nav.module.css' 
 import { FRONT_URL } from '../../const'
@@ -35,12 +36,14 @@ function Nav() {
             <div className={styles.menu}>
                 <Categories />
                 <Collections />
+                {/* <Contacts /> */}
                 {!isAdmin && <Link to="/about">about</Link>}
             </div>
 
             <div className={styles.info}>
                 {!isAdmin && <Link to="/info/offer-agreement">Info</Link>}
-                <Link to="/contacts">Contacts</Link>
+                <Contacts />
+                {/* <Link to="/contacts">Contacts</Link> */}
                 {!isAdmin && <Bag />}
                 {isAdmin && <Link to="/login" onClick={logout}>LogOut</Link>}
             </div>

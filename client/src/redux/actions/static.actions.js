@@ -1,5 +1,6 @@
 import { SET_CATEGORY, ADD_CATEGORY, DEL_CATEGORY } from '../types/static.types'
 import { SET_COLLECTION, ADD_COLLECTION, DEL_COLLECTION } from '../types/static.types'
+import { SET_CONTACTS, ADD_CONTACTS, DEL_CONTACTS } from '../types/static.types'
 import { CLEAR } from '../types/static.types'
 
 
@@ -41,6 +42,27 @@ export function addCollection(collection) {
 export function removeCollection(ids) {
     return {
         type: DEL_COLLECTION,
+        payload: ids
+    }
+}
+
+export function setContacts(list) {
+    return {
+        type: SET_CONTACTS,
+        payload: list
+    }
+}
+
+export function addContacts(contacts) {   
+    return {
+        type: ADD_CONTACTS,
+        payload: contacts
+    }
+}
+
+export function removeContacts(ids) {
+    return {
+        type: DEL_CONTACTS,
         payload: ids
     }
 }
