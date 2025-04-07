@@ -15,6 +15,7 @@ app.use('/static', express.static(path.join(__dirname, 'static')))
 
 app.use('/api/category', require('./routes/caterory.routes'))
 app.use('/api/collection', require('./routes/collection.routes'))
+app.use('/api/contacts', require('./routes/contacts.routes'))
 
 app.use('/api/products', require('./routes/products.routes'))
 app.use('/api/orders', require('./routes/orders.routes'))
