@@ -9,6 +9,11 @@ export default function useContactsApi() {
         catch(error) { return null } 
     }
 
+    // const createLink = async (link) => {
+    //     try { return await protectedRequest('api/contacts/create', {link}) }
+    //     catch(error) { return null } 
+    // }
+
     const remove = async (ids) => {
         try { return await protectedRequest('api/contacts/remove', {ids}) }
         catch(error) { return false } 
@@ -21,6 +26,7 @@ export default function useContactsApi() {
 
     return { 
         create,
+        // createLink,
         remove,
 
         list

@@ -10,6 +10,13 @@ async function create(title) {
     return contacts
 }
 
+// async function create(title, link) {
+//     const contacts = new Contacts({ title, link })
+//     await contacts.save()
+
+//     return contacts
+// }
+
 async function remove(ids) {
     await Contacts.deleteMany({ _id: {$in: ids} })
 

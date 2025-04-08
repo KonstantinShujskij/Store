@@ -15,8 +15,9 @@ function Contacts() {
     const contactsList = useSelector(staticSelectors.contactsList)
 
     const click = (id) => navigate(`/contacts/${id}`)
+    // const click = (link) => navigate(`window.location.href = ${link}`)
 
-    return <List label={'contactsList'} list={contactsList} click={click} save={Contacts.add} remove={Contacts.removeList} />
+    return <List label={'contacts'} list={contactsList} click={click} save={Contacts.add} remove={Contacts.removeList} />
 }
 
 export default Contacts

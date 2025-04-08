@@ -1,12 +1,16 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 import styles from './Also.module.css'
 import useAlsoApi from '../../api/also.api'
-import useLoad from '../../hooks/load.hook'
+// import useLoad from '../../hooks/load.hook'
+import * as authSelectors from '../../redux/selectors/auth.selectors'
 import { IMG_SRC } from '../../const'
 
 
 function Also({product}) {
     const Also = useAlsoApi()
+    
+    const isAdmin = useSelector(authSelectors.isAdmin)
 
     const [popa, setPopa] = useState([null, null])
 
@@ -36,12 +40,14 @@ function Also({product}) {
             <div className={styles.list}>
                 {popa.map((also) => (
                     <div className={styles.item} key={Date.now().toString(16)}>
-                        <div className={styles.photo}>
-                            <img src={`${IMG_SRC}${also?.photo}`} alt={also?.photo} />
-                            <div className={styles.popup} onClick={() => setHandler()}>
-                                <div className={styles.btn}>Заменить</div>
+                        {isAdmin &&
+                            <div className={styles.photo}>
+                                <img src={`${IMG_SRC}${also?.photo}`} alt={also?.photo} />
+                                <div className={styles.popup} onClick={() => setHandler()}>
+                                    <div className={styles.btn}>Заменить</div>
+                                </div>
                             </div>
-                        </div>
+                        }
                         <div className={styles.title}>{also?.title? also.title : 'Title'}</div>
                         <div className={styles.color}>Color</div>
                     </div>
