@@ -40,14 +40,14 @@ function Also({product}) {
             <div className={styles.list}>
                 {popa.map((also) => (
                     <div className={styles.item} key={Date.now().toString(16)}>
-                        {isAdmin &&
                             <div className={styles.photo}>
                                 <img src={`${IMG_SRC}${also?.photo}`} alt={also?.photo} />
+                                {isAdmin &&
                                 <div className={styles.popup} onClick={() => setHandler()}>
                                     <div className={styles.btn}>Заменить</div>
+                                }
                                 </div>
                             </div>
-                        }
                         <div className={styles.title}>{also?.title? also.title : 'Title'}</div>
                         <div className={styles.color}>Color</div>
                     </div>
