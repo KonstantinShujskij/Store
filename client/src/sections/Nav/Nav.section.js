@@ -43,7 +43,7 @@ function Nav() {
             <div className={styles.info}>
                 {!isAdmin && <Link to="/info/offer-agreement">Info</Link>}
                 <Contacts />
-                {/* <Link to="/contacts">Contacts</Link> */}
+                {/* <Link to="/contacts">Contacts</Link>  */}
                 {!isAdmin && <Bag />}
                 {isAdmin && <Link to="/login" onClick={logout}>LogOut</Link>}
             </div>

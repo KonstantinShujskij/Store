@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import useContactsApi from '../api/contacts.api'
 
 import {setContacts, addContacts, removeContacts} from '../redux/actions/static.actions'
+import { contactsList } from '../redux/selectors/static.selectors'
 
 
 export default function useContacts() {
@@ -14,10 +15,10 @@ export default function useContacts() {
         
     const load = async () => { dispath(setContacts(await contactsApi.list())) }
 
-    const add = async (title) => { 
-        if(!title) { return false }
+    const add = async (title, link) => { 
+        if(!title || !link) { return false }
 
-        const contacts = await contactsApi.create(title)
+        const contacts = await contactsApi.create({...contactsList})
         if(contacts) { dispath(addContacts(contacts)) }    
         
         return !!contacts
