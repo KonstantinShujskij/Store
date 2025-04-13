@@ -4,13 +4,14 @@ import { useSelector } from 'react-redux'
 import * as authSelectors from '../../../../redux/selectors/auth.selectors'
 
 import styles from './List.module.css' 
-import useInputContacts from '../../../../hooks/inputContact.hook'
+import useInput from '../../../../hooks/input.hook'
 
 
 function List({label, list, click, save, remove}) {
     const isAdmin = useSelector(authSelectors.isAdmin)
     
-    const value = useInputContacts('')
+    const title = useInput('')
+    const link = useInput('')
     const [ids, setIds] = useState([])
 
     const [open, setOpen] = useState(false)   
@@ -21,8 +22,8 @@ function List({label, list, click, save, remove}) {
         return [...prew, id]
     })
 
-    const saveHandler = async () => { 
-        if(await save({title, link : contacts})) { 
+    const saveHandler = async () => {         
+        if(await save(title.value, link.value)) { 
             setEdit(false) 
             title.clear()
             link.clear()
@@ -37,9 +38,9 @@ function List({label, list, click, save, remove}) {
         } 
     }
 
-    const clickHandler = (id) => {
+    const clickHandler = (link) => {
         setOpen(false)
-        click(id)
+        click(link)
     }
 
     const Panel = <div className={styles.panel}>
@@ -60,8 +61,8 @@ function List({label, list, click, save, remove}) {
             </div>
         )}
         
-        {edit? <input className={styles.input} placeholder='Назва соцмережі' type="text" key="title" name='title' {...value.bindTitle} /> : null}
-        {edit? <input className={styles.input} placeholder='url адреса' type="url" key="link" name='link' {...value.bindLink} /> : null}
+        {edit? <input className={styles.input} placeholder="Назва соцмережі" type="text" key="title" {...title.bind} /> : null}
+        {edit? <input className={styles.input} placeholder="url адреса" type="url" key="link" {...link.bind} /> : null}
     </div>
 
     return (

@@ -36,14 +36,12 @@ function Nav() {
             <div className={styles.menu}>
                 <Categories />
                 <Collections />
-                {/* <Contacts /> */}
                 {!isAdmin && <Link to="/about">about</Link>}
             </div>
 
             <div className={styles.info}>
                 {!isAdmin && <Link to="/info/offer-agreement">Info</Link>}
                 <Contacts />
-                {/* <Link to="/contacts">Contacts</Link>  */}
                 {!isAdmin && <Bag />}
                 {isAdmin && <Link to="/login" onClick={logout}>LogOut</Link>}
             </div>

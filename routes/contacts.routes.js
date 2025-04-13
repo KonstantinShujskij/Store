@@ -12,10 +12,10 @@ const Format = require('../formats/contacts.format.js')
 const router = Router()
 
 
-router.post('/create', auth, isAdmin, create, trappiner(async (req, res) => {     
-    const { title } = req.body
+router.post('/create', auth, isAdmin, create, trappiner(async (req, res) => {  
+    const { title, link } = req.body 
 
-    const contacts = await Contacts.create(title)
+    const contacts = await Contacts.create(title, link)
 
     res.status(201).json(Format.client(contacts))
 })) 

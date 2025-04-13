@@ -3,8 +3,8 @@ const Contacts = require('../models/Contacts.model')
 const errors = require('../const/errors')
 
 
-async function create(title) {
-    const contacts = new Contacts({ title })
+async function create(title, link) {
+    const contacts = new Contacts({ title, link })
     await contacts.save()
 
     return contacts

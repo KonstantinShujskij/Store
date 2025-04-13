@@ -4,8 +4,8 @@ import useApi from '../hooks/api.hook'
 export default function useContactsApi() {
     const { publicRequest, protectedRequest } = useApi()
 
-    const create = async (title) => {
-        try { return await protectedRequest('api/contacts/create', {title}) }
+    const create = async (title, link) => {
+        try { return await protectedRequest('api/contacts/create', {title, link}) }
         catch(error) { return null } 
     }
 
