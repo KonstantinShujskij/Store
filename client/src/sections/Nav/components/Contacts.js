@@ -7,13 +7,11 @@ import useContacts from '../../../hooks/contacts.hook'
 import ListContacts from './List/ListContacts'
 
 
-
 function Contacts() {
     const Contacts = useContacts()
-
     const contactsList = useSelector(staticSelectors.contactsList)
-    
-    const click = (link) => `window.location.href = ${link}`
+
+    const click = (link) => window.location.href = link
 
     return <ListContacts 
         label={'contacts'} 
