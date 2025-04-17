@@ -18,6 +18,7 @@ import Select from '../../../components/UI/Select/Select'
 import Tooltip from '../../../components/Tooltip/Tooltip'
 import Material from './components/Material/Material'
 import ColorProp from './components/ColorProp'
+import Also from '../../../components/Also/Also'
 import Photo from './Photo'
 
 import styles from './MakeProduct.module.css'
@@ -35,6 +36,7 @@ function MakeProduct() {
 
     const [category, setCategory] = useState('')
     const [collection, setCollection] = useState('')
+    const [also, setAlso] = useState('')
 
     const title = useInput()
     const desc = useInput()
@@ -63,7 +65,8 @@ function MakeProduct() {
             setMaterials(product.materials)
             setColors(product.colors)      
             setCategory({id: product.category, title: product.categoryTitle})        
-            setCollection({id: product.collection, title: product.collectionTitle})        
+            setCollection({id: product.collection, title: product.collectionTitle}) 
+            setAlso({id: product.id})       
         }
 
         load()
@@ -99,7 +102,7 @@ function MakeProduct() {
         navigate(`/product/${product.id}`)
     }
 
-    return (
+    return (<>
         <div className={styles.main}>
             <div className={styles.photos}>
                 <div className={styles.load}>
@@ -137,7 +140,8 @@ function MakeProduct() {
                 <ColorProp colors={colors} setColors={setColors} />
             </div>
         </div>
-    )
+        <Also productId={also} setList={setAlso}/>
+    </>)
 }
 
 export default MakeProduct

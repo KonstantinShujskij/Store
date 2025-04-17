@@ -1,15 +1,17 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import styles from './Also.module.css'
 import useAlsoApi from '../../api/also.api'
 // import useLoad from '../../hooks/load.hook'
 import * as authSelectors from '../../redux/selectors/auth.selectors'
 import { IMG_SRC } from '../../const'
+import Modal from './AlsoModal'
 
 
-function Also({product}) {
+function Also() {
     const Also = useAlsoApi()
-    
+    const navigate = useNavigate()
     const isAdmin = useSelector(authSelectors.isAdmin)
 
     const [popa, setPopa] = useState([null, null])
@@ -27,26 +29,30 @@ function Also({product}) {
 
     // useLoad(load)
 
-    const setHandler = async (id=null) => {
-        const also = await Also.set(id, product)
-        if(!also) {return }
+    // const setHandler = async (id=null) => {
+    //     const also = await Also.set(id, product)
+    //     if(!also) {return }
 
-        await load()
-    }
+    //     await load()
+    // }
+
+
+      
+
+    const clickHandler = (id) => navigate(`/product/${id}`)
     
     return (
         <div className={styles.main}>
             <div className={styles.title} onClick={() => load()}>You may also like</div>
             <div className={styles.list}>
                 {popa.map((also) => (
-                    <div className={styles.item} key={Date.now().toString(16)}>
+                    <div className={styles.item} 
+                        key={Date.now().toString(16)} 
+                        onClick={() => clickHandler(also?.id)} 
+                    >
+                        {isAdmin && <Modal also={also?.id}/>}
                         <div className={styles.photo}>
                             <img src={`${IMG_SRC}${also?.photo}`} alt={also?.photo} />
-                            {isAdmin &&
-                                <div className={styles.popup} onClick={() => setHandler()}>
-                                    <div className={styles.btn}>Заменить</div>
-                                </div>
-                            }
                         </div>
                         <div className={styles.title}>{also?.title? also.title : 'Title'}</div>
                         <div className={styles.color}>Color</div>
