@@ -6,10 +6,9 @@ import useAlsoApi from '../../api/also.api'
 // import useLoad from '../../hooks/load.hook'
 import * as authSelectors from '../../redux/selectors/auth.selectors'
 import { IMG_SRC } from '../../const'
-import Modal from './AlsoModal'
 
 
-function Also() {
+function Also({product}) {
     const Also = useAlsoApi()
     const navigate = useNavigate()
     const isAdmin = useSelector(authSelectors.isAdmin)
@@ -29,12 +28,12 @@ function Also() {
 
     // useLoad(load)
 
-    // const setHandler = async (id=null) => {
-    //     const also = await Also.set(id, product)
-    //     if(!also) {return }
+    const setHandler = async (id=null) => {
+        const also = await Also.set(id, product)
+        if(!also) {return }
 
-    //     await load()
-    // }
+        await load()
+    }
 
 
       
@@ -50,7 +49,7 @@ function Also() {
                         key={Date.now().toString(16)} 
                         onClick={() => clickHandler(also?.id)} 
                     >
-                        {isAdmin && <Modal also={also?.id}/>}
+                        {isAdmin && onClick={() => setHandler(also?.id)}
                         <div className={styles.photo}>
                             <img src={`${IMG_SRC}${also?.photo}`} alt={also?.photo} />
                         </div>

@@ -36,7 +36,6 @@ function MakeProduct() {
 
     const [category, setCategory] = useState('')
     const [collection, setCollection] = useState('')
-    const [also, setAlso] = useState('')
 
     const title = useInput()
     const desc = useInput()
@@ -66,7 +65,6 @@ function MakeProduct() {
             setColors(product.colors)      
             setCategory({id: product.category, title: product.categoryTitle})        
             setCollection({id: product.collection, title: product.collectionTitle}) 
-            setAlso({id: product.id})       
         }
 
         load()
@@ -140,7 +138,7 @@ function MakeProduct() {
                 <ColorProp colors={colors} setColors={setColors} />
             </div>
         </div>
-        <Also productId={also} setList={setAlso}/>
+        <Also productId={id}/>
     </>)
 }
 
