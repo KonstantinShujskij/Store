@@ -191,7 +191,7 @@ function Product() {
                     </div>
                 )}
 
-                <button className={styles.button} onClick={pushHandler}>Bay</button>
+                <button className={styles.button} onClick={pushHandler}>Buy</button>
             </div>
         </div> 
         <Also product={product?.id} />

@@ -82,8 +82,6 @@ router.post('/update', auth, isAdmin,
 router.post('/list', auth, isAdmin,
     trappiner(async (req, res) => {     
         const { filter } = req.body
-
-        console.log('biba');
         
         const list = await Product.list(filter)
 

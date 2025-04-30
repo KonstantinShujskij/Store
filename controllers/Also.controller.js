@@ -29,20 +29,29 @@ async function update(id, productId) {
     return await also.save()
 }
 
-async function get(_id) {
-    const also = await Also.findOne({_id})
-    if(!also) { throw errors.notFind }
+async function set(id) {
+    const also = await Also.findOne({id})
+
+    also.productId = id
+    also.photo = photo
+    also.title = title
+    also.color = color
+    also.design = design
+    also.selected = selected
+    console.log(also)
+    // const also = await Also.findOne({_id})
+    // if(!also) { throw errors.notFind }
 
     return also
 }
 
 async function list(count) {
-    return await Also.find().limit(count)
+    return await Also.find({ id }).limit(count)
 }
 
 module.exports = { 
     create,
     update,
-    get,
+    set,
     list
 }

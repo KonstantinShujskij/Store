@@ -8,9 +8,8 @@ const schema = new Schema({
     design: {type: String},
 
     createdAt: { type: Number },
-    updatedAt: { type: Number }
-}, {
-    timestamps: { currentTime: () => Date.now() }
+    updatedAt: { type: Number },
+    selected: { type: Boolean }
 })
 
 module.exports = model('Also', schema)

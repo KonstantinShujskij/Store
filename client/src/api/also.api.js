@@ -4,8 +4,8 @@ import useApi from '../hooks/api.hook'
 export default function useAlsoApi() {
     const { publicRequest, protectedRequest } = useApi()
 
-    const set = async (id, productId) => {
-        try { return await protectedRequest('api/also/set', { id, productId }) }
+    const set = async (id, selected) => {
+        try { return await protectedRequest('api/also/set', { id, selected }) }
         catch(error) { return null } 
     } 
 
@@ -14,8 +14,14 @@ export default function useAlsoApi() {
         catch(error) { return [] } 
     } 
 
+    const recomends = async (id, productId) => {
+        try { return await protectedRequest('api/products/recomends', { id, productId }) }
+        catch(error) { return [] } 
+    }
+
     return { 
         set,
-        get
+        get,
+        recomends
     }
 }

@@ -64,7 +64,7 @@ function MakeProduct() {
             setMaterials(product.materials)
             setColors(product.colors)      
             setCategory({id: product.category, title: product.categoryTitle})        
-            setCollection({id: product.collection, title: product.collectionTitle}) 
+            setCollection({id: product.collection, title: product.collectionTitle})        
         }
 
         load()
@@ -138,7 +138,7 @@ function MakeProduct() {
                 <ColorProp colors={colors} setColors={setColors} />
             </div>
         </div>
-        <Also productId={id}/>
+        <Also productId={ id } />
     </>)
 }
 
