@@ -3,12 +3,12 @@ import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import styles from './Also.module.css'
 import useAlsoApi from '../../api/also.api'
-// import useLoad from '../../hooks/load.hook'
+import useLoad from '../../hooks/load.hook'
 import * as authSelectors from '../../redux/selectors/auth.selectors'
 import { IMG_SRC } from '../../const'
 
 
-function Also({product}) {
+function Also({productId}) {
     const Also = useAlsoApi()
     const navigate = useNavigate()
     const isAdmin = useSelector(authSelectors.isAdmin)
@@ -26,32 +26,36 @@ function Also({product}) {
         setPopa(data)
     }
 
-    // useLoad(load)
-    const navigateHandler = () => navigate(!isAdmin && `/product/${product.id}`)
+    useLoad(load)
+    const navigateHandler = () => navigate(!isAdmin && `/product/${productId}`)
 
     const setHandler = async (id=null) => {
-        const also = await Also.set(id, product)
+        const also = await Also.set(id, productId)
+        
         if(!also) {return }
-
+        if(also?.selected)
+        {also.selected=!also.selected}
         await load()
     }
     
     return (
         <div className={styles.main}>
-            <div className={styles.title} onClick={() => load()}>You may also like</div>
+            <div className={styles.title} 
+            // onClick={() => load()}
+            >You may also like</div>
             <div className={styles.list}>
                 {popa.map((also) => (
                     <div className={styles.item} key={Date.now().toString(16)} onClick={navigateHandler}>
                         <div className={styles.photo}>
                             <img src={`${IMG_SRC}${also?.photo}`} alt={also?.photo} />
                             {isAdmin &&
-                            <div className={styles.popup} onClick={() => setHandler()}>
+                            <div className={styles.popup} onClick={() => setHandler(also?.selected)}>
                                 <div className={styles.btn}>Заменить</div>
                             </div>
                             }
                         </div>
                         <div className={styles.title}>{also?.title? also.title : 'Title'}</div>
-                        <div className={styles.color}>Color</div>
+                        <div className={styles.color}>{also?.color? also.color : 'Color'}</div>
                     </div>
                 ))}
             </div>

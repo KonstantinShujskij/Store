@@ -9,9 +9,14 @@ export default function useAlsoApi() {
         catch(error) { return null } 
     } 
 
-    const get = async (count=3) => {
-        try { return await publicRequest('api/also/get', { count }) }
-        catch(error) { return [] } 
+    const get = async (count, id) => {
+        try { 
+            let a = await publicRequest('api/also/get', { count, id }) 
+            return a
+        }
+        catch(error) { 
+            return [] 
+        } 
     } 
 
     const recomends = async (id, productId) => {

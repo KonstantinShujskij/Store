@@ -8,15 +8,14 @@ const Also = require('../controllers/Also.controller')
 const router = Router()
 
 router.post('/set', trappiner(async (req, res) => {
-    const { id, selected } = req.body    
+    const { id } = req.body    
     const also = await Also.findOne(id)
 
     if(!also) return res.status(404).json({ message: 'Item not found' }) 
-    if (selected)
-        selected = !selected
-    // { also = await Also.update(id, productId) }
-    // else 
-    // { also = await Also.create(productId) }
+    if (also)
+        { also = await Also.update(id, productId) }
+    else 
+        { also = await Also.create(productId) }
     await also.set()
     return res.status(201).json(also)
 })) 
