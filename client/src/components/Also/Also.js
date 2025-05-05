@@ -12,29 +12,30 @@ function Also({productId}) {
     const Also = useAlsoApi()
     const navigate = useNavigate()
     const isAdmin = useSelector(authSelectors.isAdmin)
-
     const [popa, setPopa] = useState([null, null])
-
+    
     const load = async () => {
         const count = 3
         const data = await Also.get(count)
         // const len = data.length? data.length : 0
         
         // for(let i = 0; i < count - len; i++) { data.push({}) }
-
+        
         // setList(data) 
         setPopa(data)
     }
-
+    
     useLoad(load)
+
     const navigateHandler = () => navigate(!isAdmin && `/product/${productId}`)
 
     const setHandler = async (id=null) => {
         const also = await Also.set(id, productId)
         
         if(!also) {return }
-        if(also?.selected)
-        {also.selected=!also.selected}
+        if(also?.selected) {
+            also.selected=!also.selected
+        }
         await load()
     }
     
@@ -64,104 +65,3 @@ function Also({productId}) {
 }
 
 export default Also
-// import React, { useState } from 'react'
-// import { useSelector } from 'react-redux'
-// import { useNavigate } from 'react-router-dom'
-// import styles from './Also.module.css'
-// import useAlsoApi from '../../api/also.api'
-// // import useLoad from '../../hooks/load.hook'
-// import * as authSelectors from '../../redux/selectors/auth.selectors'
-// import { IMG_SRC } from '../../const'
-
-
-// function Also({product}) {
-//     const Also = useAlsoApi()
-//     const navigate = useNavigate()
-//     const isAdmin = useSelector(authSelectors.isAdmin)
-
-//     const [popa, setPopa] = useState([null, null])
-
-//     const load = async () => {
-//         // const count = {isAdmin ? 6 : 3}
-//         let count = null
-//         const data = await Also.get(count)
-//         if (isAdmin) {
-//             count = {} // без обмеження
-//         } else {
-//             count = { selected: true }.limit(3) // тільки вибрані + максимум 3
-//         }
-//         setPopa(data)
-//     }
-//     // const len = data.length? data.length : 0
-//     // for(let i = 0; i < count - len; i++) { data.push({}) }
-//     // setList(data) 
-//     // useLoad(load)
-
-//     const selectHandler = async (id=null) => {
-//         const also = await Also.set(id, product)
-//         if(!also) {return}
-//         if (!isAdmin) return
-
-//         setPopa(prev =>
-//             prev.map(also =>
-//                 also._id === id ? { ...also, selected: true } : also
-//             )
-//         )
-//         await load()
-//     }
-
-//     const navigateHandler = () => navigate(!isAdmin && `/product/${product.id}`)
-
-//     // const clickHandler = (id) => navigate(`/product/${id}`)
-    
-//     return (
-//         <div className={styles.main}>
-//             <div className={styles.title} onClick={() => load()}>You may also like</div>
-//             <div className={styles.list}>
-//                 {popa.map((also) => (
-//                     <div className={styles.item} 
-//                         key={Date.now().toString(16)} 
-//                         onClick={navigateHandler}
-//                         // isAdmin? () => setHandler(also?.id) : () => clickHandler(also?.id)} 
-//                     >
-//                         <div className={styles.photo}>
-//                             <img src={`${IMG_SRC}${also?.photo}`} alt={also?.photo} />
-//                             {isAdmin &&
-//                                 <div 
-//                                     className={styles.popup} 
-//                                     onClick={() => selectHandler()}>
-//                                     <div className={styles.action}>Замінити</div>
-//                                 </div>
-//                             }
-//                             {isAdmin && (
-//                                 <button>
-//                                     {also?.selected ? 'Скасувати' : 'Обрати'}
-//                                 </button>
-//                             )}
-//                             {!isAdmin && also.selected && (
-//                                 <span>✅ Обране</span>
-//                             )}
-//                         </div>
-//                         <div className={styles.title}>{also?.title? also.title : 'Title'}</div>
-//                         <div className={styles.color}>Color</div>
-//                     </div>
-//                     //         <div className={styles.item} key={Date.now().toString(16)} onClick={navigateHandler}>
-//                     //         <div className={styles.photo}>
-//                     //             <img src={`${IMG_SRC}${also?.photo}`} alt={also?.photo} />
-//                     //             {isAdmin &&
-//                     //             <div className={styles.popup} onClick={() => setHandler()}>
-//                     //                 <div className={styles.btn}>Заменить</div>
-//                     //             </div>
-//                     //             }
-//                     //         </div>
-//                     //     <div className={styles.title}>{also?.title? also.title : 'Title'}</div>
-//                     //     <div className={styles.color}>Color</div>
-//                     // </div>
-
-//                 ))}
-//             </div>
-//         </div>
-//     )
-// }
-
-// export default Also

@@ -5,7 +5,7 @@ function get(filterData, forse) {
     const filter = {...filterData, ...forse}
     let options = {}
 
-    console.log(filter?.soldOut);
+    // console.log(filter?.soldOut);
     
 
     if(filter?.id) { options = {...options, _id: filter.id} }

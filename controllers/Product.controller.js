@@ -133,7 +133,7 @@ async function list(filter) {
         return products
     }
     catch(err) {
-        console.log(err);        
+        // console.log(err);        
     }
 }
 
