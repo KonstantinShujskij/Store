@@ -4,7 +4,7 @@ const Also = require('../models/Also.model')
 const errors = require('../const/errors')
 
 
-async function create(productId) {    
+async function create(productId) {       
     const product = await Product.get(productId)
 
     const color = product.colors?.length? product.colors[0]?.title : ''
@@ -16,11 +16,13 @@ async function create(productId) {
     return await also.save()
 }
 
-async function update(id, productId) {    
+async function update(id, productId) {       
     const product = await Product.get(productId)
     const also = await get(id)
 
-    also.title = title
+    if(!also) { throw errors.notFind }
+
+    also.title = product.title
     also.productId = productId
     also.color = product.colors?.length? product.colors[0]?.title : ''
     also.design = product.colors?.length && product.colors.design?.length? product.colors[0]?.design[0]?.title : ''

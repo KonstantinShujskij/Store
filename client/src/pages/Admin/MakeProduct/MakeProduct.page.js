@@ -21,6 +21,7 @@ import ColorProp from './components/ColorProp'
 import Photo from './Photo'
 
 import styles from './MakeProduct.module.css'
+import Also from '../../../components/Also/Also'
 
 
 function MakeProduct() {
@@ -135,6 +136,8 @@ function MakeProduct() {
                 <Tooltip />
                 <Material list={materials} setList={setMaterials} />
                 <ColorProp colors={colors} setColors={setColors} />
+                <div className="s-100" />
+                <Also product={id} />
             </div>
         </div>
     )

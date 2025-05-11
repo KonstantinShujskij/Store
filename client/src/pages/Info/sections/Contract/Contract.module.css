@@ -38,3 +38,40 @@
 .content {
     width: 100%;
 }
+
+.hide {
+    display: none;
+}
+
+.btn {
+    margin-left: 8px;
+    transform: scale(-1, -1);
+    user-select: none;
+}
+
+.btn.open {
+    transform: scale(-1, 1);
+}
+
+@media screen and (max-width: 578px) {
+  .title {
+    color: #000;
+    font-family: Inter, sans-serif;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 600;
+    /* Можно указать десятичное значение вместо процента: */
+    line-height: 1.20878;
+
+    width: 100%;
+    display: flex;
+  }
+
+  .point {
+    font-size: 11px;
+  }
+
+  .btn {
+    margin-left: auto;
+  }
+}

@@ -1,7 +1,7 @@
 const {Schema, model, Types} = require('mongoose')
 
 const schema = new Schema({
-    productId: {type: Types.ObjectId, ref: 'Product'},
+    productId: {type: String, default: null },
     photo: {type: String},
     title: {type: String},
     color: {type: String},

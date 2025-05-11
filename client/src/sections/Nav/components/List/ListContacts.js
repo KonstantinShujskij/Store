@@ -54,7 +54,7 @@ function List({label, list, click, save, remove}) {
     const List = <div className={styles.list}>
         {isAdmin? Panel : null}
 
-        {list.map((item) => 
+        {list?.map((item) => 
             <div className={styles.item} key={item.id}>
                 <div onClick={() => clickHandler(item?.link)} className={styles.link}>{item?.title}</div>
                 {edit? <input type="checkbox" checked={ids.includes(item?.id)} onChange={() => togle(item?.id)}/> : null}

@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 
 import { useSelector } from 'react-redux'
 import * as authSelectors from '../../../../redux/selectors/auth.selectors'
@@ -8,7 +8,7 @@ import useInput from '../../../../hooks/input.hook'
 import styles from './List.module.css' 
 
 
-function List({label, list, click, save, remove}) {
+function List({label, list, click, save, remove, isOpen=()=>{}}) {
     const isAdmin = useSelector(authSelectors.isAdmin)
     
     const value = useInput('')
@@ -16,6 +16,8 @@ function List({label, list, click, save, remove}) {
 
     const [open, setOpen] = useState(false)   
     const [edit, setEdit] = useState(false)
+
+    useEffect(() => isOpen(open), [open])
 
     const togle = (id) => setIds((prew) => {
         if(prew.includes(id)) { return prew.filter((item) => item !== id) }
@@ -41,6 +43,10 @@ function List({label, list, click, save, remove}) {
         click(id)
     }
 
+    const handleKeyDown = (event) => {
+        if(event.key === 'Enter') { saveHandler() }
+    }
+
     const Panel = <div className={styles.panel}>
         {edit && <>
             <div onClick={() => saveHandler()}>save</div>
@@ -52,14 +58,14 @@ function List({label, list, click, save, remove}) {
     const List = <div className={styles.list}>
         {isAdmin? Panel : null}
 
-        {list.map((item) => 
+        {list?.map((item) => 
             <div className={styles.item} key={item.id}>
                 <div onClick={() => clickHandler(item?.id)} className={styles.link}>{item?.title}</div>
-                {edit? <input type="checkbox" checked={ids.includes(item?.id)} onChange={() => togle(item?.id)}/> : null}
+                {edit? <input type="checkbox" checked={ids.includes(item?.id)} onChange={() => togle(item?.id)} /> : null}
             </div>
         )}
         
-        {edit? <input className={styles.input} {...value.bind} /> : null}
+        {edit? <input className={styles.input} {...value.bind} onKeyDown={handleKeyDown} /> : null}
     </div>
 
     return (

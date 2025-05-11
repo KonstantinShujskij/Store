@@ -194,6 +194,7 @@ function Product() {
                 <button className={styles.button} onClick={pushHandler}>Bay</button>
             </div>
         </div> 
+        <div className="s-100" />
         <Also product={product?.id} />
     </>)
 }

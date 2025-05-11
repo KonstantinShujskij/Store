@@ -24,7 +24,7 @@ function List({values=[], callback=()=>{}}) {
             </div>
             <div className={`${styles.list} ${open? styles.open : null}`}>
                 {values.map((item) => (
-                    <div className={styles.item} onClick={() => cangeValue(item)}>
+                    <div className={styles.item} onClick={() => cangeValue(item)} key={item.title}>
                         <div className={styles.title}>{item}cm</div>
                     </div>
                 ))}

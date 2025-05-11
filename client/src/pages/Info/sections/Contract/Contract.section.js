@@ -1,15 +1,30 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './Contract.module.css'
+import { FRONT_URL } from '../../../../const'
 
 
 function Contract() {
+    const [toggleList, setToggleList] = useState({})
+
+    const toggle = (key) => {
+        setToggleList((prew) => {
+            const newValue = {...prew}
+            newValue[key] = newValue[key]? !newValue[key] : true
+            return newValue
+        })
+    }
+
+
     return (
         <>
             <div className={styles.title}>
                 <span>1.</span>
                 <span>ТЕРМІНИ ТА ВИЗНАЧЕННЯ</span>
+                <div className={`${styles.btn} ${toggleList['1']? null : styles.open}`} onClick={() => toggle('1')}>
+                    <img src={`${FRONT_URL}/images/chevron.svg`} alt="ico" />
+                </div>
             </div>
-            <div className={styles.item}>
+            <div className={`${styles.item} ${toggleList['1']? null : styles.hide}`}>
                 <div className={styles.point}>
                     <div className={styles.label}>a.</div>
                     <div className={styles.content}>
@@ -126,8 +141,12 @@ function Contract() {
             <div className={styles.title}>
                 <span>2.</span>
                 <span>ПРЕДМЕТ ТА ЦІНА ДОГОВОРУ </span>
+                <div className={`${styles.btn} ${toggleList['2']? null : styles.open}`} onClick={() => toggle('2')}>
+                    <img src={`${FRONT_URL}/images/chevron.svg`} alt="ico" />
+                </div>
+
             </div>
-            <div className={styles.item}>
+            <div className={`${styles.item} ${toggleList['2']? null : styles.hide}`}>
                 <div className={styles.point}>
                     <div className={styles.label}>a.</div>
                     <div className={styles.content}>
@@ -197,8 +216,11 @@ function Contract() {
             <div className={styles.title}>
                 <span>3.</span>
                 <span>НАБУТТЯ ЧИННОСТІ ДОГОВОРУ ТА СТРОК ЙОГО ДІЇ </span>
+                <div className={`${styles.btn} ${toggleList['3']? null : styles.open}`} onClick={() => toggle('3')}>
+                    <img src={`${FRONT_URL}/images/chevron.svg`} alt="ico" />
+                </div>
             </div>
-            <div className={styles.item}>
+            <div className={`${styles.item} ${toggleList['3']? null : styles.hide}`}>
                 <div className={styles.point}>
                     <div className={styles.label}>a.</div>
                     <div className={styles.content}>
@@ -239,8 +261,11 @@ function Contract() {
             <div className={styles.title}>
                 <span>4.</span>
                 <span>ПОРЯДОК ОФОРМЛЕННЯ ЗАМОВЛЕННЯ ТА ОТРИМАННЯ ТОВАРУ </span>
+                <div className={`${styles.btn} ${toggleList['4']? null : styles.open}`} onClick={() => toggle('4')}>
+                    <img src={`${FRONT_URL}/images/chevron.svg`} alt="ico" />
+                </div>                
             </div>
-            <div className={styles.item}>
+            <div className={`${styles.item} ${toggleList['4']? null : styles.hide}`}>
                 <div className={styles.point}>
                     <div className={styles.label}>a.</div>
                     <div className={styles.content}>
@@ -429,8 +454,11 @@ function Contract() {
             <div className={styles.title}>
                 <span>5.</span>
                 <span>ГАРАНТІЙНИЙ СТРОК ТА ЕКСПЛУАТАЦІЯ ТОВАРУ</span>
+                <div className={`${styles.btn} ${toggleList['5']? null : styles.open}`} onClick={() => toggle('5')}>
+                    <img src={`${FRONT_URL}/images/chevron.svg`} alt="ico" />
+                </div>
             </div>
-            <div className={styles.item}>
+            <div className={`${styles.item} ${toggleList['5']? null : styles.hide}`}>
                 <div className={styles.point}>
                     <div className={styles.label}>a.</div>
                     <div className={styles.content}>
@@ -459,8 +487,11 @@ function Contract() {
             <div className={styles.title}>
                 <span>6.</span>
                 <span>ВІДПОВІДАЛЬНІСТЬ СТОРІН</span>
+                <div className={`${styles.btn} ${toggleList['6']? null : styles.open}`} onClick={() => toggle('6')}>
+                    <img src={`${FRONT_URL}/images/chevron.svg`} alt="ico" />
+                </div>
             </div>
-            <div className={styles.item}>
+            <div className={`${styles.item} ${toggleList['6']? null : styles.hide}`}>
                 <div className={styles.point}>
                     <div className={styles.label}>a.</div>
                     <div className={styles.content}>
@@ -529,8 +560,11 @@ function Contract() {
             <div className={styles.title}>
                 <span>7.</span>
                 <span>ФОРС-МАЖОРНІ ОБСТАВИНИ</span>
+                <div className={`${styles.btn} ${toggleList['7']? null : styles.open}`} onClick={() => toggle('7')}>
+                    <img src={`${FRONT_URL}/images/chevron.svg`} alt="ico" />
+                </div>
             </div>
-            <div className={styles.item}>
+            <div className={`${styles.item} ${toggleList['7']? null : styles.hide}`}>
                 <div className={styles.point}>
                     <div className={styles.label}>a.</div>
                     <div className={styles.content}>
@@ -612,8 +646,11 @@ function Contract() {
             <div className={styles.title}>
                 <span>8.</span>
                 <span>ЗМІНА ТА РОЗІРВАННЯ ДОГОВОРУ</span>
+                <div className={`${styles.btn} ${toggleList['8']? null : styles.open}`} onClick={() => toggle('8')}>
+                    <img src={`${FRONT_URL}/images/chevron.svg`} alt="ico" />
+                </div>
             </div>
-            <div className={styles.item}>
+            <div className={`${styles.item} ${toggleList['8']? null : styles.hide}`}>
                 <div className={styles.point}>
                     <div className={styles.label}>a.</div>
                     <div className={styles.content}>
@@ -677,8 +714,11 @@ function Contract() {
             <div className={styles.title}>
                 <span>9.</span>
                 <span>ВИРІШЕННЯ СПОРІВ ТА ЗАСТОСОВНЕ ПРАВО</span>
+                <div className={`${styles.btn} ${toggleList['9']? null : styles.open}`} onClick={() => toggle('9')}>
+                    <img src={`${FRONT_URL}/images/chevron.svg`} alt="ico" />
+                </div>
             </div>
-            <div className={styles.item}>
+            <div className={`${styles.item} ${toggleList['9']? null : styles.hide}`}>
                 <div className={styles.point}>
                     <div className={styles.label}>a.</div>
                     <div className={styles.content}>
@@ -709,8 +749,11 @@ function Contract() {
             <div className={styles.title}>
                 <span>10.</span>
                 <span>КОНФІДЕНЦІЙНІСТЬ ТА ПЕРСОНАЛЬНІ ДАНІ</span>
+                <div className={`${styles.btn} ${toggleList['10']? null : styles.open}`} onClick={() => toggle('10')}>
+                    <img src={`${FRONT_URL}/images/chevron.svg`} alt="ico" />
+                </div>
             </div>
-            <div className={styles.item}>
+            <div className={`${styles.item} ${toggleList['10']? null : styles.hide}`}>
                 <div className={styles.point}>
                     <div className={styles.label}>a.</div>
                     <div className={styles.content}>
@@ -733,8 +776,11 @@ function Contract() {
             <div className={styles.title}>
                 <span>11.</span>
                 <span>ПОРЯДОК КОМУНІКАЦІЇ</span>
+                <div className={`${styles.btn} ${toggleList['11']? null : styles.open}`} onClick={() => toggle('11')}>
+                    <img src={`${FRONT_URL}/images/chevron.svg`} alt="ico" />
+                </div>
             </div>
-            <div className={styles.item}>
+            <div className={`${styles.item} ${toggleList['11']? null : styles.hide}`}>
                 <div className={styles.point}>
                     <div className={styles.label}>a.</div>
                     <div className={styles.content}>

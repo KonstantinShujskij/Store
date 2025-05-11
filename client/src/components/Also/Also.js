@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import styles from './Also.module.css'
 import useAlsoApi from '../../api/also.api'
-// import useLoad from '../../hooks/load.hook'
+import useLoad from '../../hooks/load.hook'
 import * as authSelectors from '../../redux/selectors/auth.selectors'
-import { IMG_SRC } from '../../const'
+import { FRONT_URL, IMG_SRC } from '../../const'
 
 
 function Also({product}) {
@@ -12,20 +12,21 @@ function Also({product}) {
     
     const isAdmin = useSelector(authSelectors.isAdmin)
 
-    const [popa, setPopa] = useState([null, null])
+    const [list, setList] = useState([])
 
     const load = async () => {
         const count = 3
         const data = await Also.get(count)
-        const len = data.length? data.length : 0
-        
-        // for(let i = 0; i < count - len; i++) { data.push({}) }
 
-        // setList(data) 
-        setPopa(data)
+        if(data) {
+            const n = count - data.length
+            for(let i = 0; i < n; i++) { data.push(null) }
+
+            setList(data) 
+        }
     }
 
-    // useLoad(load)
+    useLoad(load)
 
     const setHandler = async (id=null) => {
         const also = await Also.set(id, product)
@@ -36,14 +37,14 @@ function Also({product}) {
     
     return (
         <div className={styles.main}>
-            <div className={styles.title} onClick={() => load()}>You may also like</div>
+            <div className={styles.head} onClick={() => load()}>You may also like</div>
             <div className={styles.list}>
-                {popa.map((also) => (
-                    <div className={styles.item} key={Date.now().toString(16)}>
+                {list.map((also) => (
+                    <div className={styles.item} key={also?._id}>
                         <div className={styles.photo}>
-                            <img src={`${IMG_SRC}${also?.photo}`} alt={also?.photo} />
+                            <img src={also?.photo? `${IMG_SRC}${also?.photo}`: `${FRONT_URL}/images/load.svg`} alt={also?.photo} />
                             {isAdmin &&
-                                <div className={styles.popup} onClick={() => setHandler()}>
+                                <div className={styles.popup} onClick={() => setHandler(also?._id)}>
                                     <div className={styles.btn}>Заменить</div>
                                 </div>
                             }
