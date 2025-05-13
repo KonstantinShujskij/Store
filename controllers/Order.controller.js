@@ -1,6 +1,7 @@
 const Order = require('../models/Order.model')
 
 const errors = require('../const/errors')
+const { createMonoInvoice } = require('../utils/mono')
 
 
 async function create(list, price, delivery, contacts, client=null) {    
@@ -13,10 +14,32 @@ async function pay(id) {
     const order = await get(id)
     if(order.status !== 'CREATE') { throw errors.notFind }
 
-    order.status = "PAID"
+    const invoice = await createMonoInvoice(id, order.price)
+    if(invoice) {
+        order.invoiceId = invoice.invoiceId
+        order.pageUrl = invoice.pageUrl
+
+        return await order.save()
+    }
+
+    return order
+}
+
+async function webhook(id, invoiceId, status, paymentDate) {
+    const order = await get(id)
+    if(order.status !== 'CREATE') { throw errors.notFind }
+    if(order.invoiceId !== invoiceId) { throw errors.notFind }
+
+    //created processing success failed expired
+    order.invoiceStatus = status
+    if(status === 'success') { 
+        order.status = 'PAID'
+        order.paid = true
+    }
 
     return await order.save()
 }
+
 
 async function get(_id) {
     const order = await Order.findOne({_id})
@@ -78,5 +101,6 @@ module.exports = {
     listAll,
     setStatus,
     setTTH,
-    next
+    next,
+    webhook
 }

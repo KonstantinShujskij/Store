@@ -30,6 +30,9 @@ const schema = new Schema({
     price: {type: Number},
     count: {type: Number},
     paid: {type: Boolean, default: false},
+    invoiceId: {type: String, default: null},
+    invoiceStatus: {type: String, default: null},
+    pageUrl: {type: String, default: null},
     
     createdAt: { type: Number },
     updatedAt: { type: Number }

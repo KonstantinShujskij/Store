@@ -1,10 +1,12 @@
 const {Router} = require('express')
+const express = require('express')
 const {check} = require('express-validator')
 const { auth, isUser, isAdmin } = require('../middleware/auth.middleware')
 const trappiner = require('../utils/trappiner.utils')
 const Validator = require('../Validators/order.validator')
 const Order = require('../controllers/Order.controller')
 const Filter = require('../utils/filter.utils')
+const { verifyMonoSignature } = require('../utils/mono')
 
 const router = Router()
 
@@ -38,6 +40,40 @@ router.post('/pay', trappiner(async (req, res) => {
 
     res.status(200).json(order)
 })) 
+
+router.post('/webhook/:orderId',
+  express.raw({ type: 'application/json' }),  
+  trappiner(async (req, res) => {
+    console.log('Get Mono Hook')
+    
+    const orderId = req.params.orderId
+
+    const rawBody = req.body
+    const sigHeader = req.headers['x-sign']
+
+    const { invoiceId, status, paymentDate } = JSON.parse(rawBody.toString('utf8'))
+
+    console.log(orderId, invoiceId, status, paymentDate);
+    
+
+    const ok = verifyMonoSignature(rawBody, sigHeader)
+    if(!ok) {
+        console.warn('Invalid Mono signature')
+        return res.sendStatus(400)
+    }
+
+    console.log('correct');
+
+    try {
+      const order = await Order.webhook(orderId, invoiceId, status, paymentDate)
+
+      res.sendStatus(200);
+    } catch (err) {
+
+      res.sendStatus(500);
+    }
+  })
+)
 
 router.post('/get', trappiner(async (req, res) => {     
     const { id } = req.body    

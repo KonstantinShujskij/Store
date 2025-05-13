@@ -5,6 +5,7 @@
     "sslPort": 443,
 
     "jwtSecret": "NHrmJipPAavz6Juw",
-    "mongoUri": "mongodb+srv://root:inM1dn5XW31BEXJG@cluster0.kos23un.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+    "mongoUri": "mongodb+srv://root:inM1dn5XW31BEXJG@cluster0.kos23un.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
+    "monoToken": "uZX-udeWwDdJwDtoqesJkNGeZkfGyExlgpkx_KRDl0mM"
 }
 

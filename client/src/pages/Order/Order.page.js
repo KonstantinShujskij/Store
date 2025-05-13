@@ -23,7 +23,7 @@ function Order() {
 
     const payHandler = async () => {
         const newOrder = await ordersApi.pay(order._id)
-        if(!newOrder) { return }
+        if(newOrder && newOrder.pageUrl) { document.location.href = newOrder.pageUrl }
         
         setOrder(newOrder)
         load().then()
