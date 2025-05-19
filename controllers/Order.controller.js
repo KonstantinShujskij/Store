@@ -25,10 +25,12 @@ async function pay(id) {
     return order
 }
 
-async function webhook(id, invoiceId, status, paymentDate) {
+async function webhook(id, invoiceId, status) {
+    console.log(id, invoiceId, status);
+    
     const order = await get(id)
-    if(order.status !== 'CREATE') { throw errors.notFind }
-    if(order.invoiceId !== invoiceId) { throw errors.notFind }
+    if(order.status !== 'CREATE') { return }
+    if(order.invoiceId !== invoiceId) { return }
 
     //created processing success failed expired
     order.invoiceStatus = status
