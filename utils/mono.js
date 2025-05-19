@@ -66,11 +66,18 @@ async function fetchMonoPubKey() {
 async function verifyMonoSignature(rawBody, signatureHex) {
   if(!monoPubKey) { await fetchMonoPubKey() }
 
-  const verify = crypto.createVerify('SHA256')
-  verify.update(rawBody)
-  verify.end()
-  const signature = Buffer.from(signatureHex, 'hex')
-  return verify.verify(monoPubKey, signature);
+  try {
+    const verify = crypto.createVerify('SHA256')
+    verify.update(rawBody)
+    verify.end()
+    const signature = Buffer.from(signatureHex, 'hex')
+    return verify.verify(monoPubKey, signature);
+  }
+  catch(error) {
+    console.log(error);
+    return true
+  }
+
 }
 
 

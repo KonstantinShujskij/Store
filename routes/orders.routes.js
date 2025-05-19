@@ -51,7 +51,7 @@ router.post('/webhook/:orderId',
         const orderId = req.params.orderId
         const { invoiceId, status } = rawBody 
 
-        const ok = verifyMonoSignature(rawBody, sigHeader)
+        const ok = await verifyMonoSignature(rawBody, sigHeader)
         if(!ok) { return res.sendStatus(400) }
 
         console.log('correct')
