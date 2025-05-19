@@ -7,6 +7,7 @@ const Validator = require('../Validators/order.validator')
 const Order = require('../controllers/Order.controller')
 const Filter = require('../utils/filter.utils')
 const { verifyMonoSignature } = require('../utils/mono')
+const { verifeOrderToken } = require('../utils/jwt.utils')
 
 const router = Router()
 
@@ -43,11 +44,12 @@ router.post('/pay', trappiner(async (req, res) => {
 
 router.post('/webhook/:orderId', trappiner(async (req, res) => {
     try {
-        console.log('Get Mono Hook')
-        console.log(req.params.orderId)
-        console.log(req.body);
+        const orderIdHash = req.params.orderId
+        console.log(orderIdHash)
         
-        const orderId = req.params.orderId
+        const orderId = verifeOrderToken(orderIdHash)
+        console.log(orderId)
+        
         const { invoiceId, status } = req.body
 
         const rawBody = req.body

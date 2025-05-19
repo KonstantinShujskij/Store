@@ -3,6 +3,24 @@ const config = require('config')
 
 const errors = require('../const/errors')
 
+const orderToken = (id) => { 
+    const secret = config.get('jwtSecret')
+
+    return jwt.sign({ id }, secret, { expiresIn: '3d' }) 
+}
+
+const verifeOrderToken = (token) => {
+    try {
+        const secret = config.get('jwtSecret')
+        const decoded = jwt.verify(token, secret)
+
+        return decoded?.id
+    }
+    catch(error) { 
+        return null
+    }
+}
+
 
 const loginToken = (_id, expiresIn='24h') => { 
     const secret = config.get('jwtSecret')
@@ -25,5 +43,7 @@ const verifeLoginToken = (token) => {
 
 module.exports = { 
     loginToken,
-    verifeLoginToken
+    verifeLoginToken,
+    orderToken,
+    verifeOrderToken
 }

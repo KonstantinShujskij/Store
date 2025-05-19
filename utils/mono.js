@@ -1,6 +1,7 @@
 const https = require('https')
 const config = require('config')
 const crypto = require('crypto')
+const { orderToken } = require('./jwt.utils')
 
 
 async function createMonoInvoice(id, amount) {
@@ -8,7 +9,7 @@ async function createMonoInvoice(id, amount) {
         amount: amount * 100,
         ccy: 980,                   
         redirectUrl: `${config.get('baseUrl')}/order/${id}`,
-        webHookUrl:  `${config.get('serverUrl')}/api/orders/webhook/${id}`,
+        webHookUrl:  `${config.get('serverUrl')}/api/orders/webhook/${orderToken(id)}`,
         description: `Оплата заказа #${id}`
     })
 
