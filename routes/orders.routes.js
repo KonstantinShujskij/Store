@@ -53,7 +53,9 @@ router.post('/webhook/:orderId',
         const rawBody = req.body
         const sigHeader = req.headers['x-sign']
 
-        const { invoiceId, status, paymentDate } = JSON.parse(rawBody.toString('utf8'))
+        console.log(rawBody);
+
+        const { invoiceId, status, paymentDate } = rawBody //JSON.parse(rawBody.toString('utf8'))
 
         console.log(orderId, invoiceId, status, paymentDate);
         
