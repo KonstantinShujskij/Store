@@ -41,27 +41,34 @@ router.post('/pay', trappiner(async (req, res) => {
     res.status(200).json(order)
 })) 
 
-router.post('/webhook/:orderId',
-  express.raw({ type: 'application/json' }),  
-  trappiner(async (req, res) => {
-    try {     
+router.post('/webhook/:orderId', trappiner(async (req, res) => {
+    try {
+        console.log('Get Mono Hook')
+        console.log(req.params.orderId)
+        console.log(req.body);
+        
+        const orderId = req.params.orderId
+
         const rawBody = req.body
         const sigHeader = req.headers['x-sign']
+        
 
-        const orderId = req.params.orderId
-        const { invoiceId, status } = rawBody 
+        const { invoiceId, status } = JSON.parse(rawBody.toString('utf8'))        
 
-        const ok = await verifyMonoSignature(rawBody, sigHeader)
-        if(!ok) { return res.sendStatus(400) }
+        const ok = verifyMonoSignature(rawBody, sigHeader)
+        if(!ok) {
+            console.warn('Invalid Mono signature')
+            return res.sendStatus(400)
+        }
 
-        console.log('correct')
+        console.log('correct');
 
         const order = await Order.webhook(orderId, invoiceId, status)
 
-        res.sendStatus(200)
+        res.sendStatus(200);
     } catch (err) {
         console.log(err)
-        res.sendStatus(500)
+        res.sendStatus(500);
     }
   })
 )

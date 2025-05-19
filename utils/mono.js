@@ -68,7 +68,7 @@ async function verifyMonoSignature(rawBody, signatureHex) {
 
   try {
     const verify = crypto.createVerify('SHA256')
-    verify.update(JSON.stringify(rawBody))
+    verify.update(rawBody)
     verify.end()
     const signature = Buffer.from(signatureHex, 'hex')
     return verify.verify(monoPubKey, signature);

@@ -9,6 +9,7 @@ const path = require('path')
 const app = express()
 
 app.use(cors())
+app.use('/api/orders/webhook', express.raw({ type: 'application/json' }));
 app.use(express.json({ extended: true }))
 
 app.use('/static', express.static(path.join(__dirname, 'static')))
