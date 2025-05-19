@@ -13,6 +13,8 @@ async function create(title, desc, price, photos, prop, materials, colors, categ
     const category = await Category.get(categoryId)
     const collection = await Collection.get(collectionId)
 
+    console.log('create')    
+
     const product = new Product({ 
         title, 
         desc, 

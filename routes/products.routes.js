@@ -43,6 +43,8 @@ router.post('/create', auth, isAdmin,
     create, 
     trappiner(async (req, res) => {   
         const { title, desc, price, prop, materials, category, collection, colors } = req.body
+
+        console.log(req.body);
        
         const materialsData = validateMaterial(JSON.parse(materials))
         const properties = validateProp(JSON.parse(prop))
