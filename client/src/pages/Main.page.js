@@ -8,7 +8,7 @@ function Main() {
         <>
             <div className={styles.photo}>
                 <img className={styles.bg} src={`${FRONT_URL}/images/bg.png`} alt="bg" />
-                <img className={styles.logo} src={`${FRONT_URL}/images/Logo2.svg`} alt="logo" />
+                <img className={styles.logo} src={`${FRONT_URL}/images/Logo2.svg`} alt="logo" /> 
             </div>
         </>
     )
