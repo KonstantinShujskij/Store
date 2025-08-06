@@ -55,9 +55,6 @@ router.post('/webhook/:orderId', trappiner(async (req, res) => {
         const rawBody = req.body
         const sigHeader = req.headers['x-sign']
         
-        // const ok = await verifyMonoSignature(rawBody, sigHeader)
-        // if(!ok) { return res.sendStatus(400) }
-
         console.log('correct');
 
         const order = await Order.webhook(orderId, invoiceId, status)
