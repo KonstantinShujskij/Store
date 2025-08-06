@@ -1,5 +1,5 @@
 import React from 'react'
-import { FRONT_URL } from '../const'
+import { FRONT_URL } from '../constants'
 import styles from '../styles/Main.module.css' 
 
 

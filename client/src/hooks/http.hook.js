@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react'
-import { FRONT_URL } from '../const'
+import { FRONT_URL } from '../constants'
 
 
 export default function useHttp() {

@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
-import useContactsApi from '../api/contacts.api'
+import useContactsApi from '../services/contacts.api'
 
 import {setContacts, addContacts, removeContacts} from '../redux/actions/static.actions'
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styles from './Status.module.css'
-import { FRONT_URL } from '../../../../const'
-import useOrdersApi from '../../../../api/orders.api'
+import { FRONT_URL } from '../../../../constants'
+import useOrdersApi from '../../../../services/orders.api'
 
 
 function Status({order, callback=()=>{}}) {

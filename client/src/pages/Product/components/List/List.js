@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { FRONT_URL } from '../../../../const'
+import { FRONT_URL } from '../../../../constants'
 import styles from './List.module.css'
 
 

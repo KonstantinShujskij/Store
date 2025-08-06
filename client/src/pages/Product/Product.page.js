@@ -1,18 +1,18 @@
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 
-import { FRONT_URL, IMG_SRC } from '../../const'
+import { FRONT_URL, IMG_SRC } from '../../constants'
 
-import useProductsApi from '../../api/products.api'
+import useProductsApi from '../../services/products.api'
 import useLoad from '../../hooks/load.hook'
 import useBasket from '../../hooks/basket.hook'
 
-import Tooltip from '../../components/Tooltip/Tooltip'
+import Tooltip from '../../components/ui/Tooltip/Tooltip'
 import Prop from './components/prop/Prop'
 import Colors from './components/Colors/Colors'
 
 import styles from './Product.module.css'
-import Also from '../../components/Also/Also'
+import Also from '../../components/layout/Also/Also'
 
 
 function Product() {

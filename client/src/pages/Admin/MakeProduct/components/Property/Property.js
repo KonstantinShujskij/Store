@@ -1,5 +1,5 @@
 import React from 'react'
-import { FRONT_URL } from '../../../../../const'
+import { FRONT_URL } from '../../../../../constants'
 import List from '../List/List'
 import Range from '../Range/Range'
 import style from './Property.module.css'

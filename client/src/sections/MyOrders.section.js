@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import useOrdersApi from '../api/orders.api'
+import useOrdersApi from '../services/orders.api'
 import useLoad from '../hooks/load.hook'
 import styles from '../styles/Orders.module.css' 
-import { IMG_SRC } from '../const'
+import { IMG_SRC } from '../constants'
 import { Link } from 'react-router-dom'
-import useProductsApi from '../api/products.api'
+import useProductsApi from '../services/products.api'
 
 
 function MyOrders() {

@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux'
-import useClientApi from '../api/client.api'
+import useClientApi from '../services/client.api'
 import * as User from '../redux/actions/user.actions'
 
 

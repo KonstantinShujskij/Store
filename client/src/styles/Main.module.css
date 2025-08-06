@@ -29,3 +29,15 @@
     position: relative;
     z-index: 1;
 }
+
+@media (max-width: 600px) {
+  .logo {
+    width: 200px;
+  }
+  .photo {
+    min-height: 200px;
+  }
+  .bg {
+    min-height: 200px;
+  }
+}

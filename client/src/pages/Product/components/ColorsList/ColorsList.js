@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { FRONT_URL, IMG_SRC } from '../../../../const'
+import { FRONT_URL, IMG_SRC } from '../../../../constants'
 import styles from './ColorsList.module.css'
 
 

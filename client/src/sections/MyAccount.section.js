@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
-import useClientApi from '../api/client.api'
+import useClientApi from '../services/client.api'
 import useAuth from '../hooks/auth.hook'
 import useInput from '../hooks/input.hook'
 import useUser from '../hooks/user.hook'

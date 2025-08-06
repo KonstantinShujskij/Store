@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { Outlet } from 'react-router-dom'
-import { FRONT_URL } from '../const'
+import { FRONT_URL } from '../constants'
 import styles from '../styles/Account.module.css' 
 
 

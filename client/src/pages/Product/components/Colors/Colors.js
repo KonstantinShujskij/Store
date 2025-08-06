@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import ColorsList from '../ColorsList/ColorsList'
-import { FRONT_URL } from '../../../../const'
+import { FRONT_URL } from '../../../../constants'
 import styles from '../../Product.module.css'
 
 

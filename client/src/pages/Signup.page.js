@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import { FRONT_URL } from '../const'
-import useClientApi from '../api/client.api'
+import { FRONT_URL } from '../constants'
+import useClientApi from '../services/client.api'
 import useAuth from '../hooks/auth.hook'
 import useInput from '../hooks/input.hook'
 

@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 
-import useClientApi from '../api/client.api'
+import useClientApi from '../services/client.api'
 import useInput from '../hooks/input.hook'
 import useUser from '../hooks/user.hook'
 import * as userSelectors from '../redux/selectors/user.selectors'
 
 import styles from '../styles/Account.module.css' 
-import Select from '../components/UI/Select/Select'
+import Select from '../components/ui/Select/Select'
 
-import { deliveryOptions } from '../const'
+import { deliveryOptions } from '../constants'
 import useAlert from '../hooks/alert.hook'
 
 

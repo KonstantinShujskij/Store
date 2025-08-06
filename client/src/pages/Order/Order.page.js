@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
-import useOrdersApi from '../../api/orders.api'
+import useOrdersApi from '../../services/orders.api'
 import useLoad from '../../hooks/load.hook'
 import styles from './Order.module.css'
-import OrderItem from '../../components/OrderItem/OrderItem'
+import OrderItem from '../../components/layout/OrderItem/OrderItem'
 
 
 function Order() {

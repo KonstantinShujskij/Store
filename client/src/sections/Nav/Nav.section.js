@@ -10,7 +10,7 @@ import Collections from './components/Collections'
 import Contacts from './components/Contacts'
 
 import styles from './Nav.module.css' 
-import { FRONT_URL } from '../../const'
+import { FRONT_URL } from '../../constants'
 import Bag from './components/Bag/Bag'
 
 

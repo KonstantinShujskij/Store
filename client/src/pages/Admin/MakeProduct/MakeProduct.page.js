@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
-import { IMG_SRC } from '../../../const'
+import { IMG_SRC } from '../../../constants'
 
-import useProductsApi from '../../../api/products.api'
+import useProductsApi from '../../../services/products.api'
 
 import useInput from '../../../hooks/input.hook'
 import useFiles from '../../../hooks/files.hook'
@@ -14,14 +14,14 @@ import useProperties from '../../../hooks/properties.hook'
 import * as staticSelectors from '../../../redux/selectors/static.selectors'
 
 import Properties from './components/Properties/Properties'
-import Select from '../../../components/UI/Select/Select'
-import Tooltip from '../../../components/Tooltip/Tooltip'
+import Select from '../../../components/ui/Select/Select'
+import Tooltip from '../../../components/ui/Tooltip/Tooltip'
 import Material from './components/Material/Material'
 import ColorProp from './components/ColorProp'
 import Photo from './Photo'
 
 import styles from './MakeProduct.module.css'
-import Also from '../../../components/Also/Also'
+import Also from '../../../components/layout/Also/Also'
 
 
 function MakeProduct() {

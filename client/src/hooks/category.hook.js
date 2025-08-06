@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
-import useCategoryApi from '../api/category.api'
+import useCategoryApi from '../services/category.api'
 
 import {setCategory, addCategory, removeCategory} from '../redux/actions/static.actions'
 

@@ -3,10 +3,10 @@ import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 import * as basket from '../redux/selectors/basket.selectors'
-import BasketItem from '../components/BasketItem/BasketItem'
+import BasketItem from '../components/layout/BasketItem/BasketItem'
 import useDelivery from '../hooks/delivery.hook'
 import useContacts from '../hooks/contact.hook'
-import useOrdersApi from '../api/orders.api'
+import useOrdersApi from '../services/orders.api'
 
 import useBasket from '../hooks/basket.hook'
 

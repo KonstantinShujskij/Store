@@ -1,11 +1,11 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import styles from './Orders.module.css'
-import Paginate from '../../../components/Paginate/Paginate'
+import Paginate from '../../../components/ui/Paginate/Paginate'
 import usePaginate from '../../../hooks/paginate.hook'
 import useInput from '../../../hooks/input.hook'
-import useOrdersApi from '../../../api/orders.api'
+import useOrdersApi from '../../../services/orders.api'
 import Item from './Item/Item'
-import { FRONT_URL } from '../../../const'
+import { FRONT_URL } from '../../../constants'
 
 
 function Orders() {

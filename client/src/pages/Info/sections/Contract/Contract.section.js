@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styles from './Contract.module.css'
-import { FRONT_URL } from '../../../../const'
+import { FRONT_URL } from '../../../../constants'
 
 
 function Contract() {

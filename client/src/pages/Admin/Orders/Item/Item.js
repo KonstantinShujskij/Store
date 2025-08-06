@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import styles from './Item.module.css'
-import { FRONT_URL, IMG_SRC } from '../../../../const'
+import { FRONT_URL, IMG_SRC } from '../../../../constants'
 import { Link } from 'react-router-dom'
 import Status from '../Status/Status'
-import useOrdersApi from '../../../../api/orders.api'
+import useOrdersApi from '../../../../services/orders.api'
 import useInput from '../../../../hooks/input.hook'
 
 

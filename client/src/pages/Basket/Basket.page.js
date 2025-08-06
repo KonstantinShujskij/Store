@@ -6,13 +6,13 @@ import useInput from '../../hooks/input.hook'
 import * as userSelectors from '../../redux/selectors/user.selectors'
 import * as basket from '../../redux/selectors/basket.selectors'
 
-import BasketItem from '../../components/BasketItem/BasketItem'
-import Select from '../../components/UI/Select/Select'
+import BasketItem from '../../components/layout/BasketItem/BasketItem'
+import Select from '../../components/ui/Select/Select'
 
 import styles from './Basket.module.css'
-import useOrdersApi from '../../api/orders.api'
+import useOrdersApi from '../../services/orders.api'
 import useBasket from '../../hooks/basket.hook'
-import { deliveryOptions } from '../../const'
+import { deliveryOptions } from '../../constants'
 
 
 function Basket() {

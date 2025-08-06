@@ -46,3 +46,18 @@
 .row2 { max-width: 1180px; }
 .row3 { max-width: 1000px; }
 .row4 { max-width: 670px; }
+
+@media (max-width: 600px) {
+  .info {
+    padding-top: 20px;
+    padding-bottom: 40px;
+    font-size: 15px;
+    gap: 16px;
+  }
+  .image img {
+    min-height: 120px;
+  }
+  .row1, .row2, .row3, .row4 {
+    max-width: 95vw;
+  }
+}

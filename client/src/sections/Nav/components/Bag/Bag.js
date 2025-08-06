@@ -6,7 +6,7 @@ import * as basket from '../../../../redux/selectors/basket.selectors'
 import { Link } from 'react-router-dom'
 import styles from './Bag.module.css' 
 import useBasket from '../../../../hooks/basket.hook'
-import { IMG_SRC } from '../../../../const'
+import { IMG_SRC } from '../../../../constants'
 
 
 function Bag() {

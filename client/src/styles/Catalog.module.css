@@ -38,3 +38,21 @@
 
     overflow: hidden;
 }
+
+@media (max-width: 600px) {
+  .top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .label {
+    font-size: 15px;
+  }
+  .button {
+    font-size: 18px;
+  }
+  .products {
+    flex-direction: column;
+    gap: 20px;
+  }
+}
