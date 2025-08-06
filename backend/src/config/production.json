@@ -1,0 +1,9 @@
+{
+    "serverUrl": "https://cavistudio.com",
+    "baseUrl": "https://cavistudio.com", 
+    "port": 5000,
+    "sslPort": 443,
+    "jwtSecret": "SECURE_JWT_SECRET_HERE",
+    "mongoUri": "YOUR_PRODUCTION_MONGODB_URI",
+    "monoToken": "YOUR_PRODUCTION_MONO_TOKEN"
+}
